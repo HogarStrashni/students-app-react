@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { getAllStudents } from "./data";
 
 function App() {
+  const [students, setStudents] = useState(getAllStudents);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <table>
+        <tbody>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Index Number</th>
+            <th>E-mail</th>
+            <th>Contact Phone</th>
+          </tr>
+          {students.map((item) => {
+            const { firstName, lastName, indexNumber, email, phone } = item;
+            return (
+              <tr key={indexNumber}>
+                <td>{firstName}</td>
+                <td>{lastName}</td>
+                <td>{indexNumber}</td>
+                <td>{email}</td>
+                <td>{phone}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </main>
   );
 }
 
