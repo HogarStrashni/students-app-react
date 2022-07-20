@@ -1,34 +1,13 @@
 import React, { useState } from "react";
 import { getAllStudents } from "./data";
+import StudentList from "./StudentList";
 
 function App() {
   const [students, setStudents] = useState(getAllStudents);
 
   return (
-    <main className="m-8">
-      <table>
-        <tbody>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Index Number</th>
-            <th>E-mail</th>
-            <th>Contact Phone</th>
-          </tr>
-          {students.map((item) => {
-            const { firstName, lastName, indexNumber, email, phone } = item;
-            return (
-              <tr key={indexNumber}>
-                <td>{firstName}</td>
-                <td>{lastName}</td>
-                <td>{indexNumber}</td>
-                <td>{email}</td>
-                <td>{phone}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <main className="w-[53rem] mx-auto my-4">
+      <StudentList students={students} />
     </main>
   );
 }
