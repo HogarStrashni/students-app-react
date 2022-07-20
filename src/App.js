@@ -5,7 +5,7 @@ function App() {
   const [students, setStudents] = useState(getAllStudents);
 
   return (
-    <main>
+    <main className="m-8">
       <table>
         <tbody>
           <tr>
