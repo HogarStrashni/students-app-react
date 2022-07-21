@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { getAllStudents } from "./data";
-import StudentList from "./StudentList";
+import { getAllStudents } from "./data/data";
+import StudentList from "./components/StudentList";
 
 function App() {
   const [students, setStudents] = useState(getAllStudents);
 
   return (
-    <main className="w-[53rem] mx-auto my-4">
+    <main className="w-[56rem] mx-auto my-4">
       <StudentList students={students} />
     </main>
   );

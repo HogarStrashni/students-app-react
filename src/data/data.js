@@ -8,7 +8,7 @@ const createStudent = () => {
       () =>
         `${faker.random.numeric(2, {
           allowLeadingZeros: true,
-        })}/${faker.mersenne.rand(1998, 2020)}`
+        })}-${faker.mersenne.rand(1998, 2020)}`
     ),
     email: faker.internet.email().toLowerCase(),
     phone: faker.phone.number("+387 6# ### ###"),
