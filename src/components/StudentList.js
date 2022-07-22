@@ -1,10 +1,9 @@
 import React from "react";
 import Student from "./Student";
-import { Link } from "react-router-dom";
-import { useGlobalContext } from "../context";
+import { useNavigate } from "react-router-dom";
 
-const StudentList = () => {
-  const { students } = useGlobalContext();
+const StudentList = ({ students }) => {
+  const navigate = useNavigate();
 
   return (
     <>
@@ -24,17 +23,15 @@ const StudentList = () => {
         <table className="border">
           <tbody>
             {students.map((item, index) => {
-              let serialNumber = index + 1;
               return (
-                <Link
-                  to={`/student/${item.indexNumber}`}
+                <tr
+                  onClick={() => navigate(`/student/${item.indexNumber}`)}
                   key={item.indexNumber}
+                  className="odd:bg-white even:bg-slate-100 hover:bg-green-300 cursor-pointer"
                 >
-                  <tr className="odd:bg-white even:bg-slate-100 hover:bg-green-300 cursor-pointer">
-                    <td className="w-12 border">{serialNumber}.</td>
-                    <Student {...item} />
-                  </tr>
-                </Link>
+                  <td className="w-12 border">{index + 1}.</td>
+                  <Student {...item} />
+                </tr>
               );
             })}
             ;

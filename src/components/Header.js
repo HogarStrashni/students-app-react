@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../data/logo.png";
+import logo from "../service/logo.png";
 import { FaSearch } from "react-icons/fa";
 
 const Header = () => {

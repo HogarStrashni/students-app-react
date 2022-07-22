@@ -15,10 +15,17 @@ const createStudent = () => {
   };
 };
 
+const allStudents = [];
+
 export const getAllStudents = () => {
-  const allStudents = [];
-  for (let i = 0; i < 150; i++) {
-    allStudents.push(createStudent());
+  if (allStudents.length === 0) {
+    for (let i = 0; i < 150; i++) {
+      allStudents.push(createStudent());
+    }
   }
   return allStudents;
+};
+
+export const getUniqeStudent = (index) => {
+  return allStudents.find((item) => item.indexNumber === index);
 };
