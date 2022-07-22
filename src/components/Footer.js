@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   FaGithub,
   FaCodepen,
@@ -12,27 +13,30 @@ const Footer = () => {
       <div className="w-72 h-12" />
       <div className="w-56 h-12 flex-col text-xs">
         <div className="w-32 flex justify-between text-xl mx-auto mt-1.5">
-          <button>
+          <a href="https://github.com/HogarStrashni" target="_blanc">
             <FaGithub />
-          </button>
-          <button>
+          </a>
+          <a href="https://www.freecodecamp.org/HogarStrashni" target="_blanc">
             <FaFreeCodeCamp />
-          </button>
-          <button>
+          </a>
+          <a href="https://codepen.io/hogarstrashni" target="_blanc">
             <FaCodepen />
-          </button>
-          <button>
+          </a>
+          <a href="mailto:djmatic@agfbl.org" target="_blanc">
             <FaMailBulk />
-          </button>
+          </a>
         </div>
         <div className="flex justify-center">
           <p>&copy;Copyright. All rights reserved</p>
         </div>
       </div>
       <div className="w-72 h-12 p-4 flex justify-between items-center text-sm">
-        <p>University</p>
-        <p>Documentation</p>
-        <p>About Us</p>
+        <a href="https://www.unibl.org/" target="_blanc">
+          University
+        </a>
+
+        <Link to="/documentation">Documentation</Link>
+        <Link to="/about">About Us</Link>
       </div>
     </footer>
   );

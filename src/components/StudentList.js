@@ -1,7 +1,11 @@
 import React from "react";
 import Student from "./Student";
+import { Link } from "react-router-dom";
+import { useGlobalContext } from "../context";
 
-const StudentList = ({ students }) => {
+const StudentList = () => {
+  const { students } = useGlobalContext();
+
   return (
     <>
       <table className="border">
@@ -22,15 +26,18 @@ const StudentList = ({ students }) => {
             {students.map((item, index) => {
               let serialNumber = index + 1;
               return (
-                <tr
+                <Link
+                  to={`/student/${item.indexNumber}`}
                   key={item.indexNumber}
-                  className="odd:bg-white even:bg-slate-100 hover:bg-green-300 cursor-pointer"
                 >
-                  <td className="w-12 border">{serialNumber}.</td>
-                  <Student {...item} />
-                </tr>
+                  <tr className="odd:bg-white even:bg-slate-100 hover:bg-green-300 cursor-pointer">
+                    <td className="w-12 border">{serialNumber}.</td>
+                    <Student {...item} />
+                  </tr>
+                </Link>
               );
             })}
+            ;
           </tbody>
         </table>
       </div>
