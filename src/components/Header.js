@@ -9,11 +9,16 @@ const Header = () => {
         <img src={logo} alt="logo" className="h-10 rounded-lg" />
       </div>
       <div className="pr-4 flex">
-        <form className="pr-4 flex">
+        <form className="pr-4 flex" onSubmit={(e) => e.preventDefault()}>
           <label htmlFor="search-item" className="px-2 text-2xl text-slate-200">
             <FaSearch />
           </label>
-          <input type="text" id="search-item" className="border-2 rounded " />
+          <input
+            type="text"
+            id="search-item"
+            className="border-2 rounded"
+            placeholder="Search..."
+          />
         </form>
         <button className="ml-12 border px-4 rounded-lg bg-green-300">
           LOGIN

@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Student from "./Student";
 import { useNavigate } from "react-router-dom";
 
 const StudentList = ({ students }) => {
-  const navigate = useNavigate();
+  //table scroll bar
+  const [tableHeight, setTableHeight] = useState(0);
+
+  useEffect(() => {
+    let heightTab = referTbody.current.offsetHeight;
+    setTableHeight(heightTab);
+  }, [students]);
+
+  const navigate = useNavigate(); //<Link> replacment for table error!
+  const referTbody = useRef();
 
   return (
     <>
@@ -19,9 +28,13 @@ const StudentList = ({ students }) => {
           </tr>
         </tbody>
       </table>
-      <div className="h-[calc(100vh-162px)] overflow-auto w-[calc(100%+17px)]">
+      <div
+        className={`h-[calc(100vh-162px)] overflow-auto w-[calc(${
+          tableHeight > window.innerHeight - 162 ? `100%+17px` : `100% `
+        })]`}
+      >
         <table className="border">
-          <tbody>
+          <tbody ref={referTbody}>
             {students.map((item, index) => {
               return (
                 <tr
@@ -34,7 +47,6 @@ const StudentList = ({ students }) => {
                 </tr>
               );
             })}
-            ;
           </tbody>
         </table>
       </div>

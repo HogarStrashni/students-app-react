@@ -6,6 +6,7 @@ import { getAllStudents } from "./service/data";
 
 function App() {
   const [students, setStudents] = useState([]);
+  const [searchItem, setSearchItem] = useState("");
 
   useEffect(() => {
     setStudents(getAllStudents);
@@ -13,7 +14,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header searchItem={searchItem} setSearchItem={setSearchItem} />
       <main className="w-[56rem] mx-auto my-3">
         <StudentList students={students} />
       </main>
