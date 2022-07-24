@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import Student from "./Student";
 import { useNavigate } from "react-router-dom";
+import { AppSearchContext } from "../searchContext";
 
 const StudentList = ({ students }) => {
   //table scroll bar
@@ -13,6 +14,10 @@ const StudentList = ({ students }) => {
 
   const navigate = useNavigate(); //<Link> replacment for table error!
   const referTbody = useRef();
+
+  const { filteredStudents, searchItem } = useContext(AppSearchContext);
+
+  const dataArray = !searchItem ? students : filteredStudents;
 
   return (
     <>
@@ -35,7 +40,7 @@ const StudentList = ({ students }) => {
       >
         <table className="border">
           <tbody ref={referTbody}>
-            {students.map((item, index) => {
+            {dataArray.map((item, index) => {
               return (
                 <tr
                   onClick={() => navigate(`/student/${item.indexNumber}`)}

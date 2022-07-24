@@ -18,41 +18,65 @@ const createStudent = () => {
 const allStudents = [];
 
 export const getAllStudents = () => {
-  if (allStudents.length === 0) {
-    for (let i = 0; i < 100; i++) {
-      allStudents.push(createStudent());
+  return new Promise((resolve, reject) => {
+    if (allStudents.length === 0) {
+      for (let i = 0; i < 100; i++) {
+        allStudents.push(createStudent());
+      }
     }
-  }
-  return allStudents;
+
+    if (allStudents) {
+      resolve(allStudents);
+    } else {
+      reject("Something Went Wrong!!!");
+    }
+  });
 };
 
 export const getUniqeStudent = (index) => {
-  return allStudents.find((item) => item.indexNumber === index);
+  return new Promise((resolve, reject) => {
+    const uniqueStudent = allStudents.find(
+      (item) => item.indexNumber === index
+    );
+
+    if (uniqueStudent) {
+      resolve(uniqueStudent);
+    } else {
+      reject("Something Went Wrong!!!");
+    }
+  });
 };
 
 //for search
 export const getFilteredStudents = (value) => {
-  return allStudents.filter(
-    (item) =>
-      item.firstName
-        .toString()
-        .toLowerCase()
-        .includes(value.toString().toLowerCase()) ||
-      item.lastName
-        .toString()
-        .toLowerCase()
-        .includes(value.toString().toLowerCase()) ||
-      item.indexNumber
-        .toString()
-        .toLowerCase()
-        .includes(value.toString().toLowerCase()) ||
-      item.email
-        .toString()
-        .toLowerCase()
-        .includes(value.toString().toLowerCase()) ||
-      item.phone
-        .toString()
-        .toLowerCase()
-        .includes(value.toString().toLowerCase())
-  );
+  return new Promise((resolve, reject) => {
+    const filterAllStudents = allStudents.filter(
+      (item) =>
+        item.firstName
+          .toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase()) ||
+        item.lastName
+          .toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase()) ||
+        item.indexNumber
+          .toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase()) ||
+        item.email
+          .toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase()) ||
+        item.phone
+          .toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase())
+    );
+    if (filterAllStudents) {
+      resolve(filterAllStudents);
+    } else {
+      reject("Something Went Wrong!!!");
+    }
+  });
 };

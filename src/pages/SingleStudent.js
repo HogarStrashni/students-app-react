@@ -10,7 +10,9 @@ const SingleStudent = () => {
   const { id: studentId } = useParams();
 
   useEffect(() => {
-    setStudent(() => getUniqeStudent(studentId));
+    getUniqeStudent(studentId)
+      .then((data) => setStudent(data))
+      .catch((msg) => console.log(msg));
   }, [studentId]);
 
   const { firstName, lastName, indexNumber, email, phone } = student;

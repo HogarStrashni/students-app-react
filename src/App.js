@@ -3,21 +3,25 @@ import StudentList from "./components/StudentList";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { getAllStudents } from "./service/data";
+import { AppProvider } from "./searchContext";
 
 function App() {
   const [students, setStudents] = useState([]);
-  const [searchItem, setSearchItem] = useState("");
 
   useEffect(() => {
-    setStudents(getAllStudents);
+    getAllStudents()
+      .then((data) => setStudents(data))
+      .catch((msg) => console.log(msg));
   }, []);
 
   return (
     <>
-      <Header searchItem={searchItem} setSearchItem={setSearchItem} />
-      <main className="w-[56rem] mx-auto my-3">
-        <StudentList students={students} />
-      </main>
+      <AppProvider>
+        <Header students={students} />
+        <main className="w-[56rem] mx-auto my-3">
+          <StudentList students={students} />
+        </main>
+      </AppProvider>
       <Footer />
     </>
   );

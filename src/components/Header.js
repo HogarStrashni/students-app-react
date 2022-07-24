@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../service/logo.png";
 import { FaSearch } from "react-icons/fa";
+import { AppSearchContext } from "../searchContext";
 
 const Header = () => {
+  const { searchItem, setSearchItem } = useContext(AppSearchContext);
+
   return (
     <header className="w-[60rem] mx-auto bg-slate-300 flex justify-between items-center">
       <div className="h-16 py-3 px-4">
@@ -18,6 +21,8 @@ const Header = () => {
             id="search-item"
             className="border-2 rounded"
             placeholder="Search..."
+            value={searchItem}
+            onChange={(event) => setSearchItem(event.target.value)}
           />
         </form>
         <button className="ml-12 border px-4 rounded-lg bg-green-300">
