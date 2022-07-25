@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { getFilteredStudents } from "./service/data";
+import { getAllStudents, getFilteredStudents } from "./service/data";
 
 const AppSearchContext = React.createContext();
 
 const AppProvider = ({ children }) => {
+  const [students, setStudents] = useState([]);
   const [searchItem, setSearchItem] = useState("");
   const [filteredStudents, setFilteredStudents] = useState({});
+
+  useEffect(() => {
+    getAllStudents()
+      .then((data) => setStudents(data))
+      .catch((msg) => console.log(msg));
+  }, []);
 
   useEffect(() => {
     getFilteredStudents(searchItem)
@@ -16,6 +23,7 @@ const AppProvider = ({ children }) => {
   return (
     <AppSearchContext.Provider
       value={{
+        students,
         searchItem,
         filteredStudents,
         setSearchItem,

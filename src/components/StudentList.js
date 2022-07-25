@@ -3,21 +3,26 @@ import Student from "./Student";
 import { useNavigate } from "react-router-dom";
 import { AppSearchContext } from "../searchContext";
 
-const StudentList = ({ students }) => {
+const StudentList = () => {
+  //implementig search
+  const { filteredStudents, searchItem, students } =
+    useContext(AppSearchContext);
+  const dataArray = !searchItem ? students : filteredStudents;
+
   //table scroll bar
+  const referTbody = useRef();
   const [tableHeight, setTableHeight] = useState(0);
 
   useEffect(() => {
     let heightTab = referTbody.current.offsetHeight;
     setTableHeight(heightTab);
-  }, [students]);
+  }, [dataArray]);
 
-  const navigate = useNavigate(); //<Link> replacment for table error!
-  const referTbody = useRef();
+  console.log(tableHeight);
+  console.log(window.innerHeight);
 
-  const { filteredStudents, searchItem } = useContext(AppSearchContext);
-
-  const dataArray = !searchItem ? students : filteredStudents;
+  //<Link> replacment for table error!
+  const navigate = useNavigate();
 
   return (
     <>
@@ -34,9 +39,8 @@ const StudentList = ({ students }) => {
         </tbody>
       </table>
       <div
-        className={`h-[calc(100vh-162px)] overflow-auto w-[calc(${
-          tableHeight > window.innerHeight - 162 ? `100%+17px` : `100% `
-        })]`}
+        className={`h-[calc(100vh-162px)] overflow-auto w-[calc(
+          ${tableHeight > window.innerHeight - 162 ? `100%+17px` : `100%`})]`}
       >
         <table className="border">
           <tbody ref={referTbody}>
