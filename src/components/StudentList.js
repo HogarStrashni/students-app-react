@@ -7,6 +7,7 @@ const StudentList = () => {
   //implementig search
   const { filteredStudents, searchItem, students } =
     useContext(AppSearchContext);
+
   const dataArray = !searchItem ? students : filteredStudents;
 
   //table scroll bar
@@ -39,8 +40,9 @@ const StudentList = () => {
         </tbody>
       </table>
       <div
-        className={`h-[calc(100vh-162px)] overflow-auto w-[calc(
-          ${tableHeight > window.innerHeight - 162 ? `100%+17px` : `100%`})]`}
+        className={`h-[calc(100vh-162px)] overflow-auto w-[calc(${
+          tableHeight > window.innerHeight - 162 ? `100%+17px` : `100%`
+        })]`}
       >
         <table className="border">
           <tbody ref={referTbody}>
