@@ -4,6 +4,7 @@ import { getUniqeStudent } from "../service/data";
 import { FaHome, FaEdit, FaTrashAlt } from "react-icons/fa";
 import Footer from "../components/Footer";
 import logo from "../service/logo.png";
+import Grades from "../components/Grades";
 
 const SingleStudent = () => {
   const [student, setStudent] = useState({});
@@ -35,14 +36,15 @@ const SingleStudent = () => {
           <FaHome />
         </Link>
       </header>
-      <main className="w-[56rem] mx-auto my-3">
-        <div className="h-[calc(100vh-136px)] w-[100%]">
+      <main className="w-[56rem] mx-auto my-3 h-[calc(100vh-136px)]">
+        <div className="w-[100%]">
           <h1>First Name: {firstName}</h1>
           <h1>Last Name: {lastName}</h1>
           <h1>Index Number: {indexNumber}</h1>
           <h1>E-mail: {email}</h1>
           <h1>Contact Phone: {phone}</h1>
         </div>
+        <Grades />
       </main>
       <Footer />
     </>

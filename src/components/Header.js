@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import logo from "../service/logo.png";
 import { FaSearch } from "react-icons/fa";
-import { AppSearchContext } from "../searchContext";
+import { AppSearchContext } from "../context";
 
 const Header = () => {
   const { searchItem, setSearchItem } = useContext(AppSearchContext);

@@ -73,8 +73,47 @@ export const getFilteredStudents = (value) => {
           .toLowerCase()
           .includes(value.toString().toLowerCase())
     );
+
     if (filterAllStudents) {
       resolve(filterAllStudents);
+    } else {
+      reject("Something Went Wrong!!!");
+    }
+  });
+};
+
+// for grades
+const allSubjects = [
+  "Introduction to Civil Engineering",
+  "Statics and Mechanics of Solids",
+  "Computational Methods for Civil Engineering",
+  "Engineering Graphics and Visualization",
+  "Civil Engineering Materials",
+  "Structural Analysis",
+  "Geotechnical Engineering",
+  "Transportation Engineering",
+  "Environmental Engineering",
+  "Water Resources Engineering",
+  "Systems Applications in Civil Engineering",
+  "Civil Engineering Design",
+  "Civil Engineering Distribution Electives",
+  "Engineering, Science and Mathematics Elective",
+];
+
+export const getAllGradeHistory = () => {
+  return new Promise((resolve, reject) => {
+    const allGrades = allSubjects.map((item) => {
+      return {
+        subject: item,
+        grade: faker.mersenne.rand(6, 10),
+        dateExam: faker.date
+          .between("2010-01-01T00:00:00.000Z", "2020-01-01T00:00:00.000Z")
+          .toLocaleDateString("en-US"),
+      };
+    });
+
+    if (allGrades) {
+      resolve(allGrades);
     } else {
       reject("Something Went Wrong!!!");
     }

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import Student from "./Student";
 import { useNavigate } from "react-router-dom";
-import { AppSearchContext } from "../searchContext";
+import { AppSearchContext } from "../context";
 
 const StudentList = () => {
   //implementig search
@@ -18,9 +18,6 @@ const StudentList = () => {
     let heightTab = referTbody.current.offsetHeight;
     setTableHeight(heightTab);
   }, [dataArray]);
-
-  console.log(tableHeight);
-  console.log(window.innerHeight);
 
   //<Link> replacment for table error!
   const navigate = useNavigate();

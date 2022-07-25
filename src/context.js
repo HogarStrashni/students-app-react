@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getAllStudents, getFilteredStudents } from "./service/data";
+import {
+  getAllStudents,
+  getFilteredStudents,
+  getAllGradeHistory,
+} from "./service/data";
 
 const AppSearchContext = React.createContext();
 
@@ -7,6 +11,7 @@ const AppProvider = ({ children }) => {
   const [students, setStudents] = useState([]);
   const [searchItem, setSearchItem] = useState("");
   const [filteredStudents, setFilteredStudents] = useState({});
+  const [studentGrades, setStudentGrades] = useState([]);
 
   useEffect(() => {
     getAllStudents()
@@ -20,6 +25,12 @@ const AppProvider = ({ children }) => {
       .catch((msg) => console.log(msg));
   }, [searchItem]);
 
+  useEffect(() => {
+    getAllGradeHistory()
+      .then((data) => setStudentGrades(data))
+      .catch((msg) => console.log(msg));
+  }, []);
+
   return (
     <AppSearchContext.Provider
       value={{
@@ -27,6 +38,7 @@ const AppProvider = ({ children }) => {
         searchItem,
         filteredStudents,
         setSearchItem,
+        studentGrades,
       }}
     >
       {children}
