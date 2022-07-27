@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getUniqeStudent } from "../service/data";
-import { FaHome, FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Footer from "../components/Footer";
-import logo from "../service/logo.png";
 import Grades from "../components/Grades";
+import HeaderDoc from "../components/HeaderDoc";
 
 const SingleStudent = () => {
   const [student, setStudent] = useState({});
@@ -20,32 +20,27 @@ const SingleStudent = () => {
 
   return (
     <>
-      <header className="w-[60rem] h-16 mx-auto bg-slate-300 flex justify-between items-center">
-        <div className="h-16 py-3 px-4">
-          <img src={logo} alt="logo" className="h-10 rounded-lg" />
-        </div>
-        <div className="mr-12">
-          <button className="text-3xl mr-4 text-slate-100">
-            <FaEdit />
-          </button>
-          <button className="text-3xl mr-4 text-slate-100">
-            <FaTrashAlt />
-          </button>
-        </div>
-        <Link to="/" className="text-3xl mr-4 text-slate-100">
-          <FaHome />
-        </Link>
-      </header>
-      <main className="w-[56rem] mx-auto my-3 h-[calc(100vh-136px)]">
-        <div className="w-[100%]">
+      <HeaderDoc />
+      <section className="w-[56rem] mx-auto my-4 flex justify-between">
+        <div className="w-[80%] border">
           <h1>First Name: {firstName}</h1>
           <h1>Last Name: {lastName}</h1>
           <h1>Index Number: {indexNumber}</h1>
           <h1>E-mail: {email}</h1>
           <h1>Contact Phone: {phone}</h1>
         </div>
+        <div>
+          <button className="text-2xl mr-3 text-slate-500">
+            <FaEdit />
+          </button>
+          <button className="text-2xl text-slate-500">
+            <FaTrashAlt />
+          </button>
+        </div>
+      </section>
+      <section>
         <Grades />
-      </main>
+      </section>
       <Footer />
     </>
   );

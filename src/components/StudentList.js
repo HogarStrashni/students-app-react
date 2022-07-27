@@ -5,7 +5,7 @@ import { AppSearchContext } from "../context";
 
 const StudentList = () => {
   //implementig search
-  const { filteredStudents, searchItem, students } =
+  const { students, filteredStudents, searchItem } =
     useContext(AppSearchContext);
 
   const dataArray = !searchItem ? students : filteredStudents;

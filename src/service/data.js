@@ -105,7 +105,7 @@ export const getAllGradeHistory = () => {
     const allGrades = allSubjects.map((item) => {
       return {
         subject: item,
-        grade: faker.mersenne.rand(6, 10),
+        grade: faker.mersenne.rand(6, 11),
         dateExam: faker.date
           .between("2010-01-01T00:00:00.000Z", "2020-01-01T00:00:00.000Z")
           .toLocaleDateString("en-US"),

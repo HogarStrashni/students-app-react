@@ -11,9 +11,7 @@ const AboutUs = () => {
           <h2 className="text-3xl bg-red-200 my-8">About Us</h2>
           <section>
             <article>
-              <h1 className="text-2xl my-4">
-                Lorem ipsum dolor sit amet consectetur.
-              </h1>
+              <h1 className="text-2xl my-4">Lorem ipsum dolor sit</h1>
               <p>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea
                 quaerat maiores ex cumque nobis ipsum et, dolorum debitis
@@ -30,7 +28,7 @@ const AboutUs = () => {
             </article>
             <article>
               <h1 className="text-2xl my-4">
-                Lorem ipsum dolor sit amet consectetur.
+                Lorem ipsum dolor sit amet consectetur
               </h1>
               <p>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea
