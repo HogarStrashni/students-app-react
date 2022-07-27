@@ -1,22 +1,35 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useRef,
+  useLayoutEffect,
+  useEffect,
+  useContext,
+} from "react";
 import Student from "./Student";
 import { useNavigate } from "react-router-dom";
+import { getFilteredStudents } from "../service/data";
 import { AppSearchContext } from "../context";
 
 const StudentList = () => {
   //implementig search
-  const { students, filteredStudents, searchItem } =
-    useContext(AppSearchContext);
+  const { students, searchItem } = useContext(AppSearchContext);
+
+  const [filteredStudents, setFilteredStudents] = useState({});
+  useEffect(() => {
+    getFilteredStudents(searchItem)
+      .then((data) => setFilteredStudents(data))
+      .catch((msg) => console.log(msg));
+  }, [searchItem]);
 
   const dataArray = !searchItem ? students : filteredStudents;
 
   //table scroll bar
   const referTbody = useRef();
-  const [tableHeight, setTableHeight] = useState(0);
+  const [isScrollbarVisible, setIsScrollbarVisible] = useState(true);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let heightTab = referTbody.current.offsetHeight;
-    setTableHeight(heightTab);
+    setIsScrollbarVisible(heightTab > window.innerHeight - 162);
   }, [dataArray]);
 
   //<Link> replacment for table error!
@@ -36,11 +49,8 @@ const StudentList = () => {
           </tr>
         </tbody>
       </table>
-      <div
-        className={`h-[calc(100vh-162px)] overflow-auto w-[calc(${
-          tableHeight > window.innerHeight - 162 ? `100%+17px` : `100%`
-        })]`}
-      >
+      {/* value: 162px */}
+      <div className="h-[calc(100vh-246px)] overflow-auto">
         <table className="border">
           <tbody ref={referTbody}>
             {dataArray.map((item, index) => {
@@ -51,7 +61,7 @@ const StudentList = () => {
                   className="odd:bg-white even:bg-slate-100 hover:bg-green-300 cursor-pointer"
                 >
                   <td className="w-12 border">{index + 1}.</td>
-                  <Student {...item} />
+                  <Student {...item} isScrollbarVisible={isScrollbarVisible} />
                 </tr>
               );
             })}

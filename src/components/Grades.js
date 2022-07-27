@@ -1,9 +1,15 @@
-import React, { useContext } from "react";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { AppSearchContext } from "../context";
+import React, { useState, useEffect } from "react";
+import { FaEdit } from "react-icons/fa";
+import { getAllGradeHistory } from "../service/data";
 
 const Grades = () => {
-  const { studentGrades } = useContext(AppSearchContext);
+  const [studentGrades, setStudentGrades] = useState([]);
+
+  useEffect(() => {
+    getAllGradeHistory()
+      .then((data) => setStudentGrades(data))
+      .catch((msg) => console.log(msg));
+  }, []);
 
   return (
     <section className="w-[56rem] mx-auto my-8 flex justify-between">
@@ -33,11 +39,8 @@ const Grades = () => {
         })}
       </div>
       <div>
-        <button className="text-2xl mr-3 text-slate-500">
-          <FaEdit />
-        </button>
         <button className="text-2xl text-slate-500">
-          <FaTrashAlt />
+          <FaEdit />
         </button>
       </div>
     </section>
