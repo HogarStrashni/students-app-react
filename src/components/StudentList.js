@@ -49,8 +49,7 @@ const StudentList = () => {
           </tr>
         </tbody>
       </table>
-      {/* value: 162px */}
-      <div className="h-[calc(100vh-246px)] overflow-auto">
+      <div className="h-[calc(100vh-162px)] overflow-auto">
         <table className="border">
           <tbody ref={referTbody}>
             {dataArray.map((item, index) => {

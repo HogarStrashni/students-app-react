@@ -1,8 +1,13 @@
 import React from "react";
 import logo from "../service/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import SearchBar from "./SearchBar";
+import { FaHome } from "react-icons/fa";
 
 const Header = () => {
+  // location path
+  const location = useLocation();
+
   return (
     <>
       <header className="w-[60rem] mx-auto bg-slate-300 flex justify-between items-center">
@@ -11,10 +16,12 @@ const Header = () => {
             <img src={logo} alt="logo" className="h-10 rounded-lg" />
           </div>
         </Link>
+        {location.pathname === "/" && <SearchBar />}
         <div className="pr-4 flex">
-          <button className="ml-12 border px-4 rounded-lg bg-green-300">
-            LOGIN
-          </button>
+          <Link to="/" className="text-3xl text-slate-500">
+            <FaHome />
+          </Link>
+          <button className="ml-4 px-4 rounded-lg bg-green-300">LOGIN</button>
         </div>
       </header>
     </>
