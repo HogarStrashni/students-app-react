@@ -3,7 +3,8 @@ import { FaSearch, FaUserPlus } from "react-icons/fa";
 import { AppSearchContext } from "../context";
 
 const SearchBar = () => {
-  const { searchItem, setSearchItem } = useContext(AppSearchContext);
+  const { searchItem, setSearchItem, setIsFormOpen } =
+    useContext(AppSearchContext);
 
   // description...on mouse hover
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
@@ -20,6 +21,10 @@ const SearchBar = () => {
   };
   const mouseOutHendler = () => {
     setIsDescriptionOpen(false);
+  };
+
+  const openFormHandler = () => {
+    setIsFormOpen(true);
   };
 
   return (
@@ -44,6 +49,7 @@ const SearchBar = () => {
         className="px-2 text-3xl w-12 h-8 text-slate-500 relative"
         onMouseOver={mouseEnterHandler}
         onMouseOut={mouseOutHendler}
+        onClick={openFormHandler}
       >
         {isDescriptionOpen && (
           <div

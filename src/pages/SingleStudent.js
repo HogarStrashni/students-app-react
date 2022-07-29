@@ -33,6 +33,7 @@ const SingleStudent = () => {
       {isModalOpen && (
         <Modal setIsModalOpen={setIsModalOpen} studentId={studentId} />
       )}
+
       <main className="h-[calc(100vh-144px)]">
         <section className="w-[56rem] mx-auto my-8 flex justify-between">
           <div className="w-[80%]">

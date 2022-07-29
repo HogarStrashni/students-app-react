@@ -9,10 +9,11 @@ import Student from "./Student";
 import { useNavigate } from "react-router-dom";
 import { getFilteredStudents } from "../service/data";
 import { AppSearchContext } from "../context";
+import StudentForm from "./StudentForm";
 
 const StudentList = () => {
   //implementig search
-  const { students, searchItem } = useContext(AppSearchContext);
+  const { students, searchItem, isFormOpen } = useContext(AppSearchContext);
 
   const [filteredStudents, setFilteredStudents] = useState({});
   useEffect(() => {
@@ -35,7 +36,9 @@ const StudentList = () => {
   //<Link> replacment for table error!
   const navigate = useNavigate();
 
-  return (
+  return isFormOpen ? (
+    <StudentForm />
+  ) : (
     <>
       <table className="border">
         <tbody>

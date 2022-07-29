@@ -7,6 +7,9 @@ const AppProvider = ({ children }) => {
   const [students, setStudents] = useState([]);
   const [searchItem, setSearchItem] = useState("");
 
+  //implementing add new student
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   useEffect(() => {
     getAllStudents()
       .then((data) => setStudents(data))
@@ -20,6 +23,8 @@ const AppProvider = ({ children }) => {
         setStudents,
         searchItem,
         setSearchItem,
+        isFormOpen,
+        setIsFormOpen,
       }}
     >
       {children}

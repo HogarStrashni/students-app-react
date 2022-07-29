@@ -16,6 +16,7 @@ const Modal = ({ setIsModalOpen, studentId }) => {
     setIsModalOpen(false);
     navigate("/");
   };
+  console.log(students);
 
   const closeModalHandler = () => {
     setIsModalOpen(false);
@@ -23,7 +24,7 @@ const Modal = ({ setIsModalOpen, studentId }) => {
 
   return (
     <>
-      <article className="h-[calc(100vh-112px)] w-[60rem] left-[calc(50vw-30rem)] mx-auto border bg-slate-600 opacity-10 absolute"></article>
+      <article className="h-[calc(100vh)] w-[60rem] left-[calc(50vw-30rem)] top-0 mx-auto border bg-slate-600 opacity-10 absolute"></article>
       <article className="w-80 h-32 border-2 rounded-lg absolute top-60 left-[38rem] bg-white">
         <div className="h-[100%] flex flex-col items-center justify-around">
           <h1 className="text-xl">Are you sure?</h1>
