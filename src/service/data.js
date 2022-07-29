@@ -20,7 +20,7 @@ const allStudents = [];
 export const getAllStudents = () => {
   return new Promise((resolve, reject) => {
     if (allStudents.length === 0) {
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 10; i++) {
         allStudents.push(createStudent());
       }
     }

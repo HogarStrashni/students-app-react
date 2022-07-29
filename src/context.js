@@ -17,6 +17,7 @@ const AppProvider = ({ children }) => {
     <AppSearchContext.Provider
       value={{
         students,
+        setStudents,
         searchItem,
         setSearchItem,
       }}
