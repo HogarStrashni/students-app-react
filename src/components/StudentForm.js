@@ -20,26 +20,20 @@ const StudentForm = () => {
     setStateForm({ ...stateForm, [event.target.name]: event.target.value });
   };
 
-  const [listAddedStudents, setListAddedStudents] = useState(null);
-
-  useEffect(() => {
-    getNewStudent(stateForm)
-      .then((data) => setListAddedStudents(data))
-      .catch((msg) => console.log(msg));
-  }, [stateForm]);
+  console.log(stateForm);
 
   const studentFormHandler = (event) => {
     event.preventDefault();
-    setStudents(listAddedStudents);
-    setIsFormOpen(false);
-    navigate("/");
+    getNewStudent(stateForm)
+      .then(() => setIsFormOpen(false))
+      .catch((msg) => console.log(msg));
   };
 
   const closeFormHandler = () => {
     setIsFormOpen(false);
   };
 
-  console.log(listAddedStudents);
+  // console.log(listAddedStudents);
 
   return (
     <>

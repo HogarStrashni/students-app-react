@@ -49,16 +49,8 @@ export const getUniqeStudent = (index) => {
 };
 
 // for adding new student
-//checking unique index number
-const isTheSameValue = (value) => {
-  return allStudents.some((item) => item.indexNumber === value)
-    ? value + " SAME INDEX NUMBER"
-    : value;
-};
-
 export const getNewStudent = (newStudent) => {
   return new Promise((resolve, reject) => {
-    isTheSameValue(newStudent.indexNumber);
     allStudents = [...allStudents, newStudent];
 
     if (allStudents) {
