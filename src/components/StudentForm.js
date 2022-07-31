@@ -1,42 +1,45 @@
-import React, { useContext, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppSearchContext } from "../context";
+import { getNewStudent } from "../service/data";
 
 const StudentForm = () => {
-  const { setIsFormOpen, students, setStudents } = useContext(AppSearchContext);
+  const { setIsFormOpen, setStudents } = useContext(AppSearchContext);
 
   const navigate = useNavigate();
 
-  const firstNameRef = useRef();
-  const lastNameRef = useRef();
-  const indexNumberRef = useRef();
-  const emailRef = useRef();
-  const phoneRef = useRef();
+  const [stateForm, setStateForm] = useState({
+    firstName: "",
+    lastName: "",
+    indexNumber: "",
+    email: "",
+    phone: "",
+  });
+
+  const changeInputHandler = (event) => {
+    setStateForm({ ...stateForm, [event.target.name]: event.target.value });
+  };
+
+  const [listAddedStudents, setListAddedStudents] = useState(null);
+
+  useEffect(() => {
+    getNewStudent(stateForm)
+      .then((data) => setListAddedStudents(data))
+      .catch((msg) => console.log(msg));
+  }, [stateForm]);
+
+  const studentFormHandler = (event) => {
+    event.preventDefault();
+    setStudents(listAddedStudents);
+    setIsFormOpen(false);
+    navigate("/");
+  };
 
   const closeFormHandler = () => {
     setIsFormOpen(false);
   };
 
-  //checking unique index number
-  const isTheSameValue = (value) => {
-    return students.some((item) => item.indexNumber === value)
-      ? value + " SAME INDEX NUMBER"
-      : value;
-  };
-
-  const studentFormHandler = (event) => {
-    event.preventDefault();
-    const newStudentObject = {
-      firstName: firstNameRef.current.value,
-      lastName: lastNameRef.current.value,
-      indexNumber: isTheSameValue(indexNumberRef.current.value),
-      email: emailRef.current.value,
-      phone: phoneRef.current.value,
-    };
-    setStudents([...students, newStudentObject]);
-    setIsFormOpen(false);
-    navigate("/");
-  };
+  console.log(listAddedStudents);
 
   return (
     <>
@@ -52,10 +55,11 @@ const StudentForm = () => {
                   <td>
                     <input
                       type="text"
-                      name="first-name"
+                      name="firstName"
                       id="first-name"
                       placeholder="First Name..."
-                      ref={firstNameRef}
+                      value={stateForm.firstName}
+                      onChange={changeInputHandler}
                       required
                     />
                   </td>
@@ -67,10 +71,11 @@ const StudentForm = () => {
                   <td>
                     <input
                       type="text"
-                      name="last-name"
-                      id="last-name"
+                      name="lastName"
+                      id="lastName"
                       placeholder="Last Name..."
-                      ref={lastNameRef}
+                      value={stateForm.lastName}
+                      onChange={changeInputHandler}
                       required
                     />
                   </td>
@@ -82,10 +87,11 @@ const StudentForm = () => {
                   <td>
                     <input
                       type="text"
-                      name="index-number"
-                      id="index-number"
+                      name="indexNumber"
+                      id="indexNumber"
                       placeholder="Index-Number..."
-                      ref={indexNumberRef}
+                      value={stateForm.indexNumber}
+                      onChange={changeInputHandler}
                       required
                     />
                   </td>
@@ -97,10 +103,11 @@ const StudentForm = () => {
                   <td>
                     <input
                       type="text"
-                      name="e-mail"
+                      name="email"
                       id="e-mail"
                       placeholder="E-mail..."
-                      ref={emailRef}
+                      value={stateForm.email}
+                      onChange={changeInputHandler}
                       required
                     />
                   </td>
@@ -112,10 +119,11 @@ const StudentForm = () => {
                   <td>
                     <input
                       type="text"
-                      name="contact-phone"
+                      name="phone"
                       id="contact-phone"
                       placeholder="Contact Phone..."
-                      ref={phoneRef}
+                      value={StudentForm.phone}
+                      onChange={changeInputHandler}
                       required
                     />
                   </td>
