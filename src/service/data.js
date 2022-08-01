@@ -15,18 +15,41 @@ const createStudent = () => {
   };
 };
 
+// all students list...
 let allStudents = [];
-
-export const getAllStudents = () => {
+export const getStudents = (query) => {
   return new Promise((resolve, reject) => {
     if (allStudents.length === 0) {
       for (let i = 0; i < 10; i++) {
         allStudents.push(createStudent());
       }
     }
+    const filteredStudents = allStudents.filter(
+      (item) =>
+        item.firstName
+          .toString()
+          .toLowerCase()
+          .includes(query.toString().toLowerCase()) ||
+        item.lastName
+          .toString()
+          .toLowerCase()
+          .includes(query.toString().toLowerCase()) ||
+        item.indexNumber
+          .toString()
+          .toLowerCase()
+          .includes(query.toString().toLowerCase()) ||
+        item.email
+          .toString()
+          .toLowerCase()
+          .includes(query.toString().toLowerCase()) ||
+        item.phone
+          .toString()
+          .toLowerCase()
+          .includes(query.toString().toLowerCase())
+    );
 
     if (allStudents) {
-      resolve(allStudents);
+      resolve(!query ? allStudents : filteredStudents);
     } else {
       reject("Something Went Wrong!!! Loading Students Data...");
     }
@@ -34,10 +57,10 @@ export const getAllStudents = () => {
 };
 
 // for finding unique student
-export const getUniqeStudent = (index) => {
+export const getUniqueStudent = (query) => {
   return new Promise((resolve, reject) => {
     const uniqueStudent = allStudents.find(
-      (item) => item.indexNumber === index
+      (item) => item.indexNumber === query
     );
 
     if (uniqueStudent) {
@@ -62,9 +85,9 @@ export const getNewStudent = (newStudent) => {
 };
 
 //for deleting unigue student
-export const getStudentsAfterDelete = (index) => {
+export const getStudentsAfterDelete = (query) => {
   return new Promise((resolve, reject) => {
-    allStudents = allStudents.filter((item) => item.indexNumber !== index);
+    allStudents = allStudents.filter((item) => item.indexNumber !== query);
 
     if (allStudents) {
       resolve(allStudents);
@@ -74,37 +97,17 @@ export const getStudentsAfterDelete = (index) => {
   });
 };
 
-//for search students
-export const getFilteredStudents = (value) => {
+//for editing unigue student
+export const getEditedStudent = (query, newItem) => {
   return new Promise((resolve, reject) => {
-    const filterAllStudents = allStudents.filter(
-      (item) =>
-        item.firstName
-          .toString()
-          .toLowerCase()
-          .includes(value.toString().toLowerCase()) ||
-        item.lastName
-          .toString()
-          .toLowerCase()
-          .includes(value.toString().toLowerCase()) ||
-        item.indexNumber
-          .toString()
-          .toLowerCase()
-          .includes(value.toString().toLowerCase()) ||
-        item.email
-          .toString()
-          .toLowerCase()
-          .includes(value.toString().toLowerCase()) ||
-        item.phone
-          .toString()
-          .toLowerCase()
-          .includes(value.toString().toLowerCase())
+    allStudents = allStudents.map((item) =>
+      item.indexNumber !== query ? item : newItem
     );
 
-    if (filterAllStudents) {
-      resolve(filterAllStudents);
+    if (allStudents) {
+      resolve(allStudents);
     } else {
-      reject("Something Went Wrong!!! Applying Search Form...");
+      reject("Something Went Wrong!!! Deleting Unique Student...");
     }
   });
 };

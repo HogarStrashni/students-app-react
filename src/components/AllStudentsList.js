@@ -5,24 +5,20 @@ import React, {
   useEffect,
   useContext,
 } from "react";
-import Student from "./Student";
 import { useNavigate } from "react-router-dom";
-import { getFilteredStudents } from "../service/data";
+import { getStudents } from "../service/data";
 import { AppSearchContext } from "../context";
-import StudentForm from "./StudentForm";
 
-const StudentList = () => {
+const AllStudentsList = () => {
   //implementig search
-  const { students, searchItem, isFormOpen } = useContext(AppSearchContext);
+  const { searchItem } = useContext(AppSearchContext);
 
-  const [filteredStudents, setFilteredStudents] = useState({});
+  const [listStudents, setListStudents] = useState([]);
   useEffect(() => {
-    getFilteredStudents(searchItem)
-      .then((data) => setFilteredStudents(data))
+    getStudents(searchItem)
+      .then((data) => setListStudents(data))
       .catch((msg) => console.log(msg));
   }, [searchItem]);
-
-  const dataArray = !searchItem ? students : filteredStudents;
 
   //table scroll bar
   const referTbody = useRef();
@@ -31,14 +27,12 @@ const StudentList = () => {
   useLayoutEffect(() => {
     let heightTab = referTbody.current.offsetHeight;
     setIsScrollbarVisible(heightTab > window.innerHeight - 162);
-  }, [dataArray]);
+  }, [listStudents]);
 
   //<Link> replacment for table error!
   const navigate = useNavigate();
 
-  return isFormOpen ? (
-    <StudentForm />
-  ) : (
+  return (
     <>
       <table className="border">
         <tbody>
@@ -55,7 +49,8 @@ const StudentList = () => {
       <div className="h-[calc(100vh-162px)] overflow-auto">
         <table className="border">
           <tbody ref={referTbody}>
-            {dataArray.map((item, index) => {
+            {listStudents.map((item, index) => {
+              const { firstName, lastName, indexNumber, email, phone } = item;
               return (
                 <tr
                   onClick={() => navigate(`/student/${item.indexNumber}`)}
@@ -63,7 +58,18 @@ const StudentList = () => {
                   className="odd:bg-white even:bg-slate-100 hover:bg-green-300 cursor-pointer"
                 >
                   <td className="w-12 border">{index + 1}.</td>
-                  <Student {...item} isScrollbarVisible={isScrollbarVisible} />
+                  <td className="w-32 border">{firstName}</td>
+                  <td className="w-32 border">{lastName}</td>
+                  <td className="w-32 border">{indexNumber}</td>
+                  <td className="w-80 border">{email}</td>
+                  <td
+                    className="border"
+                    style={{
+                      width: isScrollbarVisible ? "calc(9rem - 17px)" : "9rem",
+                    }}
+                  >
+                    {phone}
+                  </td>
                 </tr>
               );
             })}
@@ -74,4 +80,4 @@ const StudentList = () => {
   );
 };
 
-export default StudentList;
+export default AllStudentsList;

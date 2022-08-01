@@ -1,30 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { getAllStudents } from "./service/data";
+import React, { useState } from "react";
 
 const AppSearchContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  const [students, setStudents] = useState([]);
+  //implementing search from header component
   const [searchItem, setSearchItem] = useState("");
-
-  //implementing add new student
-  const [isFormOpen, setIsFormOpen] = useState(false);
-
-  useEffect(() => {
-    getAllStudents()
-      .then((data) => setStudents(data))
-      .catch((msg) => console.log(msg));
-  }, []);
 
   return (
     <AppSearchContext.Provider
       value={{
-        students,
-        setStudents,
         searchItem,
         setSearchItem,
-        isFormOpen,
-        setIsFormOpen,
       }}
     >
       {children}

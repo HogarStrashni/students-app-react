@@ -9,6 +9,7 @@ import SingleStudent from "./pages/SingleStudent";
 import Documentation from "./pages/Documentation";
 import AboutUs from "./pages/AboutUs";
 import ErrorPage from "./pages/ErrorPage";
+import StudentForm from "./components/StudentForm";
 
 function App() {
   return (
@@ -17,7 +18,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/student/:id" element={<SingleStudent />} />
+          <Route>
+            <Route path="/student/:id" element={<SingleStudent />} />
+            <Route path="/student/new-student" element={<StudentForm />} />
+          </Route>
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="*" element={<ErrorPage />} />

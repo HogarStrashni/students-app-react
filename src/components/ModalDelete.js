@@ -1,30 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { AppSearchContext } from "../context";
 import { getStudentsAfterDelete } from "../service/data";
 
-const Modal = ({ setIsModalOpen, studentId }) => {
-  const { setStudents } = useContext(AppSearchContext);
-
-  const [studentsDel, setStudentsDel] = useState({});
-
-  useEffect(() => {
-    getStudentsAfterDelete(studentId)
-      .then((data) => setStudentsDel(data))
-      .catch((msg) => console.log(msg));
-  }, [studentId]);
-
+const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
   //returning on main page after delete comfirm
   const navigate = useNavigate();
 
   const deleteHandler = () => {
-    setStudents(studentsDel);
-    setIsModalOpen(false);
+    getStudentsAfterDelete(studentId)
+      .then(() => setIsModalDeleteOpen(false))
+      .catch((msg) => console.log(msg));
     navigate("/");
   };
 
-  const closeModalHandler = () => {
-    setIsModalOpen(false);
+  const closeModalDeleteHandler = () => {
+    setIsModalDeleteOpen(false);
   };
 
   return (
@@ -36,7 +26,7 @@ const Modal = ({ setIsModalOpen, studentId }) => {
           <div className="w-60 flex justify-around">
             <button
               className="w-20 rounded-lg bg-slate-300 border-2"
-              onClick={closeModalHandler}
+              onClick={closeModalDeleteHandler}
             >
               Cancel
             </button>
@@ -53,4 +43,4 @@ const Modal = ({ setIsModalOpen, studentId }) => {
   );
 };
 
-export default Modal;
+export default ModalDelete;

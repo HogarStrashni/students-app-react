@@ -1,34 +1,12 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
-import { FaSearch, FaUserPlus } from "react-icons/fa";
+import React, { useContext } from "react";
+import { FaSearch } from "react-icons/fa";
 import { AppSearchContext } from "../context";
 
 const SearchBar = () => {
-  const { searchItem, setSearchItem, setIsFormOpen } =
-    useContext(AppSearchContext);
-
-  // description...on mouse hover
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
-  const descriptionText = useRef();
-  useEffect(() => {
-    if (isDescriptionOpen) {
-      descriptionText.current.style.left = "-40px";
-      descriptionText.current.style.top = "-19px";
-    }
-  }, [isDescriptionOpen]);
-
-  const mouseEnterHandler = () => {
-    setIsDescriptionOpen(true);
-  };
-  const mouseOutHendler = () => {
-    setIsDescriptionOpen(false);
-  };
-
-  const openFormHandler = () => {
-    setIsFormOpen(true);
-  };
+  const { searchItem, setSearchItem } = useContext(AppSearchContext);
 
   return (
-    <div className="my-4 flex justify-between">
+    <div className="mr-16 flex justify-between">
       <form
         className="pr-4 flex items-center"
         onSubmit={(event) => event.preventDefault()}
@@ -45,22 +23,6 @@ const SearchBar = () => {
           onChange={(event) => setSearchItem(event.target.value)}
         />
       </form>
-      <button
-        className="px-2 text-3xl w-12 h-8 text-slate-500 relative"
-        onMouseOver={mouseEnterHandler}
-        onMouseOut={mouseOutHendler}
-        onClick={openFormHandler}
-      >
-        {isDescriptionOpen && (
-          <div
-            ref={descriptionText}
-            className="text-sm absolute w-32 text-center"
-          >
-            Add New Student
-          </div>
-        )}
-        <FaUserPlus />
-      </button>
     </div>
   );
 };

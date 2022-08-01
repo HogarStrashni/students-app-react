@@ -1,37 +1,56 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getUniqeStudent } from "../service/data";
+import { getUniqueStudent } from "../service/data";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Grades from "../components/Grades";
-import { AppSearchContext } from "../context";
-import Modal from "../components/Modal";
+import ModalDelete from "../components/ModalDelete";
+import StudentForm from "../components/StudentForm";
 
 const SingleStudent = () => {
-  const { setSearchItem } = useContext(AppSearchContext);
-
-  const [student, setStudent] = useState({});
   const { id: studentId } = useParams();
+  const [student, setStudent] = useState({});
 
   useEffect(() => {
-    getUniqeStudent(studentId)
+    getUniqueStudent(studentId)
       .then((data) => setStudent(data))
       .catch((msg) => console.log(msg));
-    setSearchItem("");
-  }, [studentId, setSearchItem]);
+  }, [studentId]);
 
   const { firstName, lastName, indexNumber, email, phone } = student;
 
-  //implementing Modal
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  //implementing ModalDelete
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
-  const openModalHandler = () => {
-    setIsModalOpen(true);
+  const openModalDeleteHandler = () => {
+    setIsModalDeleteOpen(true);
+  };
+
+  //implementing edit student data
+  const [isStudentFormOpen, setIsStudentFormOpen] = useState(false);
+
+  const openFormHandler = () => {
+    setIsStudentFormOpen(true);
   };
 
   return (
     <>
-      {isModalOpen && (
-        <Modal setIsModalOpen={setIsModalOpen} studentId={studentId} />
+      {isModalDeleteOpen && (
+        <ModalDelete
+          setIsModalDeleteOpen={setIsModalDeleteOpen}
+          studentId={studentId}
+        />
+      )}
+
+      {isStudentFormOpen && (
+        <StudentForm
+          firstName={firstName}
+          lastName={lastName}
+          indexNumber={indexNumber}
+          email={email}
+          phone={phone}
+          setIsStudentFormOpen={setIsStudentFormOpen}
+          studentId={studentId}
+        />
       )}
 
       <main className="h-[calc(100vh-144px)]">
@@ -46,11 +65,14 @@ const SingleStudent = () => {
           <div>
             <button
               className="text-2xl mr-3 text-slate-500"
-              onClick={openModalHandler}
+              onClick={openModalDeleteHandler}
             >
               <FaTrashAlt />
             </button>
-            <button className="text-2xl text-slate-500">
+            <button
+              className="text-2xl text-slate-500"
+              onClick={openFormHandler}
+            >
               <FaEdit />
             </button>
           </div>

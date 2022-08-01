@@ -1,39 +1,43 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { AppSearchContext } from "../context";
-import { getNewStudent } from "../service/data";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getNewStudent, getEditedStudent } from "../service/data";
 
-const StudentForm = () => {
-  const { setIsFormOpen, setStudents } = useContext(AppSearchContext);
-
+const StudentForm = ({
+  firstName,
+  lastName,
+  indexNumber,
+  email,
+  phone,
+  setIsStudentFormOpen,
+  studentId,
+}) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [stateForm, setStateForm] = useState({
-    firstName: "",
-    lastName: "",
-    indexNumber: "",
-    email: "",
-    phone: "",
+    firstName: firstName || "",
+    lastName: lastName || "",
+    indexNumber: indexNumber || "",
+    email: email || "",
+    phone: phone || "",
   });
 
   const changeInputHandler = (event) => {
     setStateForm({ ...stateForm, [event.target.name]: event.target.value });
   };
 
-  console.log(stateForm);
-
   const studentFormHandler = (event) => {
     event.preventDefault();
-    getNewStudent(stateForm)
-      .then(() => setIsFormOpen(false))
-      .catch((msg) => console.log(msg));
+    location.pathname === "/student/new-student"
+      ? getNewStudent(stateForm).catch((msg) => console.log(msg))
+      : getEditedStudent(studentId, stateForm).catch((msg) => console.log(msg));
+    navigate("/");
   };
 
   const closeFormHandler = () => {
-    setIsFormOpen(false);
+    setIsStudentFormOpen(false);
+    navigate("/");
   };
-
-  // console.log(listAddedStudents);
 
   return (
     <>
@@ -116,7 +120,7 @@ const StudentForm = () => {
                       name="phone"
                       id="contact-phone"
                       placeholder="Contact Phone..."
-                      value={StudentForm.phone}
+                      value={stateForm.phone}
                       onChange={changeInputHandler}
                       required
                     />
@@ -127,7 +131,12 @@ const StudentForm = () => {
             <div className="flex justify-center w-[56rem] mt-16">
               <button
                 className="w-40 rounded-lg bg-slate-300 border-2"
-                onClick={closeFormHandler}
+                type="button"
+                onClick={
+                  location.pathname === "/student/new-student"
+                    ? () => navigate("/")
+                    : closeFormHandler
+                }
               >
                 Cancel
               </button>
@@ -135,7 +144,9 @@ const StudentForm = () => {
                 type="submit"
                 className="w-40 rounded-lg bg-red-300 border-2"
               >
-                Add New Student
+                {location.pathname === "/student/new-student"
+                  ? "Add New Student"
+                  : "Confirm Changes"}
               </button>
             </div>
           </form>
