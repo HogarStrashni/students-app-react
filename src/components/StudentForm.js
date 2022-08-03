@@ -8,6 +8,7 @@ const StudentForm = ({
   indexNumber,
   email,
   phone,
+  allGrades,
   setIsStudentFormOpen,
   studentId,
 }) => {
@@ -20,6 +21,7 @@ const StudentForm = ({
     indexNumber: indexNumber || "",
     email: email || "",
     phone: phone || "",
+    gradeHistory: allGrades,
   });
 
   const changeInputHandler = (event) => {

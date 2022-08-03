@@ -1,16 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FaEdit } from "react-icons/fa";
-import { getAllGradeHistory } from "../service/data";
 
-const Grades = () => {
-  const [studentGrades, setStudentGrades] = useState([]);
-
-  useEffect(() => {
-    getAllGradeHistory()
-      .then((data) => setStudentGrades(data))
-      .catch((msg) => console.log(msg));
-  }, []);
-
+const Grades = ({ allGrades }) => {
   return (
     <section className="w-[56rem] mx-auto my-8 flex justify-between">
       <div>
@@ -23,7 +14,7 @@ const Grades = () => {
             </tr>
           </tbody>
         </table>
-        {studentGrades.map((item, index) => {
+        {allGrades.map((item, index) => {
           const { subject, grade, dateExam } = item;
           return (
             <table key={index}>

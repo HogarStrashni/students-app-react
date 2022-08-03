@@ -9,10 +9,14 @@ import StudentForm from "../components/StudentForm";
 const SingleStudent = () => {
   const { id: studentId } = useParams();
   const [student, setStudent] = useState({});
+  const [allGrades, setAllGrades] = useState([]);
 
   useEffect(() => {
     getUniqueStudent(studentId)
-      .then((data) => setStudent(data))
+      .then((data) => {
+        setStudent(data);
+        setAllGrades(data.gradeHistory);
+      })
       .catch((msg) => console.log(msg));
   }, [studentId]);
 
@@ -48,6 +52,7 @@ const SingleStudent = () => {
           indexNumber={indexNumber}
           email={email}
           phone={phone}
+          allGrades={allGrades}
           setIsStudentFormOpen={setIsStudentFormOpen}
           studentId={studentId}
         />
@@ -78,7 +83,7 @@ const SingleStudent = () => {
           </div>
         </section>
         <section>
-          <Grades />
+          <Grades allGrades={allGrades} />
         </section>
       </main>
     </>

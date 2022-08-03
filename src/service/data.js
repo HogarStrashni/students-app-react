@@ -1,5 +1,23 @@
 import { faker } from "@faker-js/faker";
 
+// for grades
+const allSubjects = [
+  "Introduction to Civil Engineering",
+  "Statics and Mechanics of Solids",
+  "Computational Methods for Civil Engineering",
+  "Engineering Graphics and Visualization",
+  "Civil Engineering Materials",
+  "Structural Analysis",
+  "Geotechnical Engineering",
+  "Transportation Engineering",
+  "Environmental Engineering",
+  "Water Resources Engineering",
+  "Systems Applications in Civil Engineering",
+  "Civil Engineering Design",
+  "Civil Engineering Distribution Electives",
+  "Engineering, Science and Mathematics Elective",
+];
+
 const createStudent = () => {
   return {
     firstName: faker.name.firstName(),
@@ -12,6 +30,15 @@ const createStudent = () => {
     ),
     email: faker.internet.email().toLowerCase(),
     phone: faker.phone.number("+387 6# ### ###"),
+    gradeHistory: allSubjects.map((item) => {
+      return {
+        subject: item,
+        grade: faker.mersenne.rand(6, 11),
+        dateExam: faker.date
+          .between("2010-01-01T00:00:00.000Z", "2020-01-01T00:00:00.000Z")
+          .toLocaleDateString("en-US"),
+      };
+    }),
   };
 };
 
@@ -74,7 +101,19 @@ export const getUniqueStudent = (query) => {
 // for adding new student
 export const getNewStudent = (newStudent) => {
   return new Promise((resolve, reject) => {
-    allStudents = [...allStudents, newStudent];
+    allStudents = [
+      ...allStudents,
+      {
+        ...newStudent,
+        gradeHistory: allSubjects.map((item) => {
+          return {
+            subject: item,
+            grade: "",
+            dateExam: "",
+          };
+        }),
+      },
+    ];
 
     if (allStudents) {
       resolve(allStudents);
@@ -108,44 +147,6 @@ export const getEditedStudent = (query, newItem) => {
       resolve(allStudents);
     } else {
       reject("Something Went Wrong!!! Deleting Unique Student...");
-    }
-  });
-};
-
-// for grades
-const allSubjects = [
-  "Introduction to Civil Engineering",
-  "Statics and Mechanics of Solids",
-  "Computational Methods for Civil Engineering",
-  "Engineering Graphics and Visualization",
-  "Civil Engineering Materials",
-  "Structural Analysis",
-  "Geotechnical Engineering",
-  "Transportation Engineering",
-  "Environmental Engineering",
-  "Water Resources Engineering",
-  "Systems Applications in Civil Engineering",
-  "Civil Engineering Design",
-  "Civil Engineering Distribution Electives",
-  "Engineering, Science and Mathematics Elective",
-];
-
-export const getAllGradeHistory = () => {
-  return new Promise((resolve, reject) => {
-    const allGrades = allSubjects.map((item) => {
-      return {
-        subject: item,
-        grade: faker.mersenne.rand(6, 11),
-        dateExam: faker.date
-          .between("2010-01-01T00:00:00.000Z", "2020-01-01T00:00:00.000Z")
-          .toLocaleDateString("en-US"),
-      };
-    });
-
-    if (allGrades) {
-      resolve(allGrades);
-    } else {
-      reject("Something Went Wrong!!! Applying Grade History...");
     }
   });
 };
