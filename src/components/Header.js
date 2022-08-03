@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../service/logo.png";
 import { Link, useLocation } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import { FaHome } from "react-icons/fa";
+import { AppSearchContext } from "../context";
 
 const Header = () => {
+  const { setSearchItem } = useContext(AppSearchContext);
+
   // location path
   const location = useLocation();
 
@@ -18,7 +21,11 @@ const Header = () => {
         </Link>
         {location.pathname === "/" && <SearchBar />}
         <div className="pr-4 flex">
-          <Link to="/" className="text-3xl text-slate-500">
+          <Link
+            to="/"
+            className="text-3xl text-slate-500"
+            onClick={() => setSearchItem("")}
+          >
             <FaHome />
           </Link>
           <button className="ml-4 px-4 rounded-lg bg-green-300">LOGIN</button>

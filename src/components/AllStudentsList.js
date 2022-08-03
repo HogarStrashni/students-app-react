@@ -1,25 +1,7 @@
-import React, {
-  useState,
-  useRef,
-  useLayoutEffect,
-  useEffect,
-  useContext,
-} from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getStudents } from "../service/data";
-import { AppSearchContext } from "../context";
 
-const AllStudentsList = () => {
-  //implementig search
-  const { searchItem } = useContext(AppSearchContext);
-
-  const [listStudents, setListStudents] = useState([]);
-  useEffect(() => {
-    getStudents(searchItem)
-      .then((data) => setListStudents(data))
-      .catch((msg) => console.log(msg));
-  }, [searchItem]);
-
+const AllStudentsList = ({ listStudents }) => {
   //table scroll bar
   const referTbody = useRef();
   const [isScrollbarVisible, setIsScrollbarVisible] = useState(true);

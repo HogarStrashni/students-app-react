@@ -41,10 +41,10 @@ const StudentForm = ({
 
   return (
     <>
-      <main className="h-[calc(100vh)] w-[60rem] left-[calc(50vw-30rem)] top-0 mx-auto bg-slate-200 absolute">
+      <main className="h-[calc(100vh)] w-[60rem] left-[calc(50vw-30rem)] top-0 bg-slate-200 absolute">
         <div className="w-[56rem] mx-auto my-8 flex justify-between">
           <form onSubmit={studentFormHandler}>
-            <table className="w-[30rem]">
+            <table className="w-[45rem]">
               <tbody>
                 <tr className="h-12">
                   <td>
@@ -52,6 +52,7 @@ const StudentForm = ({
                   </td>
                   <td>
                     <input
+                      className="w-[20rem]"
                       type="text"
                       name="firstName"
                       id="first-name"
@@ -68,6 +69,7 @@ const StudentForm = ({
                   </td>
                   <td>
                     <input
+                      className="w-[20rem]"
                       type="text"
                       name="lastName"
                       id="lastName"
@@ -84,6 +86,7 @@ const StudentForm = ({
                   </td>
                   <td>
                     <input
+                      className="w-[20rem]"
                       type="text"
                       name="indexNumber"
                       id="indexNumber"
@@ -100,6 +103,7 @@ const StudentForm = ({
                   </td>
                   <td>
                     <input
+                      className="w-[20rem]"
                       type="text"
                       name="email"
                       id="e-mail"
@@ -116,6 +120,7 @@ const StudentForm = ({
                   </td>
                   <td>
                     <input
+                      className="w-[20rem]"
                       type="text"
                       name="phone"
                       id="contact-phone"

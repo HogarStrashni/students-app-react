@@ -1,9 +1,25 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import AllStudentsList from "../components/AllStudentsList";
+import { getStudents } from "../service/data";
+import { AppSearchContext } from "../context";
+import LoadingStage from "../components/LoadingStage";
 
 const Home = () => {
+  //implementig search
+  const { searchItem } = useContext(AppSearchContext);
+
+  //loading students and LoadingStage
+  const [isLoading, setIsLoading] = useState(true);
+  const [listStudents, setListStudents] = useState([]);
+  useEffect(() => {
+    getStudents(searchItem)
+      .then((data) => setListStudents(data))
+      .catch((msg) => console.log(msg));
+    setIsLoading(false);
+  }, [searchItem, isLoading]);
+
   //description on mouse hover...
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
@@ -43,7 +59,11 @@ const Home = () => {
             <FaUserPlus />
           </button>
         </Link>
-        <AllStudentsList />
+        {isLoading ? (
+          <LoadingStage />
+        ) : (
+          <AllStudentsList listStudents={listStudents} />
+        )}
       </main>
     </>
   );
