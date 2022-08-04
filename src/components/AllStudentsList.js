@@ -23,8 +23,8 @@ const AllStudentsList = ({ listStudents }) => {
             <th className="border text-left w-32">First Name</th>
             <th className="border text-left w-32">Last Name</th>
             <th className="border text-left w-32">Index Number</th>
-            <th className="border text-left w-80">E-mail</th>
-            <th className="border text-left w-36">Contact Phone</th>
+            <th className="border text-left w-[19rem]">E-mail</th>
+            <th className="border text-left w-40">Contact Phone</th>
           </tr>
         </tbody>
       </table>
@@ -43,11 +43,13 @@ const AllStudentsList = ({ listStudents }) => {
                   <td className="w-32 border">{firstName}</td>
                   <td className="w-32 border">{lastName}</td>
                   <td className="w-32 border">{indexNumber}</td>
-                  <td className="w-80 border">{email}</td>
+                  <td className="w-[19rem] border">{email}</td>
                   <td
                     className="border"
                     style={{
-                      width: isScrollbarVisible ? "calc(9rem - 17px)" : "9rem",
+                      width: isScrollbarVisible
+                        ? "calc(10rem - 17px)"
+                        : "10rem",
                     }}
                   >
                     {phone}

@@ -43,21 +43,21 @@ const StudentForm = ({
 
   return (
     <>
-      <main className="h-[calc(100vh)] w-[60rem] left-[calc(50vw-30rem)] top-0 bg-slate-200 absolute">
-        <div className="w-[56rem] mx-auto my-8 flex justify-between">
-          <form onSubmit={studentFormHandler}>
-            <table className="w-[45rem]">
+      <main className="h-[calc(100vh-112px)] w-[60rem] mx-auto pt-8 bg-slate-200">
+        <div className="w-[32rem] mx-auto flex justify-between">
+          <form onSubmit={studentFormHandler} className="w-[30rem] mx-auto">
+            <table className="w-[30rem]">
               <tbody>
                 <tr className="h-12">
-                  <td>
-                    <label htmlFor="first-name">First Name: </label>
+                  <td className="w-24">
+                    <label htmlFor="firstName">First Name: </label>
                   </td>
-                  <td>
+                  <td className="w-[15rem]">
                     <input
-                      className="w-[20rem]"
+                      className="w-[100%] rounded-md px-2"
                       type="text"
                       name="firstName"
-                      id="first-name"
+                      id="firstName"
                       placeholder="First Name..."
                       value={stateForm.firstName}
                       onChange={changeInputHandler}
@@ -67,11 +67,11 @@ const StudentForm = ({
                 </tr>
                 <tr className="h-12">
                   <td>
-                    <label htmlFor="last-name">Last Name: </label>
+                    <label htmlFor="lastName">Last Name: </label>
                   </td>
                   <td>
                     <input
-                      className="w-[20rem]"
+                      className="w-[100%] rounded-md px-2"
                       type="text"
                       name="lastName"
                       id="lastName"
@@ -84,15 +84,15 @@ const StudentForm = ({
                 </tr>
                 <tr className="h-12">
                   <td>
-                    <label htmlFor="index-number">Index-Number: </label>
+                    <label htmlFor="indexNumber">Index-Number: </label>
                   </td>
                   <td>
                     <input
-                      className="w-[20rem]"
+                      className="w-[100%] rounded-md px-2"
                       type="text"
                       name="indexNumber"
                       id="indexNumber"
-                      placeholder="Index-Number..."
+                      placeholder="Index Number..."
                       value={stateForm.indexNumber}
                       onChange={changeInputHandler}
                       required
@@ -101,14 +101,14 @@ const StudentForm = ({
                 </tr>
                 <tr className="h-12">
                   <td>
-                    <label htmlFor="e-mail">E-mail: </label>
+                    <label htmlFor="email">E-mail: </label>
                   </td>
                   <td>
                     <input
-                      className="w-[20rem]"
+                      className="w-[100%] rounded-md px-2"
                       type="text"
                       name="email"
-                      id="e-mail"
+                      id="email"
                       placeholder="E-mail..."
                       value={stateForm.email}
                       onChange={changeInputHandler}
@@ -118,14 +118,14 @@ const StudentForm = ({
                 </tr>
                 <tr className="h-12">
                   <td>
-                    <label htmlFor="contact-phone">Contact Phone: </label>
+                    <label htmlFor="contactPhone">Contact Phone: </label>
                   </td>
                   <td>
                     <input
-                      className="w-[20rem]"
+                      className="w-[100%] rounded-md px-2"
                       type="text"
                       name="phone"
-                      id="contact-phone"
+                      id="contactPhone"
                       placeholder="Contact Phone..."
                       value={stateForm.phone}
                       onChange={changeInputHandler}
@@ -135,9 +135,9 @@ const StudentForm = ({
                 </tr>
               </tbody>
             </table>
-            <div className="flex justify-center w-[56rem] mt-16">
+            <div className="flex justify-center w-[30rem] mt-16">
               <button
-                className="w-40 rounded-lg bg-slate-300 border-2"
+                className="w-40 h-8 rounded-lg bg-slate-300 border"
                 type="button"
                 onClick={
                   location.pathname === "/student/new-student"
@@ -149,7 +149,7 @@ const StudentForm = ({
               </button>
               <button
                 type="submit"
-                className="w-40 rounded-lg bg-red-300 border-2"
+                className="w-40 h-8 rounded-lg bg-red-300 border"
               >
                 {location.pathname === "/student/new-student"
                   ? "Add New Student"

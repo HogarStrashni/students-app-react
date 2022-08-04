@@ -45,7 +45,7 @@ const SingleStudent = () => {
         />
       )}
 
-      {isStudentFormOpen && (
+      {isStudentFormOpen ? (
         <StudentForm
           firstName={firstName}
           lastName={lastName}
@@ -56,36 +56,36 @@ const SingleStudent = () => {
           setIsStudentFormOpen={setIsStudentFormOpen}
           studentId={studentId}
         />
+      ) : (
+        <main className="h-[calc(100vh-112px)]">
+          <section className="w-[56rem] mx-auto pt-4 flex justify-between">
+            <div className="w-[80%]">
+              <h1>First Name: {firstName}</h1>
+              <h1>Last Name: {lastName}</h1>
+              <h1>Index Number: {indexNumber}</h1>
+              <h1>E-mail: {email}</h1>
+              <h1>Contact Phone: {phone}</h1>
+            </div>
+            <div>
+              <button
+                className="text-2xl mr-3 text-slate-500"
+                onClick={openModalDeleteHandler}
+              >
+                <FaTrashAlt />
+              </button>
+              <button
+                className="text-2xl text-slate-500"
+                onClick={openFormHandler}
+              >
+                <FaEdit />
+              </button>
+            </div>
+          </section>
+          <section>
+            <Grades allGrades={allGrades} />
+          </section>
+        </main>
       )}
-
-      <main className="h-[calc(100vh-144px)]">
-        <section className="w-[56rem] mx-auto my-8 flex justify-between">
-          <div className="w-[80%]">
-            <h1>First Name: {firstName}</h1>
-            <h1>Last Name: {lastName}</h1>
-            <h1>Index Number: {indexNumber}</h1>
-            <h1>E-mail: {email}</h1>
-            <h1>Contact Phone: {phone}</h1>
-          </div>
-          <div>
-            <button
-              className="text-2xl mr-3 text-slate-500"
-              onClick={openModalDeleteHandler}
-            >
-              <FaTrashAlt />
-            </button>
-            <button
-              className="text-2xl text-slate-500"
-              onClick={openFormHandler}
-            >
-              <FaEdit />
-            </button>
-          </div>
-        </section>
-        <section>
-          <Grades allGrades={allGrades} />
-        </section>
-      </main>
     </>
   );
 };
