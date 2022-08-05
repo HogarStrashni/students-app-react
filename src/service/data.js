@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 
 // for grades
-const allSubjects = [
+export const allSubjects = [
   "Introduction to Civil Engineering",
   "Statics and Mechanics of Solids",
   "Computational Methods for Civil Engineering",
@@ -146,7 +146,22 @@ export const getEditedStudent = (query, newItem) => {
     if (allStudents) {
       resolve(allStudents);
     } else {
-      reject("Something Went Wrong!!! Deleting Unique Student...");
+      reject("Something Went Wrong!!! Editing Unique Student...");
+    }
+  });
+};
+
+//for editing student's grades
+export const getEditedGrades = (query, newGrades) => {
+  return new Promise((resolve, reject) => {
+    allStudents = allStudents.map((item) =>
+      item.indexNumber !== query ? item : { ...item, gradeHistory: newGrades }
+    );
+
+    if (allStudents) {
+      resolve(allStudents);
+    } else {
+      reject("Something Went Wrong!!! Editing Grades...");
     }
   });
 };

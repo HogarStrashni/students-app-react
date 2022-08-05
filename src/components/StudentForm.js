@@ -38,7 +38,7 @@ const StudentForm = ({
 
   const closeFormHandler = () => {
     setIsStudentFormOpen(false);
-    navigate("/");
+    navigate(`/student/${studentId}`);
   };
 
   return (

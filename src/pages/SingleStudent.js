@@ -36,6 +36,9 @@ const SingleStudent = () => {
     setIsStudentFormOpen(true);
   };
 
+  //implementing edit grades data
+  const [isEditGradeOpen, setIsEditGradeOpen] = useState(false);
+
   return (
     <>
       {isModalDeleteOpen && (
@@ -66,23 +69,30 @@ const SingleStudent = () => {
               <h1>E-mail: {email}</h1>
               <h1>Contact Phone: {phone}</h1>
             </div>
-            <div>
-              <button
-                className="text-2xl mr-3 text-slate-500"
-                onClick={openModalDeleteHandler}
-              >
-                <FaTrashAlt />
-              </button>
-              <button
-                className="text-2xl text-slate-500"
-                onClick={openFormHandler}
-              >
-                <FaEdit />
-              </button>
-            </div>
+            {!isEditGradeOpen && (
+              <div>
+                <button
+                  className="text-2xl mr-3 text-slate-500"
+                  onClick={openModalDeleteHandler}
+                >
+                  <FaTrashAlt />
+                </button>
+                <button
+                  className="text-2xl text-slate-500"
+                  onClick={openFormHandler}
+                >
+                  <FaEdit />
+                </button>
+              </div>
+            )}
           </section>
           <section>
-            <Grades allGrades={allGrades} />
+            <Grades
+              allGrades={allGrades}
+              isEditGradeOpen={isEditGradeOpen}
+              setIsEditGradeOpen={setIsEditGradeOpen}
+              studentId={studentId}
+            />
           </section>
         </main>
       )}
