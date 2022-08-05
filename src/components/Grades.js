@@ -1,6 +1,5 @@
 import React from "react";
 import GradesForm from "./GradesForm";
-import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { FaEdit } from "react-icons/fa";
 
 const Grades = ({
@@ -21,47 +20,38 @@ const Grades = ({
             </tr>
           </tbody>
         </table>
-        <table>
-          <tbody>
-            {isEditGradeOpen ? (
-              <GradesForm allGrades={allGrades} studentId={studentId} />
-            ) : (
-              allGrades.map((item, index) => {
-                const { subject, grade, dateExam } = item;
-                return (
-                  <tr key={index}>
-                    <td className="w-96 border">{subject}</td>
-                    <td className="w-32 border text-center">{grade}</td>
-                    <td className="w-32 border text-center">{dateExam}</td>
-                  </tr>
-                );
-              })
-            )}
-          </tbody>
-        </table>
+        {isEditGradeOpen ? (
+          <GradesForm
+            allGrades={allGrades}
+            studentId={studentId}
+            setIsEditGradeOpen={setIsEditGradeOpen}
+          />
+        ) : (
+          allGrades.map((item, index) => {
+            const { subject, grade, dateExam } = item;
+            return (
+              <div key={index}>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td className="w-96 border">{subject}</td>
+                      <td className="w-32 border text-center">{grade}</td>
+                      <td className="w-32 border text-center">{dateExam}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            );
+          })
+        )}
       </div>
-      {!isEditGradeOpen ? (
+      {!isEditGradeOpen && (
         <div>
           <button
             className="text-2xl text-slate-500"
             onClick={() => setIsEditGradeOpen(true)}
           >
             <FaEdit />
-          </button>
-        </div>
-      ) : (
-        <div>
-          <button
-            className="text-2xl text-red-500"
-            onClick={() => setIsEditGradeOpen(false)}
-          >
-            <GiCancel />
-          </button>
-          <button
-            className="text-2xl pl-3 text-green-500"
-            onClick={() => console.log("hello world")} //changing
-          >
-            <GiConfirmed />
           </button>
         </div>
       )}

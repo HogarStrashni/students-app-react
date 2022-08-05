@@ -11,6 +11,9 @@ const SingleStudent = () => {
   const [student, setStudent] = useState({});
   const [allGrades, setAllGrades] = useState([]);
 
+  //implementing edit grades data
+  const [isEditGradeOpen, setIsEditGradeOpen] = useState(false);
+
   useEffect(() => {
     getUniqueStudent(studentId)
       .then((data) => {
@@ -18,7 +21,7 @@ const SingleStudent = () => {
         setAllGrades(data.gradeHistory);
       })
       .catch((msg) => console.log(msg));
-  }, [studentId]);
+  }, [studentId, isEditGradeOpen]);
 
   const { firstName, lastName, indexNumber, email, phone } = student;
 
@@ -35,9 +38,6 @@ const SingleStudent = () => {
   const openFormHandler = () => {
     setIsStudentFormOpen(true);
   };
-
-  //implementing edit grades data
-  const [isEditGradeOpen, setIsEditGradeOpen] = useState(false);
 
   return (
     <>

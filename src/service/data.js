@@ -47,7 +47,7 @@ let allStudents = [];
 export const getStudents = (query) => {
   return new Promise((resolve, reject) => {
     if (allStudents.length === 0) {
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 50; i++) {
         allStudents.push(createStudent());
       }
     }
