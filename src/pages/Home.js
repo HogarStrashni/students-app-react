@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
+import { useDebounce } from "use-debounce";
 import { FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import AllStudentsList from "../components/AllStudentsList";
@@ -13,12 +14,16 @@ const Home = () => {
   //loading students and LoadingStage
   const [isLoading, setIsLoading] = useState(true);
   const [listStudents, setListStudents] = useState([]);
+
+  //useDebounce on student search
+  const [debounceStudent] = useDebounce(searchItem, 500);
+
   useEffect(() => {
-    getStudents(searchItem)
+    getStudents(debounceStudent)
       .then((data) => setListStudents(data))
       .catch((msg) => console.log(msg));
     setIsLoading(false);
-  }, [searchItem, isLoading]);
+  }, [searchItem, isLoading, debounceStudent]);
 
   //description on mouse hover...
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
