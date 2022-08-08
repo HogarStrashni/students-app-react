@@ -8,6 +8,18 @@ const Grades = ({
   setIsEditGradeOpen,
   studentId,
 }) => {
+  const allGradesList = allGrades
+    .map((item) => Number(item.grade))
+    .filter((item) => item);
+  const numberPassedExam = allGradesList.length;
+  const valueGPA =
+    numberPassedExam > 0
+      ? (
+          allGradesList.reduce((acc, item) => (acc += item), 0) /
+          numberPassedExam
+        ).toFixed(2)
+      : "";
+
   return (
     <section className="w-[56rem] mx-auto my-8 flex justify-between">
       <div>
@@ -44,6 +56,21 @@ const Grades = ({
             );
           })
         )}
+        <div className="mt-2">
+          <table>
+            <tbody>
+              <tr>
+                <td className="w-96 font-bold">
+                  GPA (Sum of all grades / Number passed exam):
+                </td>
+                <td className="w-32 text-center font-extrabold">{valueGPA}</td>
+                <td className="w-32 text-center">
+                  ({numberPassedExam} {numberPassedExam > 1 ? "Exams" : "Exam"})
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       {!isEditGradeOpen && (
         <div>
