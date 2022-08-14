@@ -5,6 +5,7 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Grades from "../components/Grades";
 import ModalDelete from "../components/ModalDelete";
 import StudentForm from "../components/StudentForm";
+import axios from "axios";
 
 const SingleStudent = () => {
   const { id: studentId } = useParams();
@@ -15,10 +16,13 @@ const SingleStudent = () => {
   const [isEditGradeOpen, setIsEditGradeOpen] = useState(false);
 
   useEffect(() => {
-    getUniqueStudent(studentId)
-      .then((data) => {
-        setStudent(data);
-        setAllGrades(data.gradeHistory);
+    axios
+      .get(
+        `https://students-app-server-plum.vercel.app/api/student/${studentId}`
+      )
+      .then((response) => {
+        setStudent(response.data);
+        // setAllGrades(data.gradeHistory);
       })
       .catch((msg) => console.log(msg));
   }, [studentId, isEditGradeOpen]);

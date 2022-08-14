@@ -3,9 +3,9 @@ import { useDebounce } from "use-debounce";
 import { FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import AllStudentsList from "../components/AllStudentsList";
-import { getStudents } from "../service/data";
 import { AppSearchContext } from "../context";
 import LoadingStage from "../components/LoadingStage";
+import axios from "axios";
 
 const Home = () => {
   //implementig search
@@ -19,11 +19,12 @@ const Home = () => {
   const [debounceStudent] = useDebounce(searchItem, 500);
 
   useEffect(() => {
-    getStudents(debounceStudent)
-      .then((data) => setListStudents(data))
+    axios
+      .get("https://students-app-server-plum.vercel.app/api/students")
+      .then((response) => setListStudents(response.data))
       .catch((msg) => console.log(msg));
     setIsLoading(false);
-  }, [searchItem, isLoading, debounceStudent]);
+  }, [isLoading]);
 
   //description on mouse hover...
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
