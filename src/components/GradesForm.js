@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
-import { getEditedGrades } from "../service/data";
+import axios from "axios";
 
 const GradesForm = ({ allGrades, setIsEditGradeOpen, studentId }) => {
   const navigate = useNavigate();
@@ -41,7 +41,14 @@ const GradesForm = ({ allGrades, setIsEditGradeOpen, studentId }) => {
   };
 
   const studentGradeHandler = () => {
-    getEditedGrades(studentId, stateGrades).catch((msg) => console.log(msg));
+    axios
+      .patch(
+        `https://students-app-server-plum.vercel.app/api/student/${studentId}`,
+        {
+          gradeHistory: stateGrades,
+        }
+      )
+      .catch((msg) => console.log(msg));
     setIsEditGradeOpen(false);
     navigate(`/student/${studentId}`);
   };

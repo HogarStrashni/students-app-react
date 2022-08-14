@@ -29,7 +29,7 @@ const SingleStudent = () => {
         setIsLoading(false);
       })
       .catch((msg) => console.log(msg));
-  }, [studentId, isEditGradeOpen]);
+  }, [studentId, isEditGradeOpen, student]);
 
   const { firstName, lastName, indexNumber, email, phone } = student;
 

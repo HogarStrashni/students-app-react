@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getNewStudent, getEditedStudent } from "../service/data";
+import axios from "axios";
 
 const StudentForm = ({
   firstName,
@@ -8,7 +8,6 @@ const StudentForm = ({
   indexNumber,
   email,
   phone,
-  allGrades,
   setIsStudentFormOpen,
   studentId,
 }) => {
@@ -21,7 +20,6 @@ const StudentForm = ({
     indexNumber: indexNumber || "",
     email: email || "",
     phone: phone || "",
-    gradeHistory: allGrades,
   });
 
   const changeInputHandler = (event) => {
@@ -31,8 +29,27 @@ const StudentForm = ({
   const studentFormHandler = (event) => {
     event.preventDefault();
     location.pathname === "/student/new-student"
-      ? getNewStudent(stateForm).catch((msg) => console.log(msg))
-      : getEditedStudent(studentId, stateForm).catch((msg) => console.log(msg));
+      ? axios
+          .post("https://students-app-server-plum.vercel.app/api/students", {
+            firstName: stateForm.firstName,
+            lastName: stateForm.lastName,
+            indexNumber: stateForm.indexNumber,
+            email: stateForm.email,
+            phone: stateForm.phone,
+          })
+          .catch((msg) => console.log(msg))
+      : axios
+          .patch(
+            `https://students-app-server-plum.vercel.app/api/student/${studentId}`,
+            {
+              firstName: stateForm.firstName,
+              lastName: stateForm.lastName,
+              indexNumber: stateForm.indexNumber,
+              email: stateForm.email,
+              phone: stateForm.phone,
+            }
+          )
+          .catch((msg) => console.log(msg));
     navigate("/");
   };
 
