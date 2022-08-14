@@ -8,13 +8,12 @@ import LoadingStage from "../components/LoadingStage";
 import axios from "axios";
 
 const Home = () => {
-  //implementig search
-  const { searchItem } = useContext(AppSearchContext);
-
   //loading students and LoadingStage
   const [isLoading, setIsLoading] = useState(true);
   const [listStudents, setListStudents] = useState([]);
 
+  //implementig search
+  const { searchItem } = useContext(AppSearchContext);
   //useDebounce on student search
   const [debounceStudent] = useDebounce(searchItem, 500);
 
@@ -27,6 +26,18 @@ const Home = () => {
       })
       .catch((msg) => console.log(msg));
   }, []);
+
+  //implementing search
+  useEffect(() => {
+    axios
+      .post("https://students-app-server-plum.vercel.app/api/students", {
+        query: debounceStudent,
+      })
+      .then((response) => {
+        setListStudents(response.data);
+      })
+      .catch((msg) => console.log(msg));
+  }, [debounceStudent, searchItem]);
 
   //description on mouse hover...
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);

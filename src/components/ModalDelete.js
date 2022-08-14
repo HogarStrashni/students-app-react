@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppSearchContext } from "../context";
-import { getStudentsAfterDelete } from "../service/data";
+import axios from "axios";
 
 const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
   //returning on main page after delete comfirm
@@ -9,9 +9,13 @@ const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
   const { setSearchItem } = useContext(AppSearchContext);
 
   const deleteHandler = () => {
-    getStudentsAfterDelete(studentId)
+    axios
+      .delete(
+        `https://students-app-server-plum.vercel.app/api/student/${studentId}`
+      )
       .then(() => setIsModalDeleteOpen(false))
       .catch((msg) => console.log(msg));
+
     setSearchItem("");
     navigate("/");
   };
