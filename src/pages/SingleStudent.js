@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getUniqueStudent } from "../service/data";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Grades from "../components/Grades";
 import ModalDelete from "../components/ModalDelete";
 import StudentForm from "../components/StudentForm";
+import LoadingStage from "../components/LoadingStage";
 import axios from "axios";
 
 const SingleStudent = () => {
   const { id: studentId } = useParams();
   const [student, setStudent] = useState({});
   const [allGrades, setAllGrades] = useState([]);
+
+  //loading students and LoadingStage
+  const [isLoading, setIsLoading] = useState(true);
 
   //implementing edit grades data
   const [isEditGradeOpen, setIsEditGradeOpen] = useState(false);
@@ -22,7 +25,8 @@ const SingleStudent = () => {
       )
       .then((response) => {
         setStudent(response.data);
-        // setAllGrades(data.gradeHistory);
+        setAllGrades(response.data.gradeHistory);
+        setIsLoading(false);
       })
       .catch((msg) => console.log(msg));
   }, [studentId, isEditGradeOpen]);
@@ -65,39 +69,45 @@ const SingleStudent = () => {
         />
       ) : (
         <main className="h-[calc(100vh-112px)]">
-          <section className="w-[56rem] mx-auto pt-4 flex justify-between">
-            <div className="w-[80%]">
-              <h1>First Name: {firstName}</h1>
-              <h1>Last Name: {lastName}</h1>
-              <h1>Index Number: {indexNumber}</h1>
-              <h1>E-mail: {email}</h1>
-              <h1>Contact Phone: {phone}</h1>
-            </div>
-            {!isEditGradeOpen && (
-              <div>
-                <button
-                  className="text-2xl mr-3 text-slate-500"
-                  onClick={openModalDeleteHandler}
-                >
-                  <FaTrashAlt />
-                </button>
-                <button
-                  className="text-2xl text-slate-500"
-                  onClick={openFormHandler}
-                >
-                  <FaEdit />
-                </button>
-              </div>
-            )}
-          </section>
-          <section>
-            <Grades
-              allGrades={allGrades}
-              isEditGradeOpen={isEditGradeOpen}
-              setIsEditGradeOpen={setIsEditGradeOpen}
-              studentId={studentId}
-            />
-          </section>
+          {isLoading ? (
+            <LoadingStage />
+          ) : (
+            <>
+              <section className="w-[56rem] mx-auto pt-4 flex justify-between">
+                <div className="w-[80%]">
+                  <h1>First Name: {firstName}</h1>
+                  <h1>Last Name: {lastName}</h1>
+                  <h1>Index Number: {indexNumber}</h1>
+                  <h1>E-mail: {email}</h1>
+                  <h1>Contact Phone: {phone}</h1>
+                </div>
+                {!isEditGradeOpen && (
+                  <div>
+                    <button
+                      className="text-2xl mr-3 text-slate-500"
+                      onClick={openModalDeleteHandler}
+                    >
+                      <FaTrashAlt />
+                    </button>
+                    <button
+                      className="text-2xl text-slate-500"
+                      onClick={openFormHandler}
+                    >
+                      <FaEdit />
+                    </button>
+                  </div>
+                )}
+              </section>
+              <section>
+                <Grades
+                  allGrades={allGrades}
+                  isEditGradeOpen={isEditGradeOpen}
+                  setIsEditGradeOpen={setIsEditGradeOpen}
+                  studentId={studentId}
+                />
+              </section>
+            </>
+          )}
         </main>
       )}
     </>

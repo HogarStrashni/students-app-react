@@ -21,10 +21,12 @@ const Home = () => {
   useEffect(() => {
     axios
       .get("https://students-app-server-plum.vercel.app/api/students")
-      .then((response) => setListStudents(response.data))
+      .then((response) => {
+        setListStudents(response.data);
+        setIsLoading(false);
+      })
       .catch((msg) => console.log(msg));
-    setIsLoading(false);
-  }, [isLoading]);
+  }, []);
 
   //description on mouse hover...
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
