@@ -30,7 +30,7 @@ const StudentForm = ({
     event.preventDefault();
     location.pathname === "/student/new-student"
       ? axios
-          .post("https://students-app-server-plum.vercel.app/api/students", {
+          .post("https://students-app-server-plum.vercel.app/api/student/new", {
             firstName: stateForm.firstName,
             lastName: stateForm.lastName,
             indexNumber: stateForm.indexNumber,

@@ -1,3 +1,4 @@
+/*
 import { faker } from "@faker-js/faker";
 
 // for grades
@@ -165,3 +166,4 @@ export const getEditedGrades = (query, newGrades) => {
     }
   });
 };
+*/

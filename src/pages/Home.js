@@ -25,7 +25,7 @@ const Home = () => {
         setIsLoading(false);
       })
       .catch((msg) => console.log(msg));
-  }, []);
+  }, [listStudents]);
 
   //implementing search
   useEffect(() => {

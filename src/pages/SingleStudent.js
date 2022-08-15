@@ -63,7 +63,6 @@ const SingleStudent = () => {
           indexNumber={indexNumber}
           email={email}
           phone={phone}
-          allGrades={allGrades}
           setIsStudentFormOpen={setIsStudentFormOpen}
           studentId={studentId}
         />
