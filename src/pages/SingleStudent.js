@@ -67,12 +67,12 @@ const SingleStudent = () => {
           studentId={studentId}
         />
       ) : (
-        <main className="h-[calc(100vh-112px)]">
+        <main className="h-[calc(100vh-116px)] mt-3">
           {isLoading ? (
             <LoadingStage />
           ) : (
             <>
-              <section className="w-[56rem] mx-auto pt-4 flex justify-between">
+              <section className="w-[56rem] mx-auto flex justify-between">
                 <div className="w-[80%]">
                   <h1>First Name: {firstName}</h1>
                   <h1>Last Name: {lastName}</h1>

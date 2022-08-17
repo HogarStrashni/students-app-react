@@ -30,7 +30,7 @@ const StudentForm = ({
     event.preventDefault();
     location.pathname === "/student/new-student"
       ? axios
-          .post("https://students-app-server-plum.vercel.app/api/student/new", {
+          .post("https://students-app-server-plum.vercel.app/api/students", {
             firstName: stateForm.firstName,
             lastName: stateForm.lastName,
             indexNumber: stateForm.indexNumber,
@@ -60,7 +60,7 @@ const StudentForm = ({
 
   return (
     <>
-      <main className="h-[calc(100vh-112px)] w-[60rem] mx-auto pt-8 bg-slate-200">
+      <main className="h-[calc(100vh-128px)] w-[56rem] mx-auto my-3 pt-8 bg-slate-200">
         <div className="w-[32rem] mx-auto flex justify-between">
           <form onSubmit={studentFormHandler} className="w-[30rem] mx-auto">
             <table className="w-[30rem]">

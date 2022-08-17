@@ -28,7 +28,7 @@ const AllStudentsList = ({ listStudents }) => {
           </tr>
         </tbody>
       </table>
-      <div className="h-[calc(100vh-162px)] overflow-auto">
+      <div className="h-[calc(100vh-212px)] overflow-auto">
         <table className="border">
           <tbody ref={referTbody}>
             {listStudents.map((item, index) => {
