@@ -1,7 +1,10 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ searchItem, setSearchItem }) => {
+const SearchBar = ({ queryPart }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="ml-16 flex justify-between">
       <form
@@ -16,8 +19,10 @@ const SearchBar = ({ searchItem, setSearchItem }) => {
           id="search-item"
           className="border-2 rounded w-80"
           placeholder="Search..."
-          value={searchItem}
-          onChange={(event) => setSearchItem(event.target.value)}
+          value={queryPart}
+          onChange={(event) =>
+            navigate(event.target.value ? `/?q=${event.target.value}` : "/")
+          }
         />
       </form>
     </div>

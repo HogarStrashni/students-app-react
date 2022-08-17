@@ -1,34 +1,59 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
-import { useDebounce } from "use-debounce";
+import React, { useEffect, useRef, useState } from "react";
 import { FaUserPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import AllStudentsList from "../components/AllStudentsList";
 import LoadingStage from "../components/LoadingStage";
 import axios from "axios";
-import { AppSearchContext } from "../context";
+
+const debounce = (cb, time = 400) => {
+  let timeout;
+  return (...args) => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => cb(...args), time);
+  };
+};
 
 const Home = () => {
-  const { searchParams, searchItem, setSearchItem } =
-    useContext(AppSearchContext);
   //loading students and LoadingStage
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [listStudents, setListStudents] = useState([]);
 
-  //useDebounce on student search
-  const [debounceStudent] = useDebounce(searchParams, 500);
+  //implementing searchParams
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  //implementig search(funcitonality helper)
+  const queryPart = searchParams.get("q") ?? "";
 
   useEffect(() => {
     axios
-      .get(
-        `https://students-app-server-plum.vercel.app/api/students/${debounceStudent}`
-      )
+      .get(`https://students-app-server-plum.vercel.app/api/students`)
       .then((response) => {
         setListStudents(response.data);
         setIsLoading(false);
       })
       .catch((msg) => console.log(msg));
-  }, [debounceStudent, isLoading]);
+  }, []);
+
+  const fetchData = useRef(
+    debounce((searchParams) => {
+      if (searchParams.get("q")) {
+        axios
+          .get(
+            `https://students-app-server-plum.vercel.app/api/students/${searchParams}`
+          )
+          .then((response) => {
+            setListStudents(response.data);
+            setIsLoading(false);
+          })
+          .catch((msg) => console.log(msg));
+      }
+    })
+  );
+
+  useEffect(() => {
+    fetchData.current(searchParams);
+  }, [fetchData, searchParams, isLoading]);
 
   //description on mouse hover...
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
@@ -57,16 +82,13 @@ const Home = () => {
         ) : (
           <>
             <div className="w-[46rem] mx-auto border-b border-slate-200 flex justify-between mb-3 pb-2">
-              <SearchBar
-                searchItem={searchItem}
-                setSearchItem={setSearchItem}
-              />
+              <SearchBar queryPart={queryPart} />
               <Link to="/student/new-student">
                 <button
                   className="text-3xl h-8 mr-16 text-slate-500"
                   onMouseOver={mouseEnterHandler}
                   onMouseOut={mouseOutHendler}
-                  onClick={() => setSearchItem("")}
+                  // onClick={() => setSearchItem("")}
                 >
                   {isDescriptionOpen && (
                     <div

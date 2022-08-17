@@ -1,21 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import logo from "../service/logo.png";
 import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
-import { AppSearchContext } from "../context";
 
 const Header = () => {
-  const { setSearchItem } = useContext(AppSearchContext);
   return (
     <header className="w-[60rem] mx-auto bg-slate-300 flex justify-between items-center">
       <Link to="/">
         <div className="h-14 py-2 px-4">
-          <img
-            src={logo}
-            alt="logo"
-            className="h-10 rounded-lg"
-            onClick={() => setSearchItem("")}
-          />
+          <img src={logo} alt="logo" className="h-10 rounded-lg" />
         </div>
       </Link>
       <div>
@@ -25,11 +18,7 @@ const Header = () => {
         </p>
       </div>
       <div className="pr-4 flex">
-        <Link
-          to="/"
-          className="text-3xl text-slate-500"
-          onClick={() => setSearchItem("")}
-        >
+        <Link to="/" className="text-3xl text-slate-500">
           <FaHome />
         </Link>
         <button className="ml-4 px-4 rounded-lg bg-green-300">LOGIN</button>
