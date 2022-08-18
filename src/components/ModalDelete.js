@@ -13,7 +13,7 @@ const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
         `https://students-app-server-plum.vercel.app/api/student/${studentId}`
       )
       .then(() => setIsModalDeleteOpen(false))
-      .catch((msg) => console.log(msg));
+      .catch((err) => console.log(err.message));
     navigate("/");
   };
 

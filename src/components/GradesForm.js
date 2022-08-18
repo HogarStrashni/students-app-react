@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const GradesForm = ({ allGrades, setIsEditGradeOpen, studentId }) => {
-  const navigate = useNavigate();
-
   const [stateGrades, setStateGrades] = useState(
     allGrades.map((item) => {
       return {
@@ -48,9 +45,8 @@ const GradesForm = ({ allGrades, setIsEditGradeOpen, studentId }) => {
           gradeHistory: stateGrades,
         }
       )
-      .catch((msg) => console.log(msg));
-    setIsEditGradeOpen(false);
-    navigate(`/student/${studentId}`);
+      .then(() => setIsEditGradeOpen(false))
+      .catch((err) => console.log(err.message));
   };
 
   return (

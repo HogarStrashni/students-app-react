@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import ErrorStage from "./ErrorStage";
 
 const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  //setting ErrorStage
+  const [isError, setIsError] = useState(false);
 
   const { firstName, lastName, indexNumber, email, phone } = student
     ? student
@@ -33,7 +37,11 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
             email: stateForm.email,
             phone: stateForm.phone,
           })
-          .catch((msg) => console.log(msg))
+          .then(() => navigate("/"))
+          .catch((err) => {
+            setIsError(true);
+            console.log(err.message);
+          })
       : axios
           .patch(
             `https://students-app-server-plum.vercel.app/api/student/${studentId}`,
@@ -45,8 +53,8 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
               phone: stateForm.phone,
             }
           )
-          .catch((msg) => console.log(msg));
-    studentId ? setIsStudentFormOpen(false) : navigate("/");
+          .then(() => setIsStudentFormOpen(false))
+          .catch((err) => console.log(err.message));
   };
 
   const closeFormHandler = () => {
@@ -54,7 +62,9 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
     navigate(`/student/${studentId}`);
   };
 
-  return (
+  return isError ? (
+    <ErrorStage setIsError={setIsError} />
+  ) : (
     <>
       <main className="h-[calc(100vh-128px)] w-[56rem] mx-auto my-3 pt-8 bg-slate-200">
         <div className="w-[32rem] mx-auto flex justify-between">

@@ -16,7 +16,7 @@ const debounce = (cb, time = 400) => {
 
 const Home = () => {
   //loading students and LoadingStage
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [listStudents, setListStudents] = useState([]);
 
   //implementing searchParams
@@ -33,7 +33,7 @@ const Home = () => {
           setListStudents(response.data);
           setIsLoading(false);
         })
-        .catch((msg) => console.log(msg));
+        .catch((err) => console.log(err.message));
     }
   }, [searchParams]);
 
@@ -42,13 +42,13 @@ const Home = () => {
       if (searchParams.get("q")) {
         axios
           .get(
-            `https://students-app-server-plum.vercel.app/api/students/${searchParams}`
+            `https://students-app-server-plum.vercel.app/api/students${searchParams}`
           )
           .then((response) => {
             setListStudents(response.data);
             setIsLoading(false);
           })
-          .catch((msg) => console.log(msg));
+          .catch((err) => console.log(err.message));
       }
     })
   );
@@ -90,7 +90,6 @@ const Home = () => {
                   className="text-3xl h-8 mr-16 text-slate-500"
                   onMouseOver={mouseEnterHandler}
                   onMouseOut={mouseOutHendler}
-                  // onClick={() => setSearchItem("")}
                 >
                   {isDescriptionOpen && (
                     <div

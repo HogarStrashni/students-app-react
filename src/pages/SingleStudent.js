@@ -29,8 +29,8 @@ const SingleStudent = () => {
         setStudent(response.data);
         setIsLoading(false);
       })
-      .catch((msg) => console.log(msg));
-  }, [studentId, isEditGradeOpen, isStudentFormOpen]);
+      .catch((err) => console.log(err.message));
+  }, [isEditGradeOpen, isStudentFormOpen, studentId]);
 
   const { firstName, lastName, indexNumber, email, phone } = student;
 
@@ -53,7 +53,6 @@ const SingleStudent = () => {
           studentId={studentId}
         />
       )}
-
       {isStudentFormOpen ? (
         <StudentForm
           student={student}
