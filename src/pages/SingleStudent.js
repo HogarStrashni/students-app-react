@@ -10,13 +10,15 @@ import axios from "axios";
 const SingleStudent = () => {
   const { id: studentId } = useParams();
   const [student, setStudent] = useState({});
-  const [allGrades, setAllGrades] = useState([]);
 
   //loading students and LoadingStage
   const [isLoading, setIsLoading] = useState(true);
 
   //implementing edit grades data
   const [isEditGradeOpen, setIsEditGradeOpen] = useState(false);
+
+  //implementing edit student data
+  const [isStudentFormOpen, setIsStudentFormOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -25,11 +27,10 @@ const SingleStudent = () => {
       )
       .then((response) => {
         setStudent(response.data);
-        setAllGrades(response.data.gradeHistory);
         setIsLoading(false);
       })
       .catch((msg) => console.log(msg));
-  }, [studentId, isEditGradeOpen, student]);
+  }, [studentId, isEditGradeOpen, isStudentFormOpen]);
 
   const { firstName, lastName, indexNumber, email, phone } = student;
 
@@ -39,9 +40,6 @@ const SingleStudent = () => {
   const openModalDeleteHandler = () => {
     setIsModalDeleteOpen(true);
   };
-
-  //implementing edit student data
-  const [isStudentFormOpen, setIsStudentFormOpen] = useState(false);
 
   const openFormHandler = () => {
     setIsStudentFormOpen(true);
@@ -58,11 +56,7 @@ const SingleStudent = () => {
 
       {isStudentFormOpen ? (
         <StudentForm
-          firstName={firstName}
-          lastName={lastName}
-          indexNumber={indexNumber}
-          email={email}
-          phone={phone}
+          student={student}
           setIsStudentFormOpen={setIsStudentFormOpen}
           studentId={studentId}
         />
@@ -99,7 +93,7 @@ const SingleStudent = () => {
               </section>
               <section>
                 <Grades
-                  allGrades={allGrades}
+                  student={student}
                   isEditGradeOpen={isEditGradeOpen}
                   setIsEditGradeOpen={setIsEditGradeOpen}
                   studentId={studentId}

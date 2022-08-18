@@ -20,20 +20,22 @@ const Home = () => {
   const [listStudents, setListStudents] = useState([]);
 
   //implementing searchParams
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   //implementig search(funcitonality helper)
   const queryPart = searchParams.get("q") ?? "";
 
   useEffect(() => {
-    axios
-      .get(`https://students-app-server-plum.vercel.app/api/students`)
-      .then((response) => {
-        setListStudents(response.data);
-        setIsLoading(false);
-      })
-      .catch((msg) => console.log(msg));
-  }, []);
+    if (!searchParams.get("q")) {
+      axios
+        .get(`https://students-app-server-plum.vercel.app/api/students`)
+        .then((response) => {
+          setListStudents(response.data);
+          setIsLoading(false);
+        })
+        .catch((msg) => console.log(msg));
+    }
+  }, [searchParams]);
 
   const fetchData = useRef(
     debounce((searchParams) => {
@@ -53,7 +55,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchData.current(searchParams);
-  }, [fetchData, searchParams, isLoading]);
+  }, [fetchData, searchParams]);
 
   //description on mouse hover...
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);

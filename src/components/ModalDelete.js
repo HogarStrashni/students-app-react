@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { AppSearchContext } from "../context";
+
 import axios from "axios";
 
 const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
   //returning on main page after delete comfirm
   const navigate = useNavigate();
-  const { setSearchItem } = useContext(AppSearchContext);
 
   const deleteHandler = () => {
     axios
@@ -15,8 +14,6 @@ const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
       )
       .then(() => setIsModalDeleteOpen(false))
       .catch((msg) => console.log(msg));
-
-    setSearchItem("");
     navigate("/");
   };
 

@@ -2,17 +2,13 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const StudentForm = ({
-  firstName,
-  lastName,
-  indexNumber,
-  email,
-  phone,
-  setIsStudentFormOpen,
-  studentId,
-}) => {
+const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { firstName, lastName, indexNumber, email, phone } = student
+    ? student
+    : "";
 
   const [stateForm, setStateForm] = useState({
     firstName: firstName || "",
@@ -50,7 +46,7 @@ const StudentForm = ({
             }
           )
           .catch((msg) => console.log(msg));
-    navigate("/");
+    studentId ? setIsStudentFormOpen(false) : navigate("/");
   };
 
   const closeFormHandler = () => {

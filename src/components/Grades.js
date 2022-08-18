@@ -3,12 +3,12 @@ import GradesForm from "./GradesForm";
 import { FaEdit } from "react-icons/fa";
 
 const Grades = ({
-  allGrades,
+  student,
   isEditGradeOpen,
   setIsEditGradeOpen,
   studentId,
 }) => {
-  const allGradesList = allGrades
+  const allGradesList = student.gradeHistory
     .map((item) => Number(item.grade))
     .filter((item) => item);
   const numberPassedExam = allGradesList.length;
@@ -34,12 +34,12 @@ const Grades = ({
         </table>
         {isEditGradeOpen ? (
           <GradesForm
-            allGrades={allGrades}
+            allGrades={student.gradeHistory}
             studentId={studentId}
             setIsEditGradeOpen={setIsEditGradeOpen}
           />
         ) : (
-          allGrades.map((item, index) => {
+          student.gradeHistory.map((item, index) => {
             const { subject, grade, dateExam } = item;
             return (
               <div key={index}>
