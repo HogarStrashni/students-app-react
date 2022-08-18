@@ -48,7 +48,6 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
             {
               firstName: stateForm.firstName,
               lastName: stateForm.lastName,
-              indexNumber: stateForm.indexNumber,
               email: stateForm.email,
               phone: stateForm.phone,
             }
@@ -116,7 +115,11 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
                       name="indexNumber"
                       id="indexNumber"
                       placeholder="Index Number..."
-                      value={stateForm.indexNumber}
+                      value={
+                        location.pathname === "/student/new-student"
+                          ? stateForm.indexNumber
+                          : student.indexNumber
+                      }
                       onChange={changeInputHandler}
                       required
                     />
