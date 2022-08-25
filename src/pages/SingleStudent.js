@@ -22,9 +22,7 @@ const SingleStudent = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://students-app-server-plum.vercel.app/api/student/${studentId}`
-      )
+      .get(`${process.env.REACT_APP_URL_PATH}student/${studentId}`)
       .then((response) => {
         setStudent(response.data);
         setIsLoading(false);

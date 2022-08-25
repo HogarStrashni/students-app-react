@@ -39,12 +39,9 @@ const GradesForm = ({ allGrades, setIsEditGradeOpen, studentId }) => {
 
   const studentGradeHandler = () => {
     axios
-      .patch(
-        `https://students-app-server-plum.vercel.app/api/student/${studentId}`,
-        {
-          gradeHistory: stateGrades,
-        }
-      )
+      .patch(`${process.env.REACT_APP_URL_PATH}student/${studentId}`, {
+        gradeHistory: stateGrades,
+      })
       .then(() => setIsEditGradeOpen(false))
       .catch((err) => console.log(err.message));
   };

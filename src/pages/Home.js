@@ -28,7 +28,7 @@ const Home = () => {
   useEffect(() => {
     if (!searchParams.get("q")) {
       axios
-        .get(`https://students-app-server-plum.vercel.app/api/students`)
+        .get(`${process.env.REACT_APP_URL_PATH}students`)
         .then((response) => {
           setListStudents(response.data);
           setIsLoading(false);
@@ -41,9 +41,7 @@ const Home = () => {
     debounce((searchParams) => {
       if (searchParams.get("q")) {
         axios
-          .get(
-            `https://students-app-server-plum.vercel.app/api/students${searchParams}`
-          )
+          .get(`${process.env.REACT_APP_URL_PATH}students${searchParams}`)
           .then((response) => {
             setListStudents(response.data);
             setIsLoading(false);

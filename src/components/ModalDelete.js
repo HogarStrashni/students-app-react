@@ -9,9 +9,7 @@ const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
 
   const deleteHandler = () => {
     axios
-      .delete(
-        `https://students-app-server-plum.vercel.app/api/student/${studentId}`
-      )
+      .delete(`${process.env.REACT_APP_URL_PATH}student/${studentId}`)
       .then(() => setIsModalDeleteOpen(false))
       .catch((err) => console.log(err.message));
     navigate("/");

@@ -30,7 +30,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
     event.preventDefault();
     location.pathname === "/student/new-student"
       ? axios
-          .post("https://students-app-server-plum.vercel.app/api/students", {
+          .post(`${process.env.REACT_APP_URL_PATH}students`, {
             firstName: stateForm.firstName,
             lastName: stateForm.lastName,
             indexNumber: stateForm.indexNumber,
@@ -43,15 +43,12 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
             console.log(err.message);
           })
       : axios
-          .patch(
-            `https://students-app-server-plum.vercel.app/api/student/${studentId}`,
-            {
-              firstName: stateForm.firstName,
-              lastName: stateForm.lastName,
-              email: stateForm.email,
-              phone: stateForm.phone,
-            }
-          )
+          .patch(`${process.env.REACT_APP_URL_PATH}student/${studentId}`, {
+            firstName: stateForm.firstName,
+            lastName: stateForm.lastName,
+            email: stateForm.email,
+            phone: stateForm.phone,
+          })
           .then(() => setIsStudentFormOpen(false))
           .catch((err) => console.log(err.message));
   };
