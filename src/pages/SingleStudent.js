@@ -5,7 +5,7 @@ import Grades from "../components/Grades";
 import ModalDelete from "../components/ModalDelete";
 import StudentForm from "../components/StudentForm";
 import LoadingStage from "../components/LoadingStage";
-import axios from "axios";
+import { axiosInstance } from "../service/axiosInstance";
 
 const SingleStudent = () => {
   const { id: studentId } = useParams();
@@ -21,8 +21,8 @@ const SingleStudent = () => {
   const [isStudentFormOpen, setIsStudentFormOpen] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_URL_PATH}student/${studentId}`)
+    axiosInstance
+      .get(`student/${studentId}`)
       .then((response) => {
         setStudent(response.data);
         setIsLoading(false);

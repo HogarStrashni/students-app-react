@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { axiosInstance } from "../service/axiosInstance";
 import ErrorStage from "./ErrorStage";
 
 const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
@@ -29,8 +29,8 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
   const studentFormHandler = (event) => {
     event.preventDefault();
     location.pathname === "/student/new-student"
-      ? axios
-          .post(`${process.env.REACT_APP_URL_PATH}students`, {
+      ? axiosInstance
+          .post("students", {
             firstName: stateForm.firstName,
             lastName: stateForm.lastName,
             indexNumber: stateForm.indexNumber,
@@ -42,8 +42,8 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
             setIsError(true);
             console.log(err.message);
           })
-      : axios
-          .patch(`${process.env.REACT_APP_URL_PATH}student/${studentId}`, {
+      : axiosInstance
+          .patch(`student/${studentId}`, {
             firstName: stateForm.firstName,
             lastName: stateForm.lastName,
             email: stateForm.email,

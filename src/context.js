@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
-  //for login LATER
-  return <AuthContext.Provider value={{}}>{children}</AuthContext.Provider>;
+  const [user, setUser] = useState({});
+
+  return (
+    <AuthContext.Provider value={{ user, setUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 // Create custom hook
