@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 
-const AppSearchContext = React.createContext();
+const AuthContext = React.createContext();
 
-const AppProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   //for login LATER
-  return (
-    <AppSearchContext.Provider value={{}}>{children}</AppSearchContext.Provider>
-  );
+  return <AuthContext.Provider value={{}}>{children}</AuthContext.Provider>;
 };
 
-export { AppSearchContext, AppProvider };
+// Create custom hook
+const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+export { AuthProvider, useAuth };

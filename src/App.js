@@ -10,6 +10,7 @@ import Documentation from "./pages/Documentation";
 import AboutUs from "./pages/AboutUs";
 import ErrorPage from "./pages/ErrorPage";
 import StudentForm from "./components/StudentForm";
+import LoginForm from "./components/LoginForm";
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
           <Route>
             <Route path="/student/:id" element={<SingleStudent />} />
             <Route path="/student/new-student" element={<StudentForm />} />
+          </Route>
+          <Route>
+            <Route path="/register" element={<LoginForm />} />
+            <Route path="/login" element={<LoginForm />} />
           </Route>
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/about" element={<AboutUs />} />
