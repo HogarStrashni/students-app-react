@@ -4,7 +4,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import AllStudentsList from "../components/AllStudentsList";
 import LoadingStage from "../components/LoadingStage";
-import { axiosInstance } from "../service/axiosInstance";
+import axiosInstance from "../service/httpClient";
 
 const debounce = (cb, time = 400) => {
   let timeout;
@@ -28,7 +28,7 @@ const Home = () => {
   useEffect(() => {
     if (!searchParams.get("q")) {
       axiosInstance
-        .get("students")
+        .get("/students")
         .then((response) => {
           setListStudents(response.data);
           setIsLoading(false);
@@ -41,7 +41,7 @@ const Home = () => {
     debounce((searchParams) => {
       if (searchParams.get("q")) {
         axiosInstance
-          .get(`students${searchParams}`)
+          .get(`/students${searchParams}`)
           .then((response) => {
             setListStudents(response.data);
             setIsLoading(false);

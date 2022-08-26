@@ -5,7 +5,7 @@ import Grades from "../components/Grades";
 import ModalDelete from "../components/ModalDelete";
 import StudentForm from "../components/StudentForm";
 import LoadingStage from "../components/LoadingStage";
-import { axiosInstance } from "../service/axiosInstance";
+import axiosInstance from "../service/httpClient";
 
 const SingleStudent = () => {
   const { id: studentId } = useParams();
@@ -22,7 +22,7 @@ const SingleStudent = () => {
 
   useEffect(() => {
     axiosInstance
-      .get(`student/${studentId}`)
+      .get(`/student/${studentId}`)
       .then((response) => {
         setStudent(response.data);
         setIsLoading(false);

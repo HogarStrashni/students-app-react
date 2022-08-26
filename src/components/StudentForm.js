@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { axiosInstance } from "../service/axiosInstance";
 import ErrorStage from "./ErrorStage";
+import axiosInstance from "../service/httpClient";
 
 const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
     event.preventDefault();
     location.pathname === "/student/new-student"
       ? axiosInstance
-          .post("students", {
+          .post("/students", {
             firstName: stateForm.firstName,
             lastName: stateForm.lastName,
             indexNumber: stateForm.indexNumber,
@@ -43,7 +43,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
             console.log(err.message);
           })
       : axiosInstance
-          .patch(`student/${studentId}`, {
+          .patch(`/student/${studentId}`, {
             firstName: stateForm.firstName,
             lastName: stateForm.lastName,
             email: stateForm.email,

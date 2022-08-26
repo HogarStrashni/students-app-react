@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
-import { axiosInstance } from "../service/axiosInstance";
+import axiosInstance from "../service/httpClient";
 
 const GradesForm = ({ allGrades, setIsEditGradeOpen, studentId }) => {
   const [stateGrades, setStateGrades] = useState(
@@ -39,7 +39,7 @@ const GradesForm = ({ allGrades, setIsEditGradeOpen, studentId }) => {
 
   const studentGradeHandler = () => {
     axiosInstance
-      .patch(`student/${studentId}`, {
+      .patch(`/student/${studentId}`, {
         gradeHistory: stateGrades,
       })
       .then(() => setIsEditGradeOpen(false))

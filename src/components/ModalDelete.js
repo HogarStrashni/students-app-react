@@ -1,15 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-import axios from "axios";
+import axiosInstance from "../service/httpClient";
 
 const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
   //returning on main page after delete comfirm
   const navigate = useNavigate();
 
   const deleteHandler = () => {
-    axios
-      .delete(`${process.env.REACT_APP_URL_PATH}student/${studentId}`)
+    axiosInstance
+      .delete(`/student/${studentId}`)
       .then(() => setIsModalDeleteOpen(false))
       .catch((err) => console.log(err.message));
     navigate("/");
