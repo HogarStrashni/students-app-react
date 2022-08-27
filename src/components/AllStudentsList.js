@@ -1,7 +1,10 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context";
 
 const AllStudentsList = ({ listStudents }) => {
+  const { loggedUser } = useAuth();
+
   //table scroll bar
   const referTbody = useRef();
   const [isScrollbarVisible, setIsScrollbarVisible] = useState(true);
@@ -28,14 +31,18 @@ const AllStudentsList = ({ listStudents }) => {
           </tr>
         </tbody>
       </table>
-      <div className="h-[calc(100vh-212px)] overflow-auto">
+      <div className="h-[calc(100vh-207px)] overflow-auto">
         <table className="border">
           <tbody ref={referTbody}>
             {listStudents.map((item, index) => {
               const { firstName, lastName, indexNumber, email, phone } = item;
               return (
                 <tr
-                  onClick={() => navigate(`/student/${item.indexNumber}`)}
+                  onClick={() =>
+                    loggedUser
+                      ? navigate(`/student/${item.indexNumber}`)
+                      : navigate(`/login#student/${item.indexNumber}`)
+                  }
                   key={item.indexNumber}
                   className="odd:bg-white even:bg-slate-100 hover:bg-green-300 cursor-pointer"
                 >

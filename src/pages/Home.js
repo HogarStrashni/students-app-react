@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaUserPlus } from "react-icons/fa";
-import { Link, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import AllStudentsList from "../components/AllStudentsList";
 import LoadingStage from "../components/LoadingStage";
 import axiosInstance from "../service/httpClient";
+import { useAuth } from "../context";
 
 const debounce = (cb, time = 400) => {
   let timeout;
@@ -15,6 +16,9 @@ const debounce = (cb, time = 400) => {
 };
 
 const Home = () => {
+  const navigate = useNavigate();
+  const { loggedUser } = useAuth();
+
   //loading students and LoadingStage
   const [isLoading, setIsLoading] = useState(true);
   const [listStudents, setListStudents] = useState([]);
@@ -63,7 +67,7 @@ const Home = () => {
   useEffect(() => {
     if (isDescriptionOpen) {
       descriptionText.current.style.left = "755px";
-      descriptionText.current.style.top = "6px";
+      descriptionText.current.style.top = "-4px";
     }
   }, [isDescriptionOpen]);
 
@@ -83,25 +87,26 @@ const Home = () => {
           <>
             <div className="w-[46rem] mx-auto border-b border-slate-200 flex justify-between mb-3 pb-2">
               <SearchBar queryPart={queryPart} />
-              <Link to="/student/new-student">
-                <button
-                  className="text-3xl h-8 mr-16 text-slate-500"
-                  onMouseOver={mouseEnterHandler}
-                  onMouseOut={mouseOutHendler}
-                >
-                  {isDescriptionOpen && (
-                    <div
-                      ref={descriptionText}
-                      className="text-sm absolute w-32 text-center"
-                    >
-                      Add New Student
-                    </div>
-                  )}
-                  <FaUserPlus />
-                </button>
-              </Link>
+              <button
+                className="text-3xl h-8 mr-16 text-slate-500 disabled:opacity-30"
+                onMouseOver={mouseEnterHandler}
+                onMouseOut={mouseOutHendler}
+                onClick={() => navigate("/student/new-student")}
+                disabled={loggedUser?.role !== "admin"}
+              >
+                {isDescriptionOpen && (
+                  <div
+                    ref={descriptionText}
+                    className="text-sm absolute w-32 text-center"
+                  >
+                    {loggedUser?.role !== "admin"
+                      ? "Add New Student (Not Allowed)"
+                      : "Add New Student"}
+                  </div>
+                )}
+                <FaUserPlus />
+              </button>
             </div>
-
             <AllStudentsList listStudents={listStudents} />
           </>
         )}

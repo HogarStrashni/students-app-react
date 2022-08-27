@@ -28,9 +28,4 @@ export const registerUser = (payload) => {
 
 export const logoutUser = () => (token = null);
 
-export const authInterceptor = (req) => {
-  if (token) {
-    req.headers["Authorization"] = `Bearer ${token}`;
-  }
-  return req;
-};
+export const getAuthToken = () => token;

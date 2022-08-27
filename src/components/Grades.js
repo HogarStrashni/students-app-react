@@ -1,6 +1,7 @@
 import React from "react";
 import GradesForm from "./GradesForm";
 import { FaEdit } from "react-icons/fa";
+import { useAuth } from "../context";
 
 const Grades = ({
   student,
@@ -8,6 +9,8 @@ const Grades = ({
   setIsEditGradeOpen,
   studentId,
 }) => {
+  const { loggedUser } = useAuth();
+
   const allGradesList = student.gradeHistory
     .map((item) => Number(item.grade))
     .filter((item) => item);
@@ -75,8 +78,9 @@ const Grades = ({
       {!isEditGradeOpen && (
         <div>
           <button
-            className="text-2xl text-slate-500"
+            className="text-2xl text-slate-500 disabled:opacity-30"
             onClick={() => setIsEditGradeOpen(true)}
+            disabled={loggedUser?.role !== "admin"}
           >
             <FaEdit />
           </button>

@@ -6,8 +6,11 @@ import ModalDelete from "../components/ModalDelete";
 import StudentForm from "../components/StudentForm";
 import LoadingStage from "../components/LoadingStage";
 import axiosInstance from "../service/httpClient";
+import { useAuth } from "../context";
 
 const SingleStudent = () => {
+  const { loggedUser } = useAuth();
+
   const { id: studentId } = useParams();
   const [student, setStudent] = useState({});
 
@@ -74,14 +77,16 @@ const SingleStudent = () => {
                 {!isEditGradeOpen && (
                   <div>
                     <button
-                      className="text-2xl mr-3 text-slate-500"
+                      className="text-2xl mr-3 text-slate-500 disabled:opacity-30"
                       onClick={openModalDeleteHandler}
+                      disabled={loggedUser?.role !== "admin"}
                     >
                       <FaTrashAlt />
                     </button>
                     <button
-                      className="text-2xl text-slate-500"
+                      className="text-2xl text-slate-500 disabled:opacity-30"
                       onClick={openFormHandler}
+                      disabled={loggedUser?.role !== "admin"}
                     >
                       <FaEdit />
                     </button>

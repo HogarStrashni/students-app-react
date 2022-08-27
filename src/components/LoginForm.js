@@ -1,40 +1,55 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context";
-import { loginUser, registerUser, logoutUser } from "../service/auth";
+import { loginUser, registerUser } from "../service/auth";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { setUser } = useAuth();
+  const { setLoggedUser } = useAuth();
 
-  const loginRegisterHandler = async (event) => {
+  const loginRegisterHandler = (event) => {
     event.preventDefault();
     if (location.pathname === "/login") {
-      let user = await loginUser({ email, password });
-      setUser(user);
+      loginUser({ email, password })
+        .then((user) => {
+          setLoginError("");
+          setLoggedUser(user);
+          navigate("/");
+        })
+        .catch(() => {
+          navigate("/login");
+          setLoginError("Invalid Email or Password!");
+          setEmail("");
+          setPassword("");
+        });
     } else {
-      let user = await registerUser({ email, password });
-      setUser(user);
+      registerUser({ email, password })
+        .then((user) => {
+          setLoginError("");
+          setLoggedUser(user);
+          navigate("/");
+        })
+        .catch(() => {
+          navigate("/register");
+          setLoginError("Email Already Exists!");
+          setEmail("");
+          setPassword("");
+        });
     }
-    navigate("/");
-  };
-
-  const logoutHandler = () => {
-    logoutUser();
-    navigate("/");
   };
 
   return (
     <>
-      <article className="h-[calc(100vh-128px)] w-[56rem] my-3 top-0 mx-auto border bg-slate-600 opacity-10"></article>
-      <article className="w-[18rem] h-72 border-2 rounded-lg top-[calc(50%-10rem)] left-[calc(50%-10rem)] bg-white absolute">
-        <div className="h-[100%] flex flex-col items-center justify-around">
-          <form className="flex flex-col" onSubmit={loginRegisterHandler}>
+      <article className="w-[56rem] h-[calc(100vh-128px)] mx-auto my-3 bg-slate-200 flex items-center">
+        <div className="w-72 flex flex-col px-6 rounded-xl mx-auto bg-white">
+          <p className="pt-6 text-red-600 text-center">{loginError}</p>
+          <form className="flex flex-col my-6" onSubmit={loginRegisterHandler}>
             <label htmlFor="email">Email:</label>
             <input
               className="mb-4 mt-2 border-2 rounded-md border-slate-300"
@@ -62,6 +77,14 @@ const LoginForm = () => {
                 {location.pathname === "/login" ? "Login" : "Register"}
               </button>
             </div>
+            {location.pathname === "/login" ? (
+              <h2 className="mt-4 text-center">
+                Don't have account?{" "}
+                <Link to="/register" className="text-blue-800">
+                  Register
+                </Link>
+              </h2>
+            ) : null}
           </form>
         </div>
       </article>
