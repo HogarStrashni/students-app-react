@@ -10,11 +10,11 @@ const Header = () => {
 
   const logoutHandler = () => {
     logoutUser();
-    setLoggedUser(null);
+    setloggedInUser(null);
     navigate("/");
   };
 
-  const { loggedUser, setLoggedUser } = useAuth();
+  const { loggedInUser, setloggedInUser } = useAuth();
 
   return (
     <header className="w-[60rem] mx-auto bg-slate-300 flex justify-between items-center">
@@ -24,14 +24,14 @@ const Header = () => {
         </div>
       </Link>
       <div>
-        {!loggedUser ? (
+        {!loggedInUser ? (
           <p className="italic text-slate-100">
             "There are two ways to write error-free programs; only the third one
             works."
           </p>
         ) : (
           <p className="italic text-slate-100">
-            You are logged as: {loggedUser.email}
+            You are logged as: {loggedInUser.email}
           </p>
         )}
       </div>
@@ -40,7 +40,7 @@ const Header = () => {
           <FaHome />
         </Link>
 
-        {!loggedUser ? (
+        {!loggedInUser ? (
           <button
             className="w-24 ml-8 rounded-lg border bg-blue-300"
             onClick={() => navigate("/login")}

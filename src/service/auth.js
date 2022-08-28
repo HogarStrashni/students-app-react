@@ -11,7 +11,10 @@ export const loginUser = (payload) => {
       delete logUser.token;
       return logUser;
     })
-    .catch((err) => console.log(err.message));
+    .catch((error) => {
+      console.log(error.message);
+      return Promise.reject(error);
+    });
 };
 
 export const registerUser = (payload) => {
@@ -23,7 +26,10 @@ export const registerUser = (payload) => {
       delete regUser.token;
       return regUser;
     })
-    .catch((err) => console.log(err.message));
+    .catch((error) => {
+      console.log(error.message);
+      return Promise.reject(error);
+    });
 };
 
 export const logoutUser = () => (token = null);

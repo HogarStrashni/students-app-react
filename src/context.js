@@ -3,13 +3,10 @@ import React, { useContext, useState } from "react";
 const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
-  const [loggedUser, setLoggedUser] = useState(null);
-  const [logError, setLogError] = useState("");
+  const [loggedInUser, setloggedInUser] = useState(null);
 
   return (
-    <AuthContext.Provider
-      value={{ loggedUser, setLoggedUser, logError, setLogError }}
-    >
+    <AuthContext.Provider value={{ loggedInUser, setloggedInUser }}>
       {children}
     </AuthContext.Provider>
   );

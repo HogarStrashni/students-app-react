@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Error = () => {
+const ErrorPage = () => {
   return (
     <main className="w-[56rem] mx-auto my-3">
       <div className="h-[calc(100vh-156px)] w-[100%]">
@@ -18,4 +18,4 @@ const Error = () => {
   );
 };
 
-export default Error;
+export default ErrorPage;

@@ -17,7 +17,7 @@ const debounce = (cb, time = 400) => {
 
 const Home = () => {
   const navigate = useNavigate();
-  const { loggedUser } = useAuth();
+  const { loggedInUser } = useAuth();
 
   //loading students and LoadingStage
   const [isLoading, setIsLoading] = useState(true);
@@ -92,14 +92,14 @@ const Home = () => {
                 onMouseOver={mouseEnterHandler}
                 onMouseOut={mouseOutHendler}
                 onClick={() => navigate("/student/new-student")}
-                disabled={loggedUser?.role !== "admin"}
+                disabled={loggedInUser?.role !== "admin"}
               >
                 {isDescriptionOpen && (
                   <div
                     ref={descriptionText}
                     className="text-sm absolute w-32 text-center"
                   >
-                    {loggedUser?.role !== "admin"
+                    {loggedInUser?.role !== "admin"
                       ? "Add New Student (Not Allowed)"
                       : "Add New Student"}
                   </div>

@@ -15,7 +15,7 @@ const AllStudentsList = ({ listStudents }) => {
   //<Link> replacment for table error!
   const navigate = useNavigate();
 
-  const { loggedUser } = useAuth();
+  const { loggedInUser } = useAuth();
 
   return (
     <>
@@ -39,7 +39,7 @@ const AllStudentsList = ({ listStudents }) => {
               return (
                 <tr
                   onClick={() =>
-                    loggedUser
+                    loggedInUser
                       ? navigate(`/student/${item.indexNumber}`)
                       : navigate(`/login?path=student/${item.indexNumber}`)
                   }

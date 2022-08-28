@@ -59,16 +59,16 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
     navigate(`/student/${studentId}`);
   };
 
-  const { loggedUser } = useAuth();
+  const { loggedInUser } = useAuth();
 
   useEffect(() => {
     if (
       location.pathname === "/student/new-student" &&
-      loggedUser?.role !== "admin"
+      loggedInUser?.role !== "admin"
     ) {
       navigate("/");
     }
-  }, [location.pathname, loggedUser?.role, navigate]);
+  }, [location.pathname, loggedInUser?.role, navigate]);
 
   return isError ? (
     <ErrorStage setIsError={setIsError} />
@@ -76,7 +76,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
     <>
       <main className="h-[calc(100vh-128px)] w-[56rem] mx-auto my-3 pt-8 bg-slate-200">
         <div className="w-[32rem] mx-auto flex justify-between">
-          {loggedUser?.role === "admin" && (
+          {loggedInUser?.role === "admin" && (
             <form onSubmit={studentFormHandler} className="w-[30rem] mx-auto">
               <table className="w-[30rem]">
                 <tbody>

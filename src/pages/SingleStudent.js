@@ -9,7 +9,7 @@ import axiosInstance from "../service/httpClient";
 import { useAuth } from "../context";
 
 const SingleStudent = () => {
-  const { loggedUser } = useAuth();
+  const { loggedInUser } = useAuth();
 
   const navigate = useNavigate();
 
@@ -85,14 +85,14 @@ const SingleStudent = () => {
                     <button
                       className="text-2xl mr-3 text-slate-500 disabled:opacity-30"
                       onClick={openModalDeleteHandler}
-                      disabled={loggedUser?.role !== "admin"}
+                      disabled={loggedInUser?.role !== "admin"}
                     >
                       <FaTrashAlt />
                     </button>
                     <button
                       className="text-2xl text-slate-500 disabled:opacity-30"
                       onClick={openFormHandler}
-                      disabled={loggedUser?.role !== "admin"}
+                      disabled={loggedInUser?.role !== "admin"}
                     >
                       <FaEdit />
                     </button>

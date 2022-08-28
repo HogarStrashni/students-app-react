@@ -9,7 +9,7 @@ const Grades = ({
   setIsEditGradeOpen,
   studentId,
 }) => {
-  const { loggedUser } = useAuth();
+  const { loggedInUser } = useAuth();
 
   const allGradesList = student.gradeHistory
     .map((item) => Number(item.grade))
@@ -80,7 +80,7 @@ const Grades = ({
           <button
             className="text-2xl text-slate-500 disabled:opacity-30"
             onClick={() => setIsEditGradeOpen(true)}
-            disabled={loggedUser?.role !== "admin"}
+            disabled={loggedInUser?.role !== "admin"}
           >
             <FaEdit />
           </button>
