@@ -1,54 +1,46 @@
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { useAuth } from "../context";
 import { loginUser, registerUser } from "../service/auth";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { setLoggedUser } = useAuth();
+  const { loggedUser, setLoggedUser } = useAuth();
 
-  const loginRegisterHandler = (event) => {
+  const [searchParams] = useSearchParams();
+  const urlPath = searchParams.get("path") ?? "";
+
+  const loginRegisterHandler = async (event) => {
     event.preventDefault();
     if (location.pathname === "/login") {
-      loginUser({ email, password })
-        .then((user) => {
-          setLoginError("");
-          setLoggedUser(user);
-          navigate("/");
-        })
-        .catch(() => {
-          navigate("/login");
-          setLoginError("Invalid Email or Password!");
-          setEmail("");
-          setPassword("");
-        });
+      let user = await loginUser({ email, password });
+      setLoggedUser(user);
     } else {
-      registerUser({ email, password })
-        .then((user) => {
-          setLoginError("");
-          setLoggedUser(user);
-          navigate("/");
-        })
-        .catch(() => {
-          navigate("/register");
-          setLoginError("Email Already Exists!");
-          setEmail("");
-          setPassword("");
-        });
+      let user = await registerUser({ email, password });
+      setLoggedUser(user);
     }
+    urlPath ? navigate(`/${urlPath}`) : navigate("/");
   };
 
   return (
     <>
       <article className="w-[56rem] h-[calc(100vh-128px)] mx-auto my-3 bg-slate-200 flex items-center">
         <div className="w-72 flex flex-col px-6 rounded-xl mx-auto bg-white">
-          <p className="pt-6 text-red-600 text-center">{loginError}</p>
+          {!loggedUser && urlPath && (
+            <p className="pt-6 text-red-600 text-center">
+              Login for complete action!
+            </p>
+          )}
           <form className="flex flex-col my-6" onSubmit={loginRegisterHandler}>
             <label htmlFor="email">Email:</label>
             <input

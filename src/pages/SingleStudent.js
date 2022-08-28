@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Grades from "../components/Grades";
 import ModalDelete from "../components/ModalDelete";
@@ -10,6 +10,8 @@ import { useAuth } from "../context";
 
 const SingleStudent = () => {
   const { loggedUser } = useAuth();
+
+  const navigate = useNavigate();
 
   const { id: studentId } = useParams();
   const [student, setStudent] = useState({});
@@ -30,8 +32,12 @@ const SingleStudent = () => {
         setStudent(response.data);
         setIsLoading(false);
       })
-      .catch((err) => console.log(err.message));
-  }, [isEditGradeOpen, isStudentFormOpen, studentId]);
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err.message);
+        navigate(`/login?path=student/${studentId}`);
+      });
+  }, [isEditGradeOpen, isStudentFormOpen, studentId, navigate]);
 
   const { firstName, lastName, indexNumber, email, phone } = student;
 

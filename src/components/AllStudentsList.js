@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context";
 
 const AllStudentsList = ({ listStudents }) => {
-  const { loggedUser } = useAuth();
-
   //table scroll bar
   const referTbody = useRef();
   const [isScrollbarVisible, setIsScrollbarVisible] = useState(true);
@@ -16,6 +14,8 @@ const AllStudentsList = ({ listStudents }) => {
 
   //<Link> replacment for table error!
   const navigate = useNavigate();
+
+  const { loggedUser } = useAuth();
 
   return (
     <>
@@ -41,7 +41,7 @@ const AllStudentsList = ({ listStudents }) => {
                   onClick={() =>
                     loggedUser
                       ? navigate(`/student/${item.indexNumber}`)
-                      : navigate(`/login#student/${item.indexNumber}`)
+                      : navigate(`/login?path=student/${item.indexNumber}`)
                   }
                   key={item.indexNumber}
                   className="odd:bg-white even:bg-slate-100 hover:bg-green-300 cursor-pointer"
