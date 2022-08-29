@@ -43,7 +43,7 @@ const LoginForm = () => {
           navigate("/");
         })
         .catch((error) => {
-          setErrorMessage(error.response.data.message);
+          console.log(error.message);
           setEmail("");
           setPassword("");
           setErrorMessage(error.response.data.message);
@@ -57,7 +57,7 @@ const LoginForm = () => {
         <div className="w-72 flex flex-col px-6 rounded-xl mx-auto bg-white">
           {!loggedInUser && urlPath && (
             <p className="pt-6 text-red-600 text-center">
-              Login for complete action!
+              Log In to Complete Action!
             </p>
           )}
           {errorMessage && (

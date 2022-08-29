@@ -35,7 +35,9 @@ const SingleStudent = () => {
       .catch((err) => {
         setIsLoading(false);
         console.log(err.message);
-        navigate(`/login?path=student/${studentId}`);
+        err.response.request.status !== 404
+          ? navigate(`/login?path=student/${studentId}`)
+          : navigate("/");
       });
   }, [isEditGradeOpen, isStudentFormOpen, studentId, navigate]);
 
