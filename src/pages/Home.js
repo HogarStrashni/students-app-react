@@ -34,7 +34,7 @@ const Home = () => {
       axiosInstance
         .get("/students")
         .then((response) => {
-          setListStudents(response.data);
+          setListStudents(response.data.resultStudents);
           setIsLoading(false);
         })
         .catch((err) => console.log(err.message));

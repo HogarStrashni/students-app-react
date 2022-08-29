@@ -34,7 +34,6 @@ const Footer = () => {
         <a href="https://www.unibl.org/" target="_blanc">
           University
         </a>
-
         <Link to="/documentation">Documentation</Link>
         <Link to="/about">About Us</Link>
       </div>

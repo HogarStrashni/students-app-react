@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  Link,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context";
 import { loginUser, registerUser } from "../service/auth";
 
@@ -99,9 +94,12 @@ const LoginForm = () => {
                 onClick={() => setErrorMessage("")}
               >
                 Don't have account?{" "}
-                <Link to="/register" className="text-blue-800">
+                <span
+                  className="text-blue-800 cursor-pointer"
+                  onClick={() => navigate("/register")}
+                >
                   Register
-                </Link>
+                </span>
               </h2>
             ) : null}
           </form>

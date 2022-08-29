@@ -37,7 +37,7 @@ const SingleStudent = () => {
         console.log(err.message);
         err.response.request.status !== 404
           ? navigate(`/login?path=student/${studentId}`)
-          : navigate("/");
+          : navigate("*");
       });
   }, [isEditGradeOpen, isStudentFormOpen, studentId, navigate]);
 

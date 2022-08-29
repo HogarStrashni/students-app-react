@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../service/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaHome, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "../context";
 import { logoutUser } from "../service/auth";
@@ -18,11 +18,14 @@ const Header = () => {
 
   return (
     <header className="w-[60rem] mx-auto bg-slate-300 flex justify-between items-center">
-      <Link to="/">
-        <div className="h-14 py-2 px-4">
-          <img src={logo} alt="logo" className="h-10 rounded-lg" />
-        </div>
-      </Link>
+      <div className="h-14 py-2 px-4">
+        <img
+          src={logo}
+          alt="logo"
+          className="h-10 rounded-lg cursor-pointer"
+          onClick={() => navigate("/")}
+        />
+      </div>
       <div>
         {!loggedInUser ? (
           <p className="italic text-slate-100">
@@ -36,10 +39,10 @@ const Header = () => {
         )}
       </div>
       <div className="pr-4 flex">
-        <Link to="/" className="text-3xl text-slate-500">
-          <FaHome />
-        </Link>
-
+        <FaHome
+          className="text-3xl text-slate-500 cursor-pointer"
+          onClick={() => navigate("/")}
+        />
         {!loggedInUser ? (
           <button
             className="w-24 ml-8 rounded-lg border bg-blue-300"
