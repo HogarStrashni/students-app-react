@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context";
 import { loginUser, registerUser } from "../service/auth";
+import toast, { Toaster } from "react-hot-toast";
 
 const LoginForm = () => {
+  //Toaster implementation
+  const notifyLoggedIn = () => toast.success("Successfully Logged In");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -24,6 +28,7 @@ const LoginForm = () => {
         .then((data) => {
           setloggedInUser(data);
           urlPath ? navigate(`/${urlPath}`) : navigate("/");
+          notifyLoggedIn();
         })
         .catch((error) => {
           console.log(error.message);
@@ -36,6 +41,7 @@ const LoginForm = () => {
         .then((data) => {
           setloggedInUser(data);
           navigate("/");
+          notifyLoggedIn();
         })
         .catch((error) => {
           console.log(error.message);
@@ -48,6 +54,7 @@ const LoginForm = () => {
 
   return (
     <>
+      <Toaster />
       <article className="w-[56rem] h-[calc(100vh-128px)] mx-auto my-3 bg-slate-200 flex items-center">
         <div className="w-72 flex flex-col px-6 rounded-xl mx-auto bg-white">
           {!loggedInUser && urlPath && (

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaHome, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "../context";
 import { logoutUser } from "../service/auth";
+import toast, { Toaster } from "react-hot-toast";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -12,12 +13,17 @@ const Header = () => {
     logoutUser();
     setloggedInUser(null);
     navigate("/");
+    notifyLoggedOut();
   };
+
+  //Toaster implementation
+  const notifyLoggedOut = () => toast.error("Successfully Logged Out");
 
   const { loggedInUser, setloggedInUser } = useAuth();
 
   return (
     <header className="w-[60rem] mx-auto bg-slate-300 flex justify-between items-center">
+      <Toaster />
       <div className="h-14 py-2 px-4">
         <img
           src={logo}
@@ -53,7 +59,9 @@ const Header = () => {
         ) : (
           <button
             className="w-24 ml-8 rounded-lg border border-slate-400 bg-red-300"
-            onClick={() => logoutHandler()}
+            onClick={() => {
+              logoutHandler();
+            }}
           >
             <FaSignOutAlt className="inline-block mb-1" /> Logout
           </button>
