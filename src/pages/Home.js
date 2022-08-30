@@ -5,15 +5,8 @@ import SearchBar from "../components/SearchBar";
 import AllStudentsList from "../components/AllStudentsList";
 import LoadingStage from "../components/LoadingStage";
 import axiosInstance from "../service/httpClient";
+import { useDebounce } from "use-debounce";
 import { useAuth } from "../context";
-
-const debounce = (cb, time = 400) => {
-  let timeout;
-  return (...args) => {
-    if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(() => cb(...args), time);
-  };
-};
 
 const Home = () => {
   const navigate = useNavigate();
@@ -34,39 +27,35 @@ const Home = () => {
   const queryPart = searchParams.get("q") ?? "";
   let pageNumber = searchParams.get("page") ?? 1;
 
+  const [debouncedQueryPart] = useDebounce(queryPart, 400);
+
   useEffect(() => {
-    if (!searchParams.get("q")) {
+    if (!queryPart) {
       axiosInstance
         .get(`/students?page=${pageNumber}`)
         .then((response) => {
           setListStudents(response.data.resultStudents);
-          setCurrentPage(response.data.currentPage.page);
-          setTotalPages(response.data.totalPages.page);
+          setCurrentPage(response.data.currentPage);
+          setTotalPages(response.data.totalPages);
           setIsLoading(false);
         })
         .catch((err) => console.log(err.message));
     }
-  }, [searchParams, pageNumber]);
-
-  const fetchData = useRef(
-    debounce((searchParams) => {
-      if (searchParams.get("q")) {
-        axiosInstance
-          .get(`/students?${searchParams}`)
-          .then((response) => {
-            setListStudents(response.data.resultStudents);
-            setCurrentPage(response.data.currentPage.page);
-            setTotalPages(response.data.totalPages.page);
-            setIsLoading(false);
-          })
-          .catch((err) => console.log(err.message));
-      }
-    })
-  );
+  }, [pageNumber, queryPart]);
 
   useEffect(() => {
-    fetchData.current(searchParams);
-  }, [fetchData, searchParams]);
+    if (debouncedQueryPart) {
+      axiosInstance
+        .get(`/students?q=${debouncedQueryPart}&page=${pageNumber}`)
+        .then((response) => {
+          setListStudents(response.data.resultStudents);
+          setCurrentPage(response.data.currentPage);
+          setTotalPages(response.data.totalPages);
+          setIsLoading(false);
+        })
+        .catch((err) => console.log(err.message));
+    }
+  }, [pageNumber, debouncedQueryPart]);
 
   //description on mouse hover...
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
@@ -88,43 +77,42 @@ const Home = () => {
   };
 
   return (
-    <>
-      <main className="w-[56rem] mx-auto my-3 relative">
-        {isLoading ? (
-          <LoadingStage />
-        ) : (
-          <>
-            <div className="w-[46rem] mx-auto border-b border-slate-200 flex justify-between mb-3 pb-2">
-              <SearchBar queryPart={queryPart} pageNumber={pageNumber} />
-              <button
-                className="text-3xl h-8 mr-16 text-slate-500 disabled:opacity-30"
-                onMouseOver={mouseEnterHandler}
-                onMouseOut={mouseOutHendler}
-                onClick={() => navigate("/student/new-student")}
-                disabled={loggedInUser?.role !== "admin"}
-              >
-                {isDescriptionOpen && (
-                  <div
-                    ref={descriptionText}
-                    className="text-sm absolute w-32 text-center"
-                  >
-                    {loggedInUser?.role !== "admin"
-                      ? "Add New Student (Not Allowed)"
-                      : "Add New Student"}
-                  </div>
-                )}
-                <FaUserPlus />
-              </button>
-            </div>
-            <AllStudentsList
-              listStudents={listStudents}
-              currentPage={currentPage}
-              totalPages={totalPages}
-            />
-          </>
-        )}
-      </main>
-    </>
+    <main className="w-[56rem] mx-auto my-3 relative">
+      {isLoading ? (
+        <LoadingStage />
+      ) : (
+        <>
+          <div className="w-[46rem] mx-auto border-b border-slate-200 flex justify-between mb-3 pb-2">
+            <SearchBar queryPart={queryPart} />
+            <button
+              className="text-3xl h-8 mr-16 text-slate-500 disabled:opacity-30"
+              onMouseOver={mouseEnterHandler}
+              onMouseOut={mouseOutHendler}
+              onClick={() => navigate("/student/new-student")}
+              disabled={loggedInUser?.role !== "admin"}
+            >
+              {isDescriptionOpen && (
+                <div
+                  ref={descriptionText}
+                  className="text-sm absolute w-32 text-center"
+                >
+                  {loggedInUser?.role !== "admin"
+                    ? "Add New Student (Not Allowed)"
+                    : "Add New Student"}
+                </div>
+              )}
+              <FaUserPlus />
+            </button>
+          </div>
+          <AllStudentsList
+            listStudents={listStudents}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            queryPart={queryPart}
+          />
+        </>
+      )}
+    </main>
   );
 };
 

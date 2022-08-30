@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context";
 import Pagination from "./Pagination";
 
-const AllStudentsList = ({ listStudents, currentPage, totalPages }) => {
+const AllStudentsList = ({
+  listStudents,
+  currentPage,
+  totalPages,
+  queryPart,
+}) => {
   //table scroll bar
   const referTbody = useRef();
   const [isScrollbarVisible, setIsScrollbarVisible] = useState(true);
@@ -70,7 +75,11 @@ const AllStudentsList = ({ listStudents, currentPage, totalPages }) => {
           </tbody>
         </table>
       </div>
-      <Pagination currentPage={currentPage} totalPages={totalPages} />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        queryPart={queryPart}
+      />
     </div>
   );
 };
