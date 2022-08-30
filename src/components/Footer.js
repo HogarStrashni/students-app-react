@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   FaGithub,
-  FaCodepen,
   FaFreeCodeCamp,
+  FaLinkedin,
   FaMailBulk,
 } from "react-icons/fa";
 
@@ -13,14 +13,17 @@ const Footer = () => {
       <div className="w-72 h-12" />
       <div className="w-56 h-12 flex-col text-xs">
         <div className="w-32 flex justify-between text-xl mx-auto mt-1.5">
+          <a
+            href="https://www.linkedin.com/in/%C4%91or%C4%91e-mati%C4%87-b634b6249/"
+            target="_blanc"
+          >
+            <FaLinkedin />
+          </a>
           <a href="https://github.com/HogarStrashni" target="_blanc">
             <FaGithub />
           </a>
           <a href="https://www.freecodecamp.org/HogarStrashni" target="_blanc">
             <FaFreeCodeCamp />
-          </a>
-          <a href="https://codepen.io/hogarstrashni" target="_blanc">
-            <FaCodepen />
           </a>
           <a href="mailto:djmatic@agfbl.org" target="_blanc">
             <FaMailBulk />

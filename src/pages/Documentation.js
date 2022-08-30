@@ -3,8 +3,10 @@ import React from "react";
 const Documentation = () => {
   return (
     <main className="w-[56rem] mx-auto my-3">
-      <div className="h-[calc(100vh-156px)] w-[100%]">
-        <h2 className="text-3xl bg-red-200 my-8">Documentation</h2>
+      <div className="h-[calc(100vh-128px)] w-[100%]">
+        <h2 className="text-3xl bg-slate-100 my-8 inline-block">
+          Documentation
+        </h2>
         <section>
           <article>
             <h1 className="text-2xl my-4">Lorem ipsum dolor sit</h1>
