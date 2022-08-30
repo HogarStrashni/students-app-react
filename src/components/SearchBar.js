@@ -21,7 +21,11 @@ const SearchBar = ({ queryPart }) => {
           placeholder="Search..."
           value={queryPart}
           onChange={(event) =>
-            navigate(event.target.value ? `/?q=${event.target.value}` : "/")
+            navigate(
+              event.target.value
+                ? `/?q=${event.target.value}&page=1`
+                : `/?page=1`
+            )
           }
         />
       </form>

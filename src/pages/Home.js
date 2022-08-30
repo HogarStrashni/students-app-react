@@ -23,31 +23,40 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [listStudents, setListStudents] = useState([]);
 
+  //implementing pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   //implementing searchParams
   const [searchParams] = useSearchParams();
 
   //implementig search(funcitonality helper)
   const queryPart = searchParams.get("q") ?? "";
+  let pageNumber = searchParams.get("page") ?? 1;
 
   useEffect(() => {
     if (!searchParams.get("q")) {
       axiosInstance
-        .get("/students")
+        .get(`/students?page=${pageNumber}`)
         .then((response) => {
           setListStudents(response.data.resultStudents);
+          setCurrentPage(response.data.currentPage.page);
+          setTotalPages(response.data.totalPages.page);
           setIsLoading(false);
         })
         .catch((err) => console.log(err.message));
     }
-  }, [searchParams]);
+  }, [searchParams, pageNumber]);
 
   const fetchData = useRef(
     debounce((searchParams) => {
       if (searchParams.get("q")) {
         axiosInstance
-          .get(`/students${searchParams}`)
+          .get(`/students?${searchParams}`)
           .then((response) => {
-            setListStudents(response.data);
+            setListStudents(response.data.resultStudents);
+            setCurrentPage(response.data.currentPage.page);
+            setTotalPages(response.data.totalPages.page);
             setIsLoading(false);
           })
           .catch((err) => console.log(err.message));
@@ -86,7 +95,7 @@ const Home = () => {
         ) : (
           <>
             <div className="w-[46rem] mx-auto border-b border-slate-200 flex justify-between mb-3 pb-2">
-              <SearchBar queryPart={queryPart} />
+              <SearchBar queryPart={queryPart} pageNumber={pageNumber} />
               <button
                 className="text-3xl h-8 mr-16 text-slate-500 disabled:opacity-30"
                 onMouseOver={mouseEnterHandler}
@@ -107,7 +116,11 @@ const Home = () => {
                 <FaUserPlus />
               </button>
             </div>
-            <AllStudentsList listStudents={listStudents} />
+            <AllStudentsList
+              listStudents={listStudents}
+              currentPage={currentPage}
+              totalPages={totalPages}
+            />
           </>
         )}
       </main>
