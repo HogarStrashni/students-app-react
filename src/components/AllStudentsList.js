@@ -8,6 +8,7 @@ const AllStudentsList = ({
   currentPage,
   totalPages,
   queryPart,
+  limitNumber,
 }) => {
   //table scroll bar
   const referTbody = useRef();
@@ -15,7 +16,7 @@ const AllStudentsList = ({
 
   useLayoutEffect(() => {
     let heightTab = referTbody.current.offsetHeight;
-    setIsScrollbarVisible(heightTab > window.innerHeight - 162);
+    setIsScrollbarVisible(heightTab > window.innerHeight - 262);
   }, [listStudents]);
 
   //<Link> replacment for table error!
@@ -37,7 +38,7 @@ const AllStudentsList = ({
           </tr>
         </tbody>
       </table>
-      <div className="overflow-auto">
+      <div className="overflow-auto max-h-[calc(100vh-262px)]">
         <table className="border">
           <tbody ref={referTbody}>
             {listStudents.map((item, index) => {
@@ -79,6 +80,7 @@ const AllStudentsList = ({
         currentPage={currentPage}
         totalPages={totalPages}
         queryPart={queryPart}
+        limitNumber={limitNumber}
       />
     </div>
   );

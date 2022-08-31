@@ -2,7 +2,7 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ queryPart }) => {
+const SearchBar = ({ queryPart, limitNumber }) => {
   const navigate = useNavigate();
 
   return (
@@ -23,8 +23,8 @@ const SearchBar = ({ queryPart }) => {
           onChange={(event) =>
             navigate(
               event.target.value
-                ? `/?q=${event.target.value}&page=1`
-                : `/?page=1`
+                ? `/?q=${event.target.value}&page=1&limit=${limitNumber}`
+                : `/?page=1&limit=${limitNumber}`
             )
           }
         />
