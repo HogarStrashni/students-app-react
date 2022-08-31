@@ -6,32 +6,32 @@ This small project is part of my learning process ReactJS. The goal was to to be
 
 In the process of making this project, I tried to cover as many things as possible that are considered basic (junior) level of knowledge:
 
-### Basic File Structure
+<h2> Basic File Structure </h2>
 
-### Function Components
+<h2> Function Components </h2>
 
-### Context and Props drilling
+<h2> Context and Props drilling </h2>
 
-### Browser Router
+<h2> Browser Router </h2>
 
-### Conditional Rendering
+<h2> Conditional Rendering </h2>
 
-### Handling Events
+<h2> Handling Events </h2>
 
-### Pagination
+<h2> Pagination </h2>
 
-### Axios http client
+<h2> Axios http client </h2>
 
-### Handling Errors
+<h2> Handling Errors </h2>
 
-### Login/Register form with JWT authentication and authorization
+<h2> Login/Register form with JWT authentication and authorization </h2>
 
-### Hooks
+<h2> Hooks </h2>
 
 useState, useEffect, useRef, useLayoutEffect, useContext from "react"<br />
 useNavigate, useLocation, useParams, useSearchParams from "react-router-dom"<br />
 useDebounce from "use-debounce"
 
-### Styling and CSS
+<h2> Styling and CSS </h2>
 
 tailwindCSS, react-icons, react-hot-toast
