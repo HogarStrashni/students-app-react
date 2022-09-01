@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const buttonPag =
   "py-0.5 text-sm text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-200 font-medium shadow-lg rounded-lg";
 const buttonDisabled =
-  "w-8 mx-2 disabled:opacity-30 disabled:cursor-not-allowed shadow-lg";
+  "w-12 mx-2 disabled:opacity-30 disabled:cursor-not-allowed shadow-lg";
 
 const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
   const navigate = useNavigate();
@@ -53,10 +53,11 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
           return (
             <button
               key={index}
-              className={`w-6 mx-0.5 ${buttonPag} ${
+              className={`w-8 mx-0.5 ${item !== "..." && buttonPag} ${
                 currentPage === item ? "ring-2 ring-gray-400 bg-gray-100" : null
-              }`}
-              onClick={() => paginationHandler(item)}
+              } ${item === "..." && ""}`}
+              onClick={() => (item !== "..." ? paginationHandler(item) : null)}
+              disabled={item === "..."}
             >
               {item}
             </button>
@@ -78,8 +79,8 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
           name="limit"
           id="limit"
           defaultValue={20}
-          className="py-0.5 text-gray-900 text-sm border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-100 shadow-lg"
-          onChange={(event) => {
+          className="py-0.5 text-gray-900 text-sm font-medium border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-100 shadow-lg"
+          onClick={(event) => {
             queryPart
               ? navigate(
                   `/?q=${queryPart}&page=${currentPage}&limit=${event.target.value}`
