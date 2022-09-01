@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaUserPlus } from "react-icons/fa";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
@@ -60,51 +60,20 @@ const Home = () => {
     }
   }, [pageNumber, debouncedQueryPart, limitNumber]);
 
-  //description on mouse hover...
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
-
-  const descriptionText = useRef();
-
-  useEffect(() => {
-    if (isDescriptionOpen) {
-      descriptionText.current.style.left = "755px";
-      descriptionText.current.style.top = "-4px";
-    }
-  }, [isDescriptionOpen]);
-
-  const mouseEnterHandler = () => {
-    setIsDescriptionOpen(true);
-  };
-  const mouseOutHendler = () => {
-    setIsDescriptionOpen(false);
-  };
-
   return (
-    <main className="w-[56rem] mx-auto my-3 relative">
+    <main className="mx-auto my-3">
       {isLoading ? (
         <LoadingStage />
       ) : (
         <>
-          <div className="w-[46rem] mx-auto border-b border-slate-200 flex justify-between mb-3 pb-2">
+          <div className="w-[65rem] mx-auto border-slate-200 mt-6 mb-4 flex justify-between items-center">
             <SearchBar queryPart={queryPart} limitNumber={limitNumber} />
             <button
-              className="text-3xl h-8 mr-16 text-slate-500 disabled:opacity-30"
-              onMouseOver={mouseEnterHandler}
-              onMouseOut={mouseOutHendler}
+              className="h-8 mr-20 text-slate-500 disabled:opacity-30 disabled:cursor-not-allowed shadow-lg"
               onClick={() => navigate("/student/new-student")}
               disabled={loggedInUser?.role !== "admin"}
             >
-              {isDescriptionOpen && (
-                <div
-                  ref={descriptionText}
-                  className="text-sm absolute w-32 text-center"
-                >
-                  {loggedInUser?.role !== "admin"
-                    ? "Add New Student (Not Allowed)"
-                    : "Add New Student"}
-                </div>
-              )}
-              <FaUserPlus />
+              <FaUserPlus className="text-[32px]" />
             </button>
           </div>
           <AllStudentsList

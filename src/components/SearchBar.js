@@ -6,19 +6,12 @@ const SearchBar = ({ queryPart, limitNumber }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="ml-16 flex justify-between">
-      <form
-        className="pr-4 flex items-center"
-        onSubmit={(event) => event.preventDefault()}
-      >
-        <label htmlFor="search-item" className="pr-2 text-2xl text-slate-200">
-          <FaSearch />
-        </label>
+    <div>
+      <form className="relative" onSubmit={(event) => event.preventDefault()}>
         <input
           type="text"
-          id="search-item"
-          className="border-2 rounded w-80"
-          placeholder="Search..."
+          className="w-96 p-2.5 pl-12 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 shadow-lg"
+          placeholder="Search for Students..."
           value={queryPart}
           onChange={(event) =>
             navigate(
@@ -28,6 +21,7 @@ const SearchBar = ({ queryPart, limitNumber }) => {
             )
           }
         />
+        <FaSearch className="text-xl text-gray-500 absolute left-4 bottom-2.5" />
       </form>
     </div>
   );

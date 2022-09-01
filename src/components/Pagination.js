@@ -4,20 +4,31 @@ import { useNavigate } from "react-router-dom";
 
 // TailWindCSS variable
 const buttonPag =
-  "py-0.5 text-sm text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-200 font-medium rounded-lg";
+  "py-0.5 text-sm text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-200 font-medium shadow-lg rounded-lg";
 const buttonDisabled =
-  "w-8 mx-2 disabled:opacity-30 disabled:cursor-not-allowed";
+  "w-8 mx-2 disabled:opacity-30 disabled:cursor-not-allowed shadow-lg";
 
 const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
   const navigate = useNavigate();
 
-  const allPages = [];
+  let allPages = [];
   for (let i = 1; i <= totalPages; i++) {
     allPages.push(i);
   }
+  if (totalPages > 9 && currentPage < 6) {
+    allPages = allPages.slice(0, 7).concat(["...", totalPages]);
+  }
+  if (totalPages > 9 && currentPage > totalPages - 5) {
+    allPages = [1, "..."].concat(allPages.slice(totalPages - 7, totalPages));
+  }
+  if (currentPage > 5 && currentPage < totalPages - 4) {
+    allPages = [1, "..."]
+      .concat(allPages.slice(currentPage - 3, currentPage + 2))
+      .concat(["...", totalPages]);
+  }
 
   const allLimits = [];
-  for (let i = 14; i <= 32; i += 3) {
+  for (let i = 10; i <= 30; i += 5) {
     allLimits.push(i);
   }
 
@@ -28,7 +39,7 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
   };
 
   return (
-    <div className="flex justify-between my-5">
+    <div className="w-[65rem] mx-auto my-5 flex justify-between">
       <div className="w-28"></div>
       <div>
         <button
@@ -54,7 +65,7 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
         <button
           className={`${buttonPag} ${buttonDisabled}`}
           onClick={() => paginationHandler(currentPage + 1)}
-          disabled={currentPage >= totalPages}
+          disabled={currentPage === totalPages}
         >
           <FaChevronRight className="text-center inline pb-1" />
         </button>
@@ -67,7 +78,7 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
           name="limit"
           id="limit"
           defaultValue={20}
-          className="py-0.5 text-gray-900 text-sm font-medium border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-100"
+          className="py-0.5 text-gray-900 text-sm border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-100 shadow-lg"
           onChange={(event) => {
             queryPart
               ? navigate(
