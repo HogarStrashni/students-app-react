@@ -71,7 +71,7 @@ const GradesForm = ({ allGrades, setIsEditGradeOpen, studentId }) => {
                     <td className="w-32 border text-center">
                       <input
                         className="w-[100%] text-center border border-blue-500 rounded-md"
-                        type="text"
+                        type="date"
                         name={subject}
                         value={helpFunctionFind(subject).dateExam}
                         onChange={dateDataHandler}

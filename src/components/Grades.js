@@ -2,6 +2,7 @@ import React from "react";
 import GradesForm from "./GradesForm";
 import { FaEdit } from "react-icons/fa";
 import { useAuth } from "../context";
+import { formatingIso, isoToLocalDate } from "../service/dateFormating";
 
 const Grades = ({
   student,
@@ -11,8 +12,9 @@ const Grades = ({
 }) => {
   const { loggedInUser } = useAuth();
 
+  //implementing GPA
   const allGradesList = student.gradeHistory
-    .map((item) => Number(item.grade))
+    .map((item) => item.grade)
     .filter((item) => item);
   const numberPassedExam = allGradesList.length;
   const valueGPA =
@@ -22,6 +24,15 @@ const Grades = ({
           numberPassedExam
         ).toFixed(2)
       : "";
+
+  // handling Date...
+  student.gradeHistory = student.gradeHistory.map((item) => {
+    return {
+      ...item,
+      dateExam: formatingIso(item.dateExam),
+      dateExamLocaly: isoToLocalDate(item.dateExam),
+    };
+  });
 
   return (
     <section className="w-[56rem] mx-auto my-8 flex justify-between">
@@ -43,7 +54,7 @@ const Grades = ({
           />
         ) : (
           student.gradeHistory.map((item, index) => {
-            const { subject, grade, dateExam } = item;
+            const { subject, grade, dateExam, dateExamLocaly } = item;
             return (
               <div key={index}>
                 <table>
@@ -51,7 +62,9 @@ const Grades = ({
                     <tr>
                       <td className="w-96 border">{subject}</td>
                       <td className="w-32 border text-center">{grade}</td>
-                      <td className="w-32 border text-center">{dateExam}</td>
+                      <td className="w-32 border text-center">
+                        {dateExam ? dateExamLocaly : ""}
+                      </td>
                     </tr>
                   </tbody>
                 </table>

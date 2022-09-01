@@ -2,6 +2,12 @@ import React from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
+// TailWindCSS variable
+const buttonPag =
+  "py-0.5 text-sm text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-200 font-medium rounded-lg";
+const buttonDisabled =
+  "w-8 mx-2 disabled:opacity-30 disabled:cursor-not-allowed";
+
 const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
   const navigate = useNavigate();
 
@@ -22,10 +28,11 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
   };
 
   return (
-    <div className="flex justify-center my-5">
+    <div className="flex justify-between my-5">
+      <div className="w-28"></div>
       <div>
         <button
-          className="w-8 mx-2 border border-slate-500 rounded-md disabled:opacity-30"
+          className={`${buttonPag} ${buttonDisabled}`}
           onClick={() => paginationHandler(currentPage - 1)}
           disabled={currentPage <= 1}
         >
@@ -35,8 +42,8 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
           return (
             <button
               key={index}
-              className={`w-6 mx-0.5 border border-slate-500 rounded-md ${
-                currentPage === item ? "bg-blue-500" : null
+              className={`w-6 mx-0.5 ${buttonPag} ${
+                currentPage === item ? "ring-2 ring-gray-400 bg-gray-100" : null
               }`}
               onClick={() => paginationHandler(item)}
             >
@@ -45,19 +52,22 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
           );
         })}
         <button
-          className="w-8 mx-2 border border-slate-500 rounded-md disabled:opacity-30"
+          className={`${buttonPag} ${buttonDisabled}`}
           onClick={() => paginationHandler(currentPage + 1)}
           disabled={currentPage >= totalPages}
         >
           <FaChevronRight className="text-center inline pb-1" />
         </button>
       </div>
-      <div className="w-40 border">
-        <label htmlFor="limit">Show per Page: </label>
+      <div className="w-28">
+        <label htmlFor="limit" className="mr-1 ml-4 text-xs text-gray-700">
+          Per page:{" "}
+        </label>
         <select
           name="limit"
           id="limit"
           defaultValue={20}
+          className="py-0.5 text-gray-900 text-sm font-medium border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-100"
           onChange={(event) => {
             queryPart
               ? navigate(
