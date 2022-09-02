@@ -66,15 +66,18 @@ const Home = () => {
         <LoadingStage />
       ) : (
         <>
-          <div className="w-[65rem] mx-auto border-slate-200 mt-6 mb-4 flex justify-between items-center">
+          <div className="w-[66rem] mx-auto border-slate-200 mt-4 mb-4 flex justify-between items-center">
             <SearchBar queryPart={queryPart} limitNumber={limitNumber} />
-            <button
-              className="h-8 mr-20 text-slate-500 disabled:opacity-30 disabled:cursor-not-allowed shadow-lg"
-              onClick={() => navigate("/student/new-student")}
-              disabled={loggedInUser?.role !== "admin"}
-            >
-              <FaUserPlus className="text-[32px]" />
-            </button>
+            {loggedInUser && (
+              <button
+                className="flex items-center px-5 py-1.5 text-sm font-medium text-slate-100 bg-blue-500 hover:text-white border border-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg shadow-sm disabled:opacity-30 disabled:cursor-not-allowed"
+                onClick={() => navigate("/student/new-student")}
+                disabled={loggedInUser?.role !== "admin"}
+              >
+                <FaUserPlus className="text-2xl text-inherit" />
+                <span className="px-2">Add new Student</span>
+              </button>
+            )}
           </div>
           <AllStudentsList
             listStudents={listStudents}

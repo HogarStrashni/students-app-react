@@ -10,7 +10,7 @@ const SearchBar = ({ queryPart, limitNumber }) => {
       <form className="relative" onSubmit={(event) => event.preventDefault()}>
         <input
           type="text"
-          className="w-96 p-2.5 pl-12 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 shadow-lg"
+          className="w-96 p-2 pl-12 text-sm text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 shadow-sm rounded-lg"
           placeholder="Search for Students..."
           value={queryPart}
           onChange={(event) =>
@@ -21,7 +21,7 @@ const SearchBar = ({ queryPart, limitNumber }) => {
             )
           }
         />
-        <FaSearch className="text-xl text-gray-500 absolute left-4 bottom-2.5" />
+        <FaSearch className="text-xl text-gray-500 absolute left-4 bottom-2" />
       </form>
     </div>
   );

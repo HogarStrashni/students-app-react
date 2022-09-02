@@ -1,10 +1,15 @@
 import React from "react";
 import logo from "../service/logo.png";
 import { useNavigate } from "react-router-dom";
-import { FaHome, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
+import { FaSignInAlt } from "react-icons/fa";
 import { useAuth } from "../context";
 import { logoutUser } from "../service/auth";
 import toast, { Toaster } from "react-hot-toast";
+import Dropdown from "./Dropdown";
+
+// TailWindCSS variable
+const hoverHeaderLinks =
+  "p-2 border border-white rounded-lg hover:border-gray-200 hover:text-gray-900 cursor-pointer";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,51 +27,51 @@ const Header = () => {
   const { loggedInUser, setloggedInUser } = useAuth();
 
   return (
-    <header className="w-[60rem] mx-auto bg-slate-300 flex justify-between items-center">
+    <header className="h-16 px-[4%] mx-auto flex justify-between text-gray-500 border-b-2">
       <Toaster />
-      <div className="h-14 py-2 px-4">
+      <div className="flex justify-between items-center">
         <img
           src={logo}
           alt="logo"
-          className="h-10 rounded-lg cursor-pointer"
+          className="h-12 rounded-lg cursor-pointer"
           onClick={() => navigate("/")}
         />
-      </div>
-      <div>
-        {!loggedInUser ? (
-          <p className="italic text-slate-100">
-            "There are two ways to write error-free programs; only the third one
-            works."
+        <div className="w-96 ml-12 flex justify-between items-center text-sm font-medium text-gray-500">
+          <p onClick={() => navigate("/")} className={`${hoverHeaderLinks}`}>
+            Home
           </p>
-        ) : (
-          <p className="italic text-slate-100">
-            You are logged as: {loggedInUser.email}
+          <a
+            href="https://www.unibl.org/"
+            target="_blanc"
+            className={`${hoverHeaderLinks}`}
+          >
+            University
+          </a>
+          <p
+            onClick={() => navigate("/documentation")}
+            className={`${hoverHeaderLinks}`}
+          >
+            Documentation
           </p>
-        )}
-      </div>
-      <div className="pr-4 flex">
-        <FaHome
-          className="text-3xl text-slate-500 cursor-pointer"
-          onClick={() => navigate("/")}
-        />
-        {!loggedInUser ? (
-          <button
-            className="w-24 ml-8 rounded-lg border bg-blue-300"
-            onClick={() => navigate("/login")}
+          <p
+            onClick={() => navigate("/about")}
+            className={`${hoverHeaderLinks}`}
           >
-            <FaSignInAlt className="inline-block mr-1 mb-1" /> Login
-          </button>
-        ) : (
-          <button
-            className="w-24 ml-8 rounded-lg border border-slate-400 bg-red-300"
-            onClick={() => {
-              logoutHandler();
-            }}
-          >
-            <FaSignOutAlt className="inline-block mb-1" /> Logout
-          </button>
-        )}
+            About Us
+          </p>
+        </div>
       </div>
+      {!loggedInUser ? (
+        <button
+          className="flex items-center px-5 my-4 text-sm font-medium text-slate-100 bg-blue-500 hover:text-white border border-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg shadow-sm"
+          onClick={() => navigate("/login")}
+        >
+          <FaSignInAlt className="mr-1 text-inherit" />
+          Login
+        </button>
+      ) : (
+        <Dropdown logoutHandler={logoutHandler} loggedInUser={loggedInUser} />
+      )}
     </header>
   );
 };

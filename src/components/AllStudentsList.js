@@ -24,20 +24,20 @@ const AllStudentsList = ({
   const { loggedInUser } = useAuth();
 
   return (
-    <main className="h-[calc(100vh-198px)]">
-      <table className="mx-auto text-sm text-left text-gray-500 shadow-xl">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-200">
+    <main className="h-[calc(100vh-196px)]">
+      <table className="mx-auto text-sm text-left text-gray-500 shadow-md">
+        <thead className="text-[11px] text-gray-700 uppercase bg-gray-200">
           <tr className="text-gray-900">
-            <th className="w-24 py-3 px-8">No.</th>
-            <th className="w-36 py-3 px-6">First Name</th>
-            <th className="w-40 py-3 px-6">Last Name</th>
-            <th className="w-40 py-3 px-6">Index Number</th>
-            <th className="w-80 py-3 px-6">E-mail</th>
-            <th className="w-44 py-3 px-6">Contact Phone</th>
+            <th className="w-24 py-2 px-8">No.</th>
+            <th className="w-36 py-2 px-6">First Name</th>
+            <th className="w-40 py-2 px-6">Last Name</th>
+            <th className="w-40 py-2 px-6">Index Number</th>
+            <th className="w-80 py-2 px-6">E-mail</th>
+            <th className="w-44 py-2 px-6">Contact Phone</th>
           </tr>
         </thead>
       </table>
-      <div className="w-[66rem] max-h-[calc(100vh-292px)] overflow-auto mx-auto shadow-lg">
+      <div className="w-[66rem] max-h-[calc(100vh-276px)] overflow-auto mx-auto shadow-md">
         <table className="mx-auto text-sm text-left text-gray-500">
           <tbody ref={referTbody}>
             {listStudents.map((item, index) => {

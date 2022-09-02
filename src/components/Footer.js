@@ -1,44 +1,57 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   FaGithub,
   FaFreeCodeCamp,
   FaLinkedin,
   FaMailBulk,
+  FaCreativeCommons,
+  FaCreativeCommonsBy,
 } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="w-[60rem] h-12 bg-slate-300 mx-auto flex justify-between text-slate-700">
-      <div className="w-72 h-12" />
-      <div className="w-56 h-12 flex-col text-xs">
-        <div className="w-32 flex justify-between text-xl mx-auto mt-1.5">
+    <footer className="h-12 px-[4%] mx-auto flex justify-between text-gray-500 border-t-2">
+      <div className="h-12 flex items-center">
+        <FaCreativeCommons className="hover:text-blue-400" />
+        <FaCreativeCommonsBy className="hover:text-blue-400" />
+        <p className="flex items-center pl-1 hover:text-blue-400">
           <a
-            href="https://www.linkedin.com/in/%C4%91or%C4%91e-mati%C4%87-b634b6249/"
-            target="_blanc"
+            href="https://creativecommons.org/licenses/by/4.0/"
+            className="italic text-xs font-medium"
           >
-            <FaLinkedin />
+            Creative Commons
           </a>
-          <a href="https://github.com/HogarStrashni" target="_blanc">
-            <FaGithub />
-          </a>
-          <a href="https://www.freecodecamp.org/HogarStrashni" target="_blanc">
-            <FaFreeCodeCamp />
-          </a>
-          <a href="mailto:djmatic@agfbl.org" target="_blanc">
-            <FaMailBulk />
-          </a>
-        </div>
-        <div className="flex justify-center">
-          <p>&copy;Copyright. All rights reserved</p>
-        </div>
+        </p>
       </div>
-      <div className="w-72 h-12 p-4 flex justify-between items-center text-sm">
-        <a href="https://www.unibl.org/" target="_blanc">
-          University
+      <div className="w-36 h-12 text-xl flex justify-between items-center">
+        <a
+          href="https://www.linkedin.com/in/%C4%91or%C4%91e-mati%C4%87-b634b6249/"
+          target="_blanc"
+          className="hover:text-blue-700"
+        >
+          <FaLinkedin />
         </a>
-        <Link to="/documentation">Documentation</Link>
-        <Link to="/about">About Us</Link>
+        <a
+          href="https://github.com/HogarStrashni"
+          target="_blanc"
+          className="hover:text-gray-900"
+        >
+          <FaGithub />
+        </a>
+        <a
+          href="https://www.freecodecamp.org/HogarStrashni"
+          target="_blanc"
+          className="hover:text-gray-900"
+        >
+          <FaFreeCodeCamp />
+        </a>
+        <a
+          href="mailto:djmatic@agfbl.org"
+          target="_blanc"
+          className="hover:text-blue-700"
+        >
+          <FaMailBulk />
+        </a>
       </div>
     </footer>
   );

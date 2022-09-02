@@ -2,8 +2,8 @@ import React from "react";
 
 const Documentation = () => {
   return (
-    <main className="w-[56rem] mx-auto my-3">
-      <div className="h-[calc(100vh-128px)] w-[100%]">
+    <main className="w-[66rem] mx-auto my-3">
+      <div className="h-[calc(100vh-138px)] w-[100%]">
         <h2 className="text-3xl bg-slate-100 my-8 inline-block">
           Documentation
         </h2>
