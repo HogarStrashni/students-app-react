@@ -25,7 +25,7 @@ const AllStudentsList = ({
 
   return (
     <main className="h-[calc(100vh-196px)]">
-      <table className="mx-auto text-sm text-left text-gray-500 shadow-md">
+      <table className="mx-auto text-sm text-left shadow-md">
         <thead className="text-[11px] text-gray-700 uppercase bg-gray-200">
           <tr className="text-gray-900">
             <th className="w-24 py-2 px-8">No.</th>
@@ -50,7 +50,7 @@ const AllStudentsList = ({
                       : navigate(`/login?path=student/${item.indexNumber}`)
                   }
                   key={item.indexNumber}
-                  className="odd:bg-white even:bg-gray-100 hover:bg-gray-200 cursor-pointer border-b text-gray-900"
+                  className="odd:bg-white even:bg-gray-50 hover:bg-gray-200 cursor-pointer border-b text-gray-900"
                 >
                   <td className="w-24 px-8">
                     {(currentPage - 1) * limitNumber + index + 1}.

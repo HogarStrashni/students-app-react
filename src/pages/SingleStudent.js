@@ -41,7 +41,17 @@ const SingleStudent = () => {
       });
   }, [isEditGradeOpen, isStudentFormOpen, studentId, navigate]);
 
-  const { firstName, lastName, indexNumber, email, phone } = student;
+  const { firstName, lastName, indexNumber, email, phone, gradeHistory } =
+    student;
+
+  const studentObjectKeys = [
+    "first name",
+    "last name",
+    "index number",
+    "email",
+    "contact phone",
+  ];
+  const studentObjectValues = [firstName, lastName, indexNumber, email, phone];
 
   //implementing ModalDelete
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
@@ -53,6 +63,22 @@ const SingleStudent = () => {
   const openFormHandler = () => {
     setIsStudentFormOpen(true);
   };
+
+  // //implementing GPA
+  let allGradesList = [];
+  if (gradeHistory) {
+    allGradesList = gradeHistory
+      .map((item) => item.grade)
+      .filter((item) => item);
+  }
+  const numberPassedExam = allGradesList.length;
+  const valueGPA =
+    numberPassedExam > 0
+      ? (
+          allGradesList.reduce((acc, item) => (acc += item), 0) /
+          numberPassedExam
+        ).toFixed(2)
+      : "0.00";
 
   return (
     <>
@@ -69,34 +95,66 @@ const SingleStudent = () => {
           studentId={studentId}
         />
       ) : (
-        <main className="h-[calc(100vh-116px)] mt-3">
+        <main className="h-[calc(100vh-126px)] mt-3">
           {isLoading ? (
             <LoadingStage />
           ) : (
             <>
-              <section className="w-[56rem] mx-auto flex justify-between">
-                <div className="w-[80%]">
-                  <h1>First Name: {firstName}</h1>
-                  <h1>Last Name: {lastName}</h1>
-                  <h1>Index Number: {indexNumber}</h1>
-                  <h1>E-mail: {email}</h1>
-                  <h1>Contact Phone: {phone}</h1>
+              <section className="w-[66rem] mx-auto flex justify-between">
+                <div className="flex items-end">
+                  <dl className="pr-12">
+                    {studentObjectValues.map((item, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className="flex border-b border-gray-100"
+                        >
+                          <dt className="w-40 px-6 pt-1 text-sm font-medium text-gray-500 capitalize">
+                            {studentObjectKeys[index]}:
+                          </dt>
+                          <dd className="px-6 pt-0.5 font-medium text-gray-900">
+                            {item}
+                          </dd>
+                        </div>
+                      );
+                    })}
+                  </dl>
+                  <dl>
+                    <div className="flex border-b border-gray-100">
+                      <dt className="w-40 px-6 pt-1 text-sm font-medium text-gray-500 capitalize">
+                        Passed Exams:
+                      </dt>
+                      <dd className="px-6 pt-0.5 font-medium text-gray-900">
+                        {numberPassedExam}
+                      </dd>
+                    </div>
+                    <div className="flex border-b border-gray-100">
+                      <dt className="w-40 px-6 pt-1 text-sm font-medium text-gray-500 capitalize">
+                        Grade Average:
+                      </dt>
+                      <dd className="px-6 pt-0.5 font-medium text-gray-900">
+                        {valueGPA}
+                      </dd>
+                    </div>
+                  </dl>
                 </div>
                 {!isEditGradeOpen && (
-                  <div>
+                  <div className="h-6 mt-2 flex">
                     <button
-                      className="text-2xl mr-3 text-slate-500 disabled:opacity-30"
+                      className="mr-3 flex items-center h-8 px-4 text-sm font-medium text-gray-500 hover:text-red-500 ring-1 ring-gray-200 hover:ring-red-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
                       onClick={openModalDeleteHandler}
                       disabled={loggedInUser?.role !== "admin"}
                     >
-                      <FaTrashAlt />
+                      <FaTrashAlt className="text-xs" />
+                      <span className="pl-1">Delete</span>
                     </button>
                     <button
-                      className="text-2xl text-slate-500 disabled:opacity-30"
+                      className="flex items-center h-8 px-5 text-sm font-medium text-gray-500 hover:text-green-500 ring-1 ring-gray-200 hover:ring-green-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
                       onClick={openFormHandler}
                       disabled={loggedInUser?.role !== "admin"}
                     >
                       <FaEdit />
+                      <span className="pl-1">Edit</span>
                     </button>
                   </div>
                 )}

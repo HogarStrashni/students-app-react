@@ -12,19 +12,6 @@ const Grades = ({
 }) => {
   const { loggedInUser } = useAuth();
 
-  //implementing GPA
-  const allGradesList = student.gradeHistory
-    .map((item) => item.grade)
-    .filter((item) => item);
-  const numberPassedExam = allGradesList.length;
-  const valueGPA =
-    numberPassedExam > 0
-      ? (
-          allGradesList.reduce((acc, item) => (acc += item), 0) /
-          numberPassedExam
-        ).toFixed(2)
-      : "";
-
   // handling Date...
   student.gradeHistory = student.gradeHistory.map((item) => {
     return {
@@ -35,16 +22,16 @@ const Grades = ({
   });
 
   return (
-    <section className="w-[56rem] mx-auto my-8 flex justify-between">
+    <section className="w-[66rem] mx-auto mt-6 flex justify-between">
       <div>
-        <table className="border">
-          <tbody>
-            <tr>
-              <th className="w-96 border text-left">Subject</th>
-              <th className="w-32 border">Grades</th>
-              <th className="w-32 border">Exam date</th>
+        <table>
+          <thead>
+            <tr className="uppercase text-xs text-gray-700 bg-gray-200 text-left border-b">
+              <th className="w-[28rem] py-1 px-6">Subject</th>
+              <th className="w-36 py-2 px-6 text-center">Grades</th>
+              <th className="w-36 py-2 px-6 text-center">Exam date</th>
             </tr>
-          </tbody>
+          </thead>
         </table>
         {isEditGradeOpen ? (
           <GradesForm
@@ -56,13 +43,18 @@ const Grades = ({
           student.gradeHistory.map((item, index) => {
             const { subject, grade, dateExam, dateExamLocaly } = item;
             return (
-              <div key={index}>
+              <div
+                key={index}
+                className="odd:bg-gray-50 uppercase text-[14px] text-gray-900 border-b"
+              >
                 <table>
                   <tbody>
                     <tr>
-                      <td className="w-96 border">{subject}</td>
-                      <td className="w-32 border text-center">{grade}</td>
-                      <td className="w-32 border text-center">
+                      <td className="w-[28rem] py-1 px-6 text-xs">{subject}</td>
+                      <td className="w-36 py-1 px-6 text-center font-medium">
+                        {grade}
+                      </td>
+                      <td className="w-36 py-1 px-6 text-center font-medium">
                         {dateExam ? dateExamLocaly : ""}
                       </td>
                     </tr>
@@ -72,30 +64,17 @@ const Grades = ({
             );
           })
         )}
-        <div className="mt-2">
-          <table>
-            <tbody>
-              <tr>
-                <td className="w-96 font-bold">
-                  GPA (Sum of all grades / Number passed exam):
-                </td>
-                <td className="w-32 text-center font-extrabold">{valueGPA}</td>
-                <td className="w-32 text-center">
-                  ({numberPassedExam} {numberPassedExam > 1 ? "Exams" : "Exam"})
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
       {!isEditGradeOpen && (
         <div>
           <button
-            className="text-2xl text-slate-500 disabled:opacity-30"
+            className="flex items-center h-8 px-5 text-sm font-medium text-gray-500 hover:text-green-500 ring-1 ring-gray-200 hover:ring-green-500 rounded-lg
+            disabled:opacity-30 disabled:cursor-not-allowed"
             onClick={() => setIsEditGradeOpen(true)}
             disabled={loggedInUser?.role !== "admin"}
           >
             <FaEdit />
+            <span className="pl-1">Edit</span>
           </button>
         </div>
       )}

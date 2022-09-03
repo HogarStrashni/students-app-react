@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 // TailWindCSS variable
 const buttonPag =
-  "py-0.5 text-sm font-medium text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-200 rounded-lg";
+  "py-0.5 text-xs font-medium text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-200 rounded-lg";
 const buttonDisabled =
   "w-8 mx-2 disabled:opacity-30 disabled:cursor-not-allowed";
 
@@ -79,7 +79,7 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
           name="limit"
           id="limit"
           defaultValue={20}
-          className="py-0.5 text-gray-900 text-sm font-medium border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-100"
+          className="py-0.5 text-gray-900 text-xs font-medium border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-100"
           onClick={(event) => {
             queryPart
               ? navigate(

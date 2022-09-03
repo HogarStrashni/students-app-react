@@ -52,25 +52,25 @@ const GradesForm = ({ allGrades, setIsEditGradeOpen, studentId }) => {
         {stateGrades.map((item, index) => {
           const { subject } = item;
           return (
-            <div key={index}>
+            <div key={index} className="even:bg-gray-50">
               <table>
                 <tbody>
-                  <tr>
-                    <td className="w-96 border">
+                  <tr className="uppercase text-[14px] text-gray-900 border-b">
+                    <td className="w-[28rem] py-1 px-6 text-xs">
                       <label>{subject}</label>
                     </td>
-                    <td className="w-32 border text-center">
+                    <td className="w-36 text-center">
                       <input
-                        className="w-[100%] text-center border border-blue-500 rounded-md"
+                        className="w-32 py-[1px] font-medium text-center border border-blue-700 rounded-lg"
                         type="text"
                         name={subject}
                         value={helpFunctionFind(subject).grade}
                         onChange={gradeDataHandler}
                       />
                     </td>
-                    <td className="w-32 border text-center">
+                    <td className="w-36">
                       <input
-                        className="w-[100%] text-center border border-blue-500 rounded-md"
+                        className="pr-6 my-[2px] font-medium text-right border border-blue-700 rounded-lg"
                         type="date"
                         name={subject}
                         value={helpFunctionFind(subject).dateExam}

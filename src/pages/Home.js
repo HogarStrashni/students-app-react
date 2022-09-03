@@ -75,7 +75,7 @@ const Home = () => {
                 disabled={loggedInUser?.role !== "admin"}
               >
                 <FaUserPlus className="text-2xl text-inherit" />
-                <span className="px-2">Add new Student</span>
+                <span className="pl-2">Add new Student</span>
               </button>
             )}
           </div>
