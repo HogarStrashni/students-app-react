@@ -2,13 +2,13 @@ import React from "react";
 
 const AboutUs = () => {
   return (
-    <main className="w-[66rem] mx-auto my-3">
-      <div className="h-[calc(100vh-138px)] w-[100%]">
-        <h2 className="text-3xl bg-slate-100 my-8 inline-block">About Us</h2>
+    <main className="w-[66rem] mx-auto my-2">
+      <div className="h-[calc(100vh-130px)] w-[100%]">
+        <h1 className="text-xl bg-gray-50 my-6 inline-block">About Us</h1>
         <section>
           <article>
-            <h1 className="text-2xl my-4">Lorem ipsum dolor sit</h1>
-            <p>
+            <h2 className="mb-2 italic">Lorem ipsum dolor sit</h2>
+            <p className="text-sm mb-4 text-justify">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea
               quaerat maiores ex cumque nobis ipsum et, dolorum debitis
               accusamus ratione suscipit aliquid eligendi excepturi repellendus
@@ -22,10 +22,8 @@ const AboutUs = () => {
             </p>
           </article>
           <article>
-            <h1 className="text-2xl my-4">
-              Lorem ipsum dolor sit amet consectetur
-            </h1>
-            <p>
+            <h2 className="mb-2 italic">Officiis eum tempora</h2>
+            <p className="text-sm mb-2 text-justify">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea
               quaerat maiores ex cumque nobis ipsum et, dolorum debitis
               accusamus ratione suscipit aliquid eligendi excepturi repellendus

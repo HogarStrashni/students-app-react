@@ -9,7 +9,7 @@ import Dropdown from "./Dropdown";
 
 // TailWindCSS variable
 const hoverHeaderLinks =
-  "p-2 rounded-lg hover:ring-1 hover:ring-blue-100 hover:text-gray-900 cursor-pointer";
+  "p-2 rounded-lg hover:ring-1 hover:ring-gray-200 hover:text-gray-900 cursor-pointer";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -63,7 +63,7 @@ const Header = () => {
       </div>
       {!loggedInUser ? (
         <button
-          className="flex items-center px-5 my-4 text-sm font-medium text-slate-100 bg-blue-500 hover:text-white border border-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg shadow-sm"
+          className="flex items-center px-5 my-3 text-sm font-medium text-slate-100 bg-blue-500 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg shadow-sm"
           onClick={() => navigate("/login")}
         >
           <FaSignInAlt className="mr-1 text-inherit" />

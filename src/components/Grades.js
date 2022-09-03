@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import GradesForm from "./GradesForm";
 import { FaEdit } from "react-icons/fa";
 import { useAuth } from "../context";
+import axiosInstance from "../service/httpClient";
 import { formatingIso, isoToLocalDate } from "../service/dateFormating";
+import { GiCancel, GiConfirmed } from "react-icons/gi";
 
 const Grades = ({
   student,
@@ -11,6 +13,25 @@ const Grades = ({
   studentId,
 }) => {
   const { loggedInUser } = useAuth();
+
+  const [stateGrades, setStateGrades] = useState(
+    student.gradeHistory.map((item) => {
+      return {
+        subject: item.subject || "",
+        grade: item.grade || "",
+        dateExam: item.dateExam || "",
+      };
+    })
+  );
+
+  const studentGradeHandler = () => {
+    axiosInstance
+      .patch(`/student/${studentId}`, {
+        gradeHistory: stateGrades,
+      })
+      .then(() => setIsEditGradeOpen(false))
+      .catch((err) => console.log(err.message));
+  };
 
   // handling Date...
   student.gradeHistory = student.gradeHistory.map((item) => {
@@ -35,7 +56,8 @@ const Grades = ({
         </table>
         {isEditGradeOpen ? (
           <GradesForm
-            allGrades={student.gradeHistory}
+            stateGrades={stateGrades}
+            setStateGrades={setStateGrades}
             studentId={studentId}
             setIsEditGradeOpen={setIsEditGradeOpen}
           />
@@ -65,16 +87,33 @@ const Grades = ({
           })
         )}
       </div>
-      {!isEditGradeOpen && (
+      {!isEditGradeOpen ? (
         <div>
           <button
-            className="flex items-center h-8 px-5 text-sm font-medium text-gray-500 hover:text-green-500 ring-1 ring-gray-200 hover:ring-green-500 rounded-lg
+            className="flex items-center h-8 px-4 text-sm font-medium text-gray-500 hover:text-green-500 ring-1 ring-gray-100 hover:ring-green-500 rounded-lg
             disabled:opacity-30 disabled:cursor-not-allowed"
             onClick={() => setIsEditGradeOpen(true)}
             disabled={loggedInUser?.role !== "admin"}
           >
             <FaEdit />
             <span className="pl-1">Edit</span>
+          </button>
+        </div>
+      ) : (
+        <div className="flex">
+          <button
+            className="mr-3 flex items-center h-8 px-3 text-sm font-medium text-gray-500 hover:text-red-500 ring-1 ring-gray-100 hover:ring-red-500 rounded-lg"
+            onClick={() => setIsEditGradeOpen(false)}
+          >
+            <GiCancel />
+            <span className="pl-1">Cancel</span>
+          </button>
+          <button
+            className="flex items-center h-8 px-3 text-sm font-medium text-gray-500 hover:text-green-500 ring-1 ring-gray-100 hover:ring-green-500 rounded-lg"
+            onClick={() => studentGradeHandler()}
+          >
+            <GiConfirmed />
+            <span className="pl-1">Confirm</span>
           </button>
         </div>
       )}
