@@ -100,7 +100,7 @@ const SingleStudent = () => {
             <LoadingStage />
           ) : (
             <>
-              <section className="w-[66rem] mx-auto flex justify-between">
+              <section className="w-[60rem] mx-auto flex justify-between">
                 <div className="flex items-end">
                   <dl className="pr-12">
                     {studentObjectValues.map((item, index) => {
@@ -109,10 +109,10 @@ const SingleStudent = () => {
                           key={index}
                           className="flex border-b border-gray-100"
                         >
-                          <dt className="w-40 px-6 pt-1 text-sm font-medium text-gray-500 capitalize">
+                          <dt className="w-36 pl-6 pt-1 text-sm font-medium text-gray-500 capitalize">
                             {studentObjectKeys[index]}:
                           </dt>
-                          <dd className="px-6 pt-0.5 font-medium text-gray-900">
+                          <dd className="pl-3 pr-6 pt-0.5 font-medium text-gray-900">
                             {item}
                           </dd>
                         </div>
@@ -121,18 +121,18 @@ const SingleStudent = () => {
                   </dl>
                   <dl>
                     <div className="flex border-b border-gray-100">
-                      <dt className="w-40 px-6 pt-1 text-sm font-medium text-gray-500 capitalize">
+                      <dt className="w-36 pl-6 pt-1 text-sm font-medium text-gray-500 capitalize">
                         Passed Exams:
                       </dt>
-                      <dd className="px-6 pt-0.5 font-medium text-gray-900">
+                      <dd className="pl-3 pr-6 pt-0.5 font-medium text-gray-900">
                         {numberPassedExam}
                       </dd>
                     </div>
                     <div className="flex border-b border-gray-100">
-                      <dt className="w-40 px-6 pt-1 text-sm font-medium text-gray-500 capitalize">
+                      <dt className="w-36 pl-6 pt-1 text-sm font-medium text-gray-500 capitalize">
                         Grade Average:
                       </dt>
-                      <dd className="px-6 pt-0.5 font-medium text-gray-900">
+                      <dd className="pl-3 pr-6 pt-0.5 font-medium text-gray-900">
                         {valueGPA}
                       </dd>
                     </div>
@@ -141,7 +141,7 @@ const SingleStudent = () => {
                 {!isEditGradeOpen && (
                   <div className="h-6 mt-2 flex">
                     <button
-                      className="mr-3 flex items-center h-8 px-3 text-sm font-medium text-gray-500 hover:text-red-500 ring-1 ring-gray-100 hover:ring-red-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="mr-3 flex items-center h-8 px-3 text-sm font-medium text-red-500 hover:text-white ring-1 ring-red-500 hover:bg-red-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
                       onClick={openModalDeleteHandler}
                       disabled={loggedInUser?.role !== "admin"}
                     >
@@ -149,7 +149,7 @@ const SingleStudent = () => {
                       <span className="pl-1">Delete</span>
                     </button>
                     <button
-                      className="flex items-center h-8 px-4 text-sm font-medium text-gray-500 hover:text-green-500 ring-1 ring-gray-100 hover:ring-green-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="flex items-center h-8 px-[18px] text-sm font-medium text-green-500 hover:text-white ring-1 ring-green-500 hover:bg-green-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
                       onClick={openFormHandler}
                       disabled={loggedInUser?.role !== "admin"}
                     >

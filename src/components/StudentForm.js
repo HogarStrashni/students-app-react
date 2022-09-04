@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ErrorStage from "./ErrorStage";
 import axiosInstance from "../service/httpClient";
 import { useAuth } from "../context";
+import { GiCancel, GiConfirmed } from "react-icons/gi";
 
 const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
   const navigate = useNavigate();
@@ -70,110 +71,57 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
     }
   }, [location.pathname, loggedInUser?.role, navigate]);
 
+  const formTagValue = [
+    "firstName",
+    "lastName",
+    "indexNumber",
+    "email",
+    "phone",
+  ];
+  const formPlaceVal = [
+    "First Name",
+    "Last Name",
+    "Index Number",
+    "E-mail",
+    "Contact Phone",
+  ];
+
   return isError ? (
     <ErrorStage setIsError={setIsError} />
   ) : (
     <>
-      <main className="h-[calc(100vh-128px)] w-[56rem] mx-auto my-3 pt-8 bg-slate-200">
-        <div className="w-[32rem] mx-auto flex justify-between">
+      <main className="h-[calc(100vh-114px)] mx-auto bg-white">
+        <div className="h-[90%] mx-auto my-auto flex justify-between items-center">
           {loggedInUser?.role === "admin" && (
-            <form onSubmit={studentFormHandler} className="w-[30rem] mx-auto">
-              <table className="w-[30rem]">
-                <tbody>
-                  <tr className="h-12">
-                    <td className="w-24">
-                      <label htmlFor="firstName">First Name: </label>
-                    </td>
-                    <td className="w-[15rem]">
-                      <input
-                        className="w-[100%] rounded-md px-2"
-                        type="text"
-                        name="firstName"
-                        id="firstName"
-                        placeholder="First Name..."
-                        value={stateForm.firstName}
-                        onChange={changeInputHandler}
-                        required
-                      />
-                    </td>
-                  </tr>
-                  <tr className="h-12">
-                    <td>
-                      <label htmlFor="lastName">Last Name: </label>
-                    </td>
-                    <td>
-                      <input
-                        className="w-[100%] rounded-md px-2"
-                        type="text"
-                        name="lastName"
-                        id="lastName"
-                        placeholder="Last Name..."
-                        value={stateForm.lastName}
-                        onChange={changeInputHandler}
-                        required
-                      />
-                    </td>
-                  </tr>
-                  <tr className="h-12">
-                    <td>
-                      <label htmlFor="indexNumber">Index-Number: </label>
-                    </td>
-                    <td>
-                      <input
-                        className="w-[100%] rounded-md px-2"
-                        type="text"
-                        name="indexNumber"
-                        id="indexNumber"
-                        placeholder="Index Number..."
-                        value={
-                          location.pathname === "/student/new-student"
-                            ? stateForm.indexNumber
-                            : student.indexNumber
-                        }
-                        onChange={changeInputHandler}
-                        required
-                      />
-                    </td>
-                  </tr>
-                  <tr className="h-12">
-                    <td>
-                      <label htmlFor="email">E-mail: </label>
-                    </td>
-                    <td>
-                      <input
-                        className="w-[100%] rounded-md px-2"
-                        type="text"
-                        name="email"
-                        id="email"
-                        placeholder="E-mail..."
-                        value={stateForm.email}
-                        onChange={changeInputHandler}
-                        required
-                      />
-                    </td>
-                  </tr>
-                  <tr className="h-12">
-                    <td>
-                      <label htmlFor="contactPhone">Contact Phone: </label>
-                    </td>
-                    <td>
-                      <input
-                        className="w-[100%] rounded-md px-2"
-                        type="text"
-                        name="phone"
-                        id="contactPhone"
-                        placeholder="Contact Phone..."
-                        value={stateForm.phone}
-                        onChange={changeInputHandler}
-                        required
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div className="flex justify-center w-[30rem] mt-16">
+            <form onSubmit={studentFormHandler} className="w-[40rem] mx-auto">
+              {formTagValue.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="w-[30rem] mx-auto py-3 flex justify-center items-center"
+                  >
+                    <label
+                      htmlFor={item}
+                      className="w-32 text-sm font-medium text-gray-500 capitalize"
+                    >
+                      {formPlaceVal[index]}:
+                    </label>
+                    <input
+                      type="text"
+                      className="w-80 py-1 pl-4 font-medium text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm shadow-sm rounded-lg"
+                      name={item}
+                      id={item}
+                      placeholder={`${formPlaceVal[index]}...`}
+                      value={stateForm[item]}
+                      onChange={changeInputHandler}
+                      required
+                    />
+                  </div>
+                );
+              })}
+              <div className="flex justify-center mt-16">
                 <button
-                  className="w-40 h-8 rounded-lg bg-slate-300 border"
+                  className="mr-3 flex items-center h-8 px-11 text-sm font-medium text-red-500 hover:text-white ring-1 ring-red-500 hover:bg-red-500 rounded-lg"
                   type="button"
                   onClick={
                     location.pathname === "/student/new-student"
@@ -181,15 +129,19 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
                       : closeFormHandler
                   }
                 >
-                  Cancel
+                  <GiCancel />
+                  <span className="pl-1">Cancel</span>
                 </button>
                 <button
                   type="submit"
-                  className="w-40 h-8 rounded-lg bg-red-300 border"
+                  className="flex items-center h-8 px-3 text-sm font-medium text-green-500 hover:text-white ring-1 ring-green-500 hover:bg-green-500 rounded-lg"
                 >
-                  {location.pathname === "/student/new-student"
-                    ? "Add New Student"
-                    : "Confirm Changes"}
+                  <GiConfirmed />
+                  <span className="pl-1">
+                    {location.pathname === "/student/new-student"
+                      ? "Add New Student"
+                      : "Confirm Changes"}
+                  </span>
                 </button>
               </div>
             </form>

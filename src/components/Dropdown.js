@@ -6,11 +6,11 @@ const Dropdown = ({ logoutHandler, loggedInUser }) => {
   return (
     <Menu as="div" className="relative text-right">
       <Menu.Button>
-        <div className="flex items-center my-[12px] text-sm font-medium text-gray-50 bg-gray-400 hover:text-white border hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full">
+        <div className="flex items-center my-[12px] text-sm font-medium text-gray-50 bg-gray-400 hover:text-white border hover:bg-blue-500 rounded-full">
           <FaUserCircle className="text-[38px] inherit" />
         </div>
       </Menu.Button>
-      <Menu.Items className="absolute right-0 my-2 bg-gray-50 text-left origin-top-right divide-y opacity-100 divide-gray-300 rounded-md shadow-lg  focus:outline-none border border-gray-100">
+      <Menu.Items className="absolute right-0 my-2 bg-gray-50 text-left origin-top-right divide-y divide-gray-300 rounded-md shadow-lg border border-gray-100">
         <Menu.Item>
           <div className="py-2 px-6">
             <p className="text-sm">Logged in:</p>

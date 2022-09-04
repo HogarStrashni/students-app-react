@@ -40,7 +40,7 @@ const GradesForm = ({ stateGrades, setStateGrades }) => {
                     </td>
                     <td className="w-36 text-center">
                       <input
-                        className="w-32 py-[1px] font-medium text-center border border-blue-700 rounded-lg"
+                        className="w-32 py-[1px] font-medium text-center border border-blue-500 hover:bg-gray-100 rounded-lg"
                         type="text"
                         name={subject}
                         value={helpFunctionFind(subject).grade}
@@ -49,7 +49,7 @@ const GradesForm = ({ stateGrades, setStateGrades }) => {
                     </td>
                     <td className="w-36">
                       <input
-                        className="pr-4 my-[2px] font-medium text-right border border-blue-700 rounded-lg"
+                        className="pr-4 my-[2px] font-medium text-center border border-blue-500 hover:bg-gray-100 rounded-lg"
                         type="date"
                         name={subject}
                         value={helpFunctionFind(subject).dateExam}
