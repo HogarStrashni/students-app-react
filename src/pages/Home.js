@@ -61,11 +61,11 @@ const Home = () => {
   }, [pageNumber, debouncedQueryPart, limitNumber]);
 
   return (
-    <main className="mx-auto my-3">
+    <main>
       {isLoading ? (
         <LoadingStage />
       ) : (
-        <>
+        <div className="mx-auto my-3">
           <div className="w-[66rem] mx-auto border-slate-200 mt-4 mb-4 flex justify-between items-center">
             <SearchBar queryPart={queryPart} limitNumber={limitNumber} />
             {loggedInUser && (
@@ -86,7 +86,7 @@ const Home = () => {
             queryPart={queryPart}
             limitNumber={limitNumber}
           />
-        </>
+        </div>
       )}
     </main>
   );

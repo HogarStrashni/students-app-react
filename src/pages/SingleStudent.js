@@ -95,12 +95,12 @@ const SingleStudent = () => {
           studentId={studentId}
         />
       ) : (
-        <main className="h-[calc(100vh-126px)] mt-3">
+        <main>
           {isLoading ? (
             <LoadingStage />
           ) : (
-            <>
-              <section className="w-[60rem] mx-auto flex justify-between">
+            <div className="h-[calc(100vh-126px)]">
+              <section className="w-[60rem] mx-auto my-3 flex justify-between">
                 <div className="flex items-end">
                   <dl className="pr-12">
                     {studentObjectValues.map((item, index) => {
@@ -167,7 +167,7 @@ const SingleStudent = () => {
                   studentId={studentId}
                 />
               </section>
-            </>
+            </div>
           )}
         </main>
       )}
