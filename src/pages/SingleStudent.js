@@ -141,7 +141,7 @@ const SingleStudent = () => {
                 {!isEditGradeOpen && (
                   <div className="h-6 mt-2 flex">
                     <button
-                      className="mr-3 flex items-center h-8 px-3 text-sm font-medium text-red-500 hover:text-white ring-1 ring-red-500 hover:bg-red-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="mr-3 flex items-center h-8 px-2.5 text-sm font-medium text-red-500 hover:text-white ring-1 ring-red-500 hover:bg-red-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
                       onClick={openModalDeleteHandler}
                       disabled={loggedInUser?.role !== "admin"}
                     >
@@ -149,7 +149,7 @@ const SingleStudent = () => {
                       <span className="pl-1">Delete</span>
                     </button>
                     <button
-                      className="flex items-center h-8 px-[18px] text-sm font-medium text-green-500 hover:text-white ring-1 ring-green-500 hover:bg-green-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="flex items-center h-8 px-4 text-sm font-medium text-green-500 hover:text-white ring-1 ring-green-500 hover:bg-green-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
                       onClick={openFormHandler}
                       disabled={loggedInUser?.role !== "admin"}
                     >

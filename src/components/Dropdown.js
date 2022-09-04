@@ -10,7 +10,7 @@ const Dropdown = ({ logoutHandler, loggedInUser }) => {
           <FaUserCircle className="text-[38px] inherit" />
         </div>
       </Menu.Button>
-      <Menu.Items className="absolute right-0 my-2 bg-gray-50 text-left origin-top-right divide-y opacity-100 divide-gray-300 rounded-md shadow-lg border border-gray-100">
+      <Menu.Items className="absolute right-0 my-2 bg-gray-50 text-left origin-top-right divide-y opacity-100 z-20 divide-gray-300 rounded-md shadow-lg border border-gray-100">
         <Menu.Item>
           <div className="py-2 px-6">
             <p className="text-sm">Logged in:</p>

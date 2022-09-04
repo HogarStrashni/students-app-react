@@ -49,7 +49,7 @@ const GradesForm = ({ stateGrades, setStateGrades }) => {
                     </td>
                     <td className="w-36">
                       <input
-                        className="pr-4 my-[2px] font-medium text-center border border-blue-500 hover:bg-gray-100 rounded-lg"
+                        className="pr-4 my-0.5 font-medium text-center border border-blue-500 hover:bg-gray-100 rounded-lg"
                         type="date"
                         name={subject}
                         value={helpFunctionFind(subject).dateExam}

@@ -1,4 +1,5 @@
 import React from "react";
+import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../service/httpClient";
 
@@ -20,22 +21,27 @@ const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
 
   return (
     <>
-      <article className="h-[calc(100vh)] w-[60rem] left-[calc(50vw-30rem)] top-0 mx-auto border bg-slate-600 opacity-10 absolute"></article>
-      <article className="w-80 h-32 border-2 rounded-lg absolute top-60 left-[calc(50vw-10rem)] bg-white">
-        <div className="h-[100%] flex flex-col items-center justify-around">
-          <h1 className="text-xl">Are you sure?</h1>
-          <div className="w-60 flex justify-around">
+      <article
+        className="w-[100%] h-[100%] top-0 bg-gray-200 opacity-70 absolute"
+        onClick={closeModalDeleteHandler}
+      />
+      <article className="w-72 h-44 border-2 rounded-lg absolute top-[calc(50%-5.5rem)] left-[calc(50%-9rem)] bg-white shadow-sm">
+        <div className="h-[100%] flex flex-col items-center justify-around py-6">
+          <h1 className="font-medium">Are you sure?</h1>
+          <div className="flex">
             <button
-              className="w-20 rounded-lg bg-slate-300 border-2"
+              className="mr-7 flex items-center h-8 px-3 text-sm font-medium text-red-500 hover:text-white ring-1 ring-red-500 hover:bg-red-500 rounded-lg"
               onClick={closeModalDeleteHandler}
             >
-              Cancel
+              <GiCancel />
+              <span className="pl-1">Cancel</span>
             </button>
             <button
-              className="w-20 rounded-lg bg-red-300 border-2"
+              className="flex items-center h-8 px-3 text-sm font-medium text-green-500 hover:text-white ring-1 ring-green-500 hover:bg-green-500 rounded-lg"
               onClick={deleteHandler}
             >
-              Delete
+              <GiConfirmed />
+              <span className="pl-1">Delete</span>
             </button>
           </div>
         </div>

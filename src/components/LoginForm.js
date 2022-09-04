@@ -62,8 +62,8 @@ const LoginForm = () => {
   return (
     <>
       <Toaster />
-      <article className="w-[56rem] h-[calc(100vh-114px)] mx-auto bg-slate-200 flex items-center">
-        <div className="flex flex-col px-6 rounded-xl mx-auto bg-white">
+      <article className="w-[100%] h-[calc(100vh-114px)] mx-auto bg-gray-50 flex items-center">
+        <div className="flex flex-col px-6 rounded-xl mx-auto bg-white shadow-lg">
           {!loggedInUser && urlPath && (
             <p className="pt-6 text-red-600 text-sm text-center">
               Log In to Complete Action!

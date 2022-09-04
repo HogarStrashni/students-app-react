@@ -86,14 +86,22 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
     "Contact Phone",
   ];
 
-  return isError ? (
-    <ErrorStage setIsError={setIsError} />
-  ) : (
+  return (
     <>
-      <main className="h-[calc(100vh-114px)] mx-auto bg-white">
-        <div className="h-[90%] mx-auto my-auto flex justify-between items-center">
+      {isError && (
+        <ErrorStage
+          setIsError={setIsError}
+          stateForm={stateForm}
+          setStateForm={setStateForm}
+        />
+      )}
+      <main className="h-[calc(100vh-114px)] mx-auto bg-gray-50">
+        <div className="h-[100%] mx-auto my-auto flex justify-between items-center">
           {loggedInUser?.role === "admin" && (
-            <form onSubmit={studentFormHandler} className="w-[40rem] mx-auto">
+            <form
+              onSubmit={studentFormHandler}
+              className="px-4 pt-6 pb-9 mx-auto my-auto bg-white rounded-lg shadow-sm"
+            >
               {formTagValue.map((item, index) => {
                 return (
                   <div
@@ -108,13 +116,17 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
                     </label>
                     <input
                       type="text"
-                      className="w-80 py-1 pl-4 font-medium text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm shadow-sm rounded-lg"
+                      className="w-80 py-1 pl-4 font-medium text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm disabled:bg-gray-200 shadow-sm rounded-lg"
                       name={item}
                       id={item}
                       placeholder={`${formPlaceVal[index]}...`}
                       value={stateForm[item]}
                       onChange={changeInputHandler}
                       required
+                      disabled={
+                        (location.pathname !== "/student/new-student") &
+                        (item === "indexNumber")
+                      }
                     />
                   </div>
                 );
