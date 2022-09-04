@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../service/logo.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaSignInAlt } from "react-icons/fa";
 import { useAuth } from "../context";
 import { logoutUser } from "../service/auth";
@@ -13,6 +13,7 @@ const hoverHeaderLinks =
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const logoutHandler = () => {
     logoutUser();
@@ -62,13 +63,18 @@ const Header = () => {
         </div>
       </div>
       {!loggedInUser ? (
-        <button
-          className="flex items-center px-5 my-3 text-sm font-medium text-slate-100 bg-blue-500 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg shadow-sm"
-          onClick={() => navigate("/login")}
-        >
-          <FaSignInAlt className="mr-1 text-inherit" />
-          Login
-        </button>
+        !(
+          location.pathname === "/login" || location.pathname === "/register"
+        ) &&
+        !loggedInUser && (
+          <button
+            className="flex items-center px-5 my-3 text-sm font-medium text-gray-50 bg-blue-500 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg shadow-sm"
+            onClick={() => navigate("/login")}
+          >
+            <FaSignInAlt className="mr-1 text-inherit" />
+            Login
+          </button>
+        )
       ) : (
         <Dropdown logoutHandler={logoutHandler} loggedInUser={loggedInUser} />
       )}

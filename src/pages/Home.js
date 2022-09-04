@@ -70,7 +70,7 @@ const Home = () => {
             <SearchBar queryPart={queryPart} limitNumber={limitNumber} />
             {loggedInUser && (
               <button
-                className="flex items-center px-5 py-1.5 text-sm font-medium text-slate-100 bg-blue-500 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg shadow-sm disabled:opacity-30 disabled:cursor-not-allowed"
+                className="flex items-center px-5 py-1.5 text-sm font-medium text-gray-50 bg-blue-500 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg shadow-sm disabled:opacity-30 disabled:cursor-not-allowed"
                 onClick={() => navigate("/student/new-student")}
                 disabled={loggedInUser?.role !== "admin"}
               >
