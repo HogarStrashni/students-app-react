@@ -5,7 +5,6 @@ import SearchBar from "../components/SearchBar";
 import AllStudentsList from "../components/AllStudentsList";
 import LoadingStage from "../components/LoadingStage";
 import axiosInstance from "../service/httpClient";
-import { useDebounce } from "use-debounce";
 import { useAuth } from "../context";
 
 const Home = () => {
@@ -28,10 +27,9 @@ const Home = () => {
   let pageNumber = searchParams.get("page") ?? 1;
   let limitNumber = searchParams.get("limit") ?? 20;
 
-  const [debouncedQueryPart] = useDebounce(queryPart, 400);
-
   useEffect(() => {
     if (!queryPart) {
+      setIsLoading(true);
       axiosInstance
         .get(`/students?page=${pageNumber}&limit=${limitNumber}`)
         .then((response) => {
@@ -45,11 +43,10 @@ const Home = () => {
   }, [pageNumber, queryPart, limitNumber]);
 
   useEffect(() => {
-    if (debouncedQueryPart) {
+    if (queryPart) {
+      setIsLoading(true);
       axiosInstance
-        .get(
-          `/students?q=${debouncedQueryPart}&page=${pageNumber}&limit=${limitNumber}`
-        )
+        .get(`/students?q=${queryPart}&page=${pageNumber}&limit=${limitNumber}`)
         .then((response) => {
           setListStudents(response.data.resultStudents);
           setCurrentPage(response.data.currentPage);
@@ -58,7 +55,7 @@ const Home = () => {
         })
         .catch((err) => console.log(err.message));
     }
-  }, [pageNumber, debouncedQueryPart, limitNumber]);
+  }, [pageNumber, queryPart, limitNumber]);
 
   return (
     <main>

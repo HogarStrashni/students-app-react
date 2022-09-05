@@ -5,7 +5,7 @@ const LoadingStage = () => {
     <main className="h-[calc(100vh-114px)] bg-gray-50 flex justify-center items-center">
       <div role="status">
         <svg
-          class="inline mr-2 w-10 h-10 text-gray-200 animate-spin fill-blue-600"
+          className="inline mr-2 w-10 h-10 text-gray-200 animate-spin fill-blue-600"
           viewBox="0 0 100 101"
           fill="none"
         >
