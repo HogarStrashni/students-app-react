@@ -9,7 +9,7 @@ import Dropdown from "./Dropdown";
 
 // TailWindCSS variable
 const hoverHeaderLinks =
-  "p-2 rounded-lg hover:ring-1 hover:ring-gray-200 hover:text-gray-900 cursor-pointer";
+  "px-3 py-2 rounded-lg hover:ring-1 hover:ring-blue-500 hover:text-blue-500 cursor-pointer";
 
 const Header = () => {
   const navigate = useNavigate();

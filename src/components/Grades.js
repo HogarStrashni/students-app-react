@@ -43,11 +43,11 @@ const Grades = ({
   });
 
   return (
-    <section className="w-[60rem] mx-auto mt-6 flex justify-between">
+    <section className="w-[60rem] mx-auto mt-5 flex justify-between">
       <div>
         <table>
           <thead>
-            <tr className="uppercase text-xs text-gray-700 bg-gray-200 text-left border-b">
+            <tr className="uppercase text-xs text-gray-700 bg-gray-200 text-left">
               <th className="w-[28rem] py-1 px-6">Subject</th>
               <th className="w-36 py-2 px-6 text-center">Grades</th>
               <th className="w-36 py-2 px-6 text-center">Exam date</th>
@@ -67,16 +67,18 @@ const Grades = ({
             return (
               <div
                 key={index}
-                className="odd:bg-gray-50 uppercase text-[14px] text-gray-900 border-b"
+                className="odd:bg-gray-50 uppercase text-[14px] text-gray-900"
               >
                 <table>
                   <tbody>
                     <tr>
-                      <td className="w-[28rem] py-1 px-6 text-xs">{subject}</td>
-                      <td className="w-36 py-1 px-6 text-center font-medium">
+                      <td className="w-[28rem] py-[5px] px-6 text-xs">
+                        {subject}
+                      </td>
+                      <td className="w-36 py-[5px] px-6 text-center font-medium">
                         {grade}
                       </td>
-                      <td className="w-36 py-1 px-6 text-center font-medium">
+                      <td className="w-36 py-[5px] px-6 text-center font-medium">
                         {dateExam ? dateExamLocaly : ""}
                       </td>
                     </tr>
@@ -90,26 +92,26 @@ const Grades = ({
       {!isEditGradeOpen ? (
         <div>
           <button
-            className="flex items-center h-8 px-4 text-sm font-medium text-green-500 hover:text-white ring-1 ring-green-500 hover:bg-green-500 rounded-lg
+            className="flex items-center h-8 px-4 text-sm font-medium text-blue-500 hover:text-white ring-1 ring-blue-500 hover:bg-blue-500 rounded-lg
             disabled:opacity-30 disabled:cursor-not-allowed"
             onClick={() => setIsEditGradeOpen(true)}
             disabled={loggedInUser?.role !== "admin"}
           >
             <FaEdit />
-            <span className="pl-1">Edit</span>
+            <span className="pl-1">Edit the Grade list</span>
           </button>
         </div>
       ) : (
         <div className="flex">
           <button
-            className="mr-3 flex items-center h-8 px-3 text-sm font-medium text-red-500 hover:text-white ring-1 ring-red-500 hover:bg-red-500 rounded-lg"
+            className="mr-3 flex items-center h-8 px-3 text-sm font-medium text-gray-500 hover:text-white ring-1 ring-gray-500 hover:bg-gray-500 rounded-lg"
             onClick={() => setIsEditGradeOpen(false)}
           >
             <GiCancel />
             <span className="pl-1">Cancel</span>
           </button>
           <button
-            className="flex items-center h-8 px-2 text-sm font-medium text-green-500 hover:text-white ring-1 ring-green-500 hover:bg-green-500 rounded-lg"
+            className="flex items-center h-8 px-2 text-sm font-medium text-blue-500 hover:text-white ring-1 ring-blue-500 hover:bg-blue-500 rounded-lg"
             onClick={() => studentGradeHandler()}
           >
             <GiConfirmed />

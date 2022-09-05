@@ -16,16 +16,21 @@ const SingleStudent = () => {
   const { id: studentId } = useParams();
   const [student, setStudent] = useState({});
 
-  //loading students and LoadingStage
+  // Setting LoadingStage for unique Student
   const [isLoading, setIsLoading] = useState(true);
 
-  //implementing edit grades data
+  // Implementing edit grades data for dependency array
   const [isEditGradeOpen, setIsEditGradeOpen] = useState(false);
 
-  //implementing edit student data
+  // Implementing edit unique Student data
   const [isStudentFormOpen, setIsStudentFormOpen] = useState(false);
 
+  // Implementing delete student
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
+
   useEffect(() => {
+    if (isEditGradeOpen === true || isStudentFormOpen === true) return;
+    setIsLoading(true);
     axiosInstance
       .get(`/student/${studentId}`)
       .then((response) => {
@@ -53,9 +58,6 @@ const SingleStudent = () => {
   ];
   const studentObjectValues = [firstName, lastName, indexNumber, email, phone];
 
-  //implementing ModalDelete
-  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
-
   const openModalDeleteHandler = () => {
     setIsModalDeleteOpen(true);
   };
@@ -64,7 +66,7 @@ const SingleStudent = () => {
     setIsStudentFormOpen(true);
   };
 
-  // //implementing GPA
+  // Implementing GPA
   let allGradesList = [];
   if (gradeHistory) {
     allGradesList = gradeHistory
@@ -141,7 +143,7 @@ const SingleStudent = () => {
                 {!isEditGradeOpen && (
                   <div className="h-6 mt-2 flex">
                     <button
-                      className="mr-3 flex items-center h-8 px-2.5 text-sm font-medium text-red-500 hover:text-white ring-1 ring-red-500 hover:bg-red-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="mr-3 flex items-center h-8 px-2.5 text-sm font-medium text-blue-500 hover:text-white ring-1 ring-blue-500 hover:bg-blue-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
                       onClick={openModalDeleteHandler}
                       disabled={loggedInUser?.role !== "admin"}
                     >
@@ -149,7 +151,7 @@ const SingleStudent = () => {
                       <span className="pl-1">Delete</span>
                     </button>
                     <button
-                      className="flex items-center h-8 px-4 text-sm font-medium text-green-500 hover:text-white ring-1 ring-green-500 hover:bg-green-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="flex items-center h-8 px-4 text-sm font-medium text-blue-500 hover:text-white ring-1 ring-blue-500 hover:bg-blue-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
                       onClick={openFormHandler}
                       disabled={loggedInUser?.role !== "admin"}
                     >

@@ -133,7 +133,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
               })}
               <div className="flex justify-center mt-16">
                 <button
-                  className="mr-3 flex items-center h-8 px-11 text-sm font-medium text-red-500 hover:text-white ring-1 ring-red-500 hover:bg-red-500 rounded-lg"
+                  className="mr-3 flex items-center h-8 px-11 text-sm font-medium text-gray-500 hover:text-white ring-1 ring-gray-500 hover:bg-gray-500 rounded-lg"
                   type="button"
                   onClick={
                     location.pathname === "/student/new-student"
@@ -146,7 +146,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
                 </button>
                 <button
                   type="submit"
-                  className="flex items-center h-8 px-3 text-sm font-medium text-green-500 hover:text-white ring-1 ring-green-500 hover:bg-green-500 rounded-lg"
+                  className="flex items-center h-8 px-3 text-sm font-medium text-blue-500 hover:text-white ring-1 ring-blue-500 hover:bg-blue-500 rounded-lg"
                 >
                   <GiConfirmed />
                   <span className="pl-1">

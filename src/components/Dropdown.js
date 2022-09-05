@@ -6,7 +6,7 @@ const Dropdown = ({ logoutHandler, loggedInUser }) => {
   return (
     <Menu as="div" className="relative text-right">
       <Menu.Button>
-        <div className="flex items-center my-[12px] text-sm font-medium text-green-200 bg-gray-600 hover:text-white hover:bg-blue-500 rounded-full">
+        <div className="flex items-center my-[12px] text-sm font-medium text-gray-50 bg-gray-400 hover:text-white hover:bg-blue-500 rounded-full">
           <FaUserCircle className="text-[38px] inherit" />
         </div>
       </Menu.Button>

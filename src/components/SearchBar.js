@@ -14,7 +14,7 @@ const SearchBar = ({ queryPart, limitNumber }) => {
         ? `/?q=${val.target.value}&page=1&limit=${limitNumber}`
         : `/?page=1&limit=${limitNumber}`
     );
-  }, 1000);
+  }, 500);
 
   const changeHandler = (val) => {
     debounced(val);

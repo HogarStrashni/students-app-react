@@ -11,18 +11,16 @@ const Home = () => {
   const navigate = useNavigate();
   const { loggedInUser } = useAuth();
 
-  //loading students and LoadingStage
-  const [isLoading, setIsLoading] = useState(true);
+  // Loading students and LoadingStage
   const [listStudents, setListStudents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  //implementing pagination
+  // Implementing pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  //implementing searchParams
+  // Getting all searchParams
   const [searchParams] = useSearchParams();
-
-  //implementig search(funcitonality helper)
   const queryPart = searchParams.get("q") ?? "";
   let pageNumber = searchParams.get("page") ?? 1;
   let limitNumber = searchParams.get("limit") ?? 20;
@@ -67,11 +65,11 @@ const Home = () => {
             <SearchBar queryPart={queryPart} limitNumber={limitNumber} />
             {loggedInUser && (
               <button
-                className="flex items-center px-5 py-1.5 text-sm font-medium text-gray-50 bg-blue-500 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg shadow-sm disabled:opacity-30 disabled:cursor-not-allowed"
+                className="flex items-center px-5 py-2 text-sm font-medium text-blue-500 bg-white hover:text-white border border-blue-500 hover:bg-blue-500 rounded-lg shadow-sm disabled:opacity-30 disabled:cursor-not-allowed"
                 onClick={() => navigate("/student/new-student")}
                 disabled={loggedInUser?.role !== "admin"}
               >
-                <FaUserPlus className="text-2xl text-inherit" />
+                <FaUserPlus className="text-xl" />
                 <span className="pl-2">Add new Student</span>
               </button>
             )}

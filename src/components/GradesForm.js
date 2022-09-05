@@ -34,13 +34,13 @@ const GradesForm = ({ stateGrades, setStateGrades }) => {
             <div key={index} className="even:bg-gray-50">
               <table>
                 <tbody>
-                  <tr className="uppercase text-[14px] text-gray-900 border-b">
-                    <td className="w-[28rem] py-1 px-6 text-xs">
+                  <tr className="uppercase text-[14px] text-gray-900">
+                    <td className="w-[28rem] py-[5px] px-6 text-xs">
                       <label>{subject}</label>
                     </td>
                     <td className="w-36 text-center">
                       <input
-                        className="w-32 py-[1px] font-medium text-center border border-blue-500 hover:bg-gray-100 rounded-lg"
+                        className="w-32 py-[2px] font-medium text-center border border-blue-500 hover:bg-gray-100 rounded-lg"
                         type="text"
                         name={subject}
                         value={helpFunctionFind(subject).grade}
@@ -49,7 +49,7 @@ const GradesForm = ({ stateGrades, setStateGrades }) => {
                     </td>
                     <td className="w-36">
                       <input
-                        className="pr-4 my-0.5 font-medium text-center border border-blue-500 hover:bg-gray-100 rounded-lg"
+                        className="pr-4 my-0.5 py-[1px] font-medium text-center border border-blue-500 hover:bg-gray-100 rounded-lg"
                         type="date"
                         name={subject}
                         value={helpFunctionFind(subject).dateExam}

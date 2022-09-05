@@ -12,7 +12,7 @@ const AllStudentsList = ({
 }) => {
   const navigate = useNavigate();
 
-  //table scroll bar
+  // For table scroll bar
   const referTbody = useRef();
   const [isScrollbarVisible, setIsScrollbarVisible] = useState(true);
 
@@ -33,7 +33,7 @@ const AllStudentsList = ({
             <th className="w-40 py-2 px-6">Last Name</th>
             <th className="w-40 py-2 px-6">Index Number</th>
             <th className="w-80 py-2 px-6">E-mail</th>
-            <th className="w-44 py-2 px-6">Contact Phone</th>
+            <th className="w-44 py-2 pl-6">Contact Phone</th>
           </tr>
         </thead>
       </table>
@@ -60,7 +60,7 @@ const AllStudentsList = ({
                   <td className="w-40 py-2 px-6">{indexNumber}</td>
                   <td className="w-80 py-2 px-6">{email}</td>
                   <td
-                    className="w-44 py-2 px-6"
+                    className="w-44 py-2 pl-6"
                     style={{
                       width: isScrollbarVisible
                         ? "calc(11rem - 17px)"

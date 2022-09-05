@@ -77,12 +77,12 @@ const LoginForm = () => {
           <form className="flex flex-col my-6" onSubmit={loginRegisterHandler}>
             <label
               htmlFor="email"
-              className="mb-2 text-sm font-medium text-gray-500 capitalize"
+              className="mb-2 text-sm text-gray-500 capitalize"
             >
               Email:
             </label>
             <input
-              className="w-72 py-1 pl-4 font-medium text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm shadow-sm rounded-lg"
+              className="w-72 py-1 pl-4 text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm shadow-sm rounded-lg"
               type="text"
               name="email"
               id="email"
@@ -93,12 +93,12 @@ const LoginForm = () => {
             />
             <label
               htmlFor="password"
-              className="mb-2 mt-6 text-sm font-medium text-gray-500 capitalize"
+              className="mb-2 mt-6 text-sm text-gray-500 capitalize"
             >
               Password:
             </label>
             <input
-              className="w-72 py-1 pl-4 font-medium text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm shadow-sm rounded-lg"
+              className="w-72 py-1 pl-4 text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm shadow-sm rounded-lg"
               type="password"
               name="password"
               id="password"
@@ -111,7 +111,7 @@ const LoginForm = () => {
               <>
                 <label
                   htmlFor="passwordConfirm"
-                  className="mb-2 mt-6 text-sm font-medium text-gray-500 capitalize"
+                  className="mb-2 mt-6 text-sm text-gray-500 capitalize"
                 >
                   Confirm Password:
                 </label>
@@ -136,7 +136,7 @@ const LoginForm = () => {
               <p className="mt-6 text-sm text-center">
                 Don't have account?{" "}
                 <span
-                  className="text-violet-600 font-semibold hover:text-blue-800 cursor-pointer"
+                  className="text-blue-500 font-semibold hover:text-blue-700 cursor-pointer"
                   onClick={() => navigate("/register")}
                 >
                   Register

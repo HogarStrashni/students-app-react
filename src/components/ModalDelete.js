@@ -30,14 +30,14 @@ const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
           <h1 className="font-medium">Are you sure?</h1>
           <div className="flex">
             <button
-              className="mr-7 flex items-center h-8 px-3 text-sm font-medium text-red-500 hover:text-white ring-1 ring-red-500 hover:bg-red-500 rounded-lg"
+              className="mr-7 flex items-center h-8 px-3 text-sm font-medium text-gray-500 hover:text-white ring-1 ring-gray-500 hover:bg-gray-500 rounded-lg"
               onClick={closeModalDeleteHandler}
             >
               <GiCancel />
               <span className="pl-1">Cancel</span>
             </button>
             <button
-              className="flex items-center h-8 px-3 text-sm font-medium text-green-500 hover:text-white ring-1 ring-green-500 hover:bg-green-500 rounded-lg"
+              className="flex items-center h-8 px-3 text-sm font-medium text-red-500 hover:text-white ring-1 ring-red-500 hover:bg-red-500 rounded-lg"
               onClick={deleteHandler}
             >
               <GiConfirmed />
