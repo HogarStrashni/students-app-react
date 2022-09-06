@@ -6,9 +6,11 @@ import StudentForm from "../components/StudentForm";
 import LoadingStage from "../components/LoadingStage";
 import axiosInstance from "../service/httpClient";
 import StudentBasicInfo from "../components/StudentBasicInfo";
+import { useAuth } from "../context";
 
 const SingleStudent = () => {
   const navigate = useNavigate();
+  const { loggedInUser } = useAuth();
 
   const { id: studentId } = useParams();
   const [student, setStudent] = useState({});
@@ -43,6 +45,8 @@ const SingleStudent = () => {
       });
   }, [isEditGradeOpen, isStudentFormOpen, studentId, navigate]);
 
+  const { gradeHistory } = student;
+
   return (
     <>
       {isLoading && <LoadingStage />}
@@ -59,24 +63,24 @@ const SingleStudent = () => {
           studentId={studentId}
         />
       ) : (
-        <main>
-          <section className="h-[calc(100vh-126px)]">
-            <StudentBasicInfo
-              setIsModalDeleteOpen={setIsModalDeleteOpen}
-              setIsStudentFormOpen={setIsStudentFormOpen}
-              isEditGradeOpen={isEditGradeOpen}
-              student={student}
-            />
-            {!isLoading && (
-              <Grades
+        loggedInUser && (
+          <main>
+            <section className="h-[calc(100vh-126px)]">
+              <StudentBasicInfo
+                setIsModalDeleteOpen={setIsModalDeleteOpen}
+                setIsStudentFormOpen={setIsStudentFormOpen}
+                isEditGradeOpen={isEditGradeOpen}
                 student={student}
+              />
+              <Grades
+                gradeHistory={gradeHistory}
                 isEditGradeOpen={isEditGradeOpen}
                 setIsEditGradeOpen={setIsEditGradeOpen}
                 studentId={studentId}
               />
-            )}
-          </section>
-        </main>
+            </section>
+          </main>
+        )
       )}
     </>
   );

@@ -7,25 +7,27 @@ import { formatingIso, isoToLocalDate } from "../service/dateFormating";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
 
 const Grades = ({
-  student,
+  gradeHistory,
   isEditGradeOpen,
   setIsEditGradeOpen,
   studentId,
 }) => {
   const { loggedInUser } = useAuth();
 
-  // Conditional for escaping error on loading
-  const { gradeHistory } = student ? student : [];
+  const [stateGrades, setStateGrades] = useState([]);
 
-  const [stateGrades, setStateGrades] = useState(
-    gradeHistory.map((item) => {
+  // Handling Date...
+  let gradeHistoryFormatDate = [];
+
+  if (gradeHistory) {
+    gradeHistoryFormatDate = gradeHistory.map((item) => {
       return {
-        subject: item.subject || "",
-        grade: item.grade || "",
-        dateExam: item.dateExam || "",
+        ...item,
+        dateExam: formatingIso(item.dateExam),
+        dateExamLocaly: isoToLocalDate(item.dateExam),
       };
-    })
-  );
+    });
+  }
 
   const studentGradeHandler = () => {
     axiosInstance
@@ -35,15 +37,6 @@ const Grades = ({
       .then(() => setIsEditGradeOpen(false))
       .catch((err) => console.log(err.message));
   };
-
-  // Handling Date...
-  student.gradeHistory = student.gradeHistory.map((item) => {
-    return {
-      ...item,
-      dateExam: formatingIso(item.dateExam),
-      dateExamLocaly: isoToLocalDate(item.dateExam),
-    };
-  });
 
   return (
     <section className="w-[60rem] mx-auto mt-5 flex justify-between">
@@ -65,7 +58,7 @@ const Grades = ({
             setIsEditGradeOpen={setIsEditGradeOpen}
           />
         ) : (
-          student.gradeHistory.map((item, index) => {
+          gradeHistoryFormatDate.map((item, index) => {
             const { subject, grade, dateExam, dateExamLocaly } = item;
             return (
               <div
@@ -97,7 +90,10 @@ const Grades = ({
           <button
             className="flex items-center h-8 px-4 text-sm font-medium text-blue-500 hover:text-white ring-1 ring-blue-500 hover:bg-blue-500 rounded-lg
             disabled:opacity-30 disabled:cursor-not-allowed"
-            onClick={() => setIsEditGradeOpen(true)}
+            onClick={() => {
+              setStateGrades(gradeHistoryFormatDate);
+              setIsEditGradeOpen(true);
+            }}
             disabled={loggedInUser?.role !== "admin"}
           >
             <FaEdit />
@@ -115,7 +111,7 @@ const Grades = ({
           </button>
           <button
             className="flex items-center h-8 px-2 text-sm font-medium text-blue-500 hover:text-white ring-1 ring-blue-500 hover:bg-blue-500 rounded-lg"
-            onClick={() => studentGradeHandler()}
+            onClick={studentGradeHandler}
           >
             <GiConfirmed />
             <span className="pl-1">Confirm</span>

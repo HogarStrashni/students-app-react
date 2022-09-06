@@ -12,10 +12,9 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
   // Setting ErrorStage
   const [isError, setIsError] = useState(false);
 
-  // Conditional for escaping error on loading
-  const { firstName, lastName, indexNumber, email, phone } = student
-    ? student
-    : "";
+  const { loggedInUser } = useAuth();
+
+  const { firstName, lastName, indexNumber, email, phone } = student;
 
   const [stateForm, setStateForm] = useState({
     firstName: firstName || "",
@@ -60,8 +59,6 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
     setIsStudentFormOpen(false);
     navigate(`/student/${studentId}`);
   };
-
-  const { loggedInUser } = useAuth();
 
   useEffect(() => {
     if (
