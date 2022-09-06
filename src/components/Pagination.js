@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 // TailWindCSS variable
 const buttonPag =
-  "py-0.5 text-xs font-medium text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-200 rounded-lg";
+  "py-0.5 text-xs font-medium text-gray-700 bg-white border border-blue-100 focus:outline-none hover:bg-gray-200 rounded-lg";
 const buttonDisabled =
-  "w-8 mx-2 disabled:opacity-30 disabled:cursor-not-allowed";
+  "w-8 mx-2 disabled:opacity-50 disabled:cursor-not-allowed";
 
 const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
 
   return (
     <div className="w-[66rem] mx-auto my-4 flex justify-between">
-      <div className="w-36"></div>
+      <div className="w-36" />
       <div>
         <button
           className={`${buttonPag} ${buttonDisabled}`}
@@ -54,7 +54,7 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
             <button
               key={index}
               className={`w-6 mx-0.5 ${item !== "..." && buttonPag} ${
-                currentPage === item ? "ring-2 ring-gray-400 bg-gray-100" : null
+                currentPage === item ? "ring-2 ring-blue-500 bg-gray-50" : null
               } ${item === "..." && ""}`}
               onClick={() => (item !== "..." ? paginationHandler(item) : null)}
               disabled={item === "..."}
@@ -79,8 +79,8 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
           name="limit"
           id="limit"
           defaultValue={20}
-          className="py-0.5 text-gray-900 text-xs font-medium border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-100"
-          onClick={(event) => {
+          className="py-0.5 text-gray-700 text-xs font-medium border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-100"
+          onChange={(event) => {
             queryPart
               ? navigate(
                   `/?q=${queryPart}&page=${currentPage}&limit=${event.target.value}`

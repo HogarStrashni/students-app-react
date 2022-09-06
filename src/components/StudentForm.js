@@ -14,14 +14,16 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
 
   const { loggedInUser } = useAuth();
 
-  const { firstName, lastName, indexNumber, email, phone } = student;
+  const { firstName, lastName, indexNumber, email, phone } = student
+    ? student
+    : "";
 
   const [stateForm, setStateForm] = useState({
-    firstName: firstName || "",
-    lastName: lastName || "",
-    indexNumber: indexNumber || "",
-    email: email || "",
-    phone: phone || "",
+    firstName: firstName,
+    lastName: lastName,
+    indexNumber: indexNumber,
+    email: email,
+    phone: phone,
   });
 
   const changeInputHandler = (event) => {
@@ -114,7 +116,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
                     </label>
                     <input
                       type="text"
-                      className="w-80 py-1 pl-4 font-medium text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm disabled:bg-gray-200 shadow-sm rounded-lg"
+                      className="w-80 py-1 pl-4 font-medium text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-300 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm disabled:bg-gray-200 shadow-sm rounded-lg"
                       name={item}
                       id={item}
                       placeholder={`${formPlaceVal[index]}...`}
@@ -131,7 +133,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
               })}
               <div className="flex justify-center mt-16">
                 <button
-                  className="mr-3 flex items-center h-8 px-11 text-sm font-medium text-gray-500 hover:text-white ring-1 ring-gray-500 hover:bg-gray-500 rounded-lg"
+                  className="mr-3 flex items-center h-8 px-11 text-sm font-medium text-gray-500 ring-1 ring-gray-400 hover:bg-gray-100 rounded-lg"
                   type="button"
                   onClick={
                     location.pathname === "/student/new-student"
@@ -144,7 +146,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
                 </button>
                 <button
                   type="submit"
-                  className="flex items-center h-8 px-3 text-sm font-medium text-blue-500 hover:text-white ring-1 ring-blue-500 hover:bg-blue-500 rounded-lg"
+                  className="flex items-center h-8 px-3 text-sm font-medium text-white ring-1 bg-blue-500 ring-blue-500 hover:bg-blue-800 rounded-lg"
                 >
                   <GiConfirmed />
                   <span className="pl-1">

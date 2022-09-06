@@ -77,7 +77,7 @@ const StudentBasicInfo = ({
       {!isEditGradeOpen && (
         <div className="h-6 mt-2 flex">
           <button
-            className="mr-3 flex items-center h-8 px-2.5 text-sm font-medium text-blue-500 hover:text-white ring-1 ring-blue-500 hover:bg-blue-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
+            className="mr-3 flex items-center h-8 px-2.5 text-sm font-medium text-blue-700 hover:text-white ring-1 ring-blue-700 hover:bg-blue-700 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
             onClick={() => setIsModalDeleteOpen(true)}
             disabled={loggedInUser?.role !== "admin"}
           >
@@ -85,7 +85,7 @@ const StudentBasicInfo = ({
             <span className="pl-1">Delete</span>
           </button>
           <button
-            className="flex items-center h-8 px-4 text-sm font-medium text-blue-500 hover:text-white ring-1 ring-blue-500 hover:bg-blue-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
+            className="flex items-center h-8 px-4 text-sm font-medium text-blue-700 hover:text-white ring-1 ring-blue-700 hover:bg-blue-700 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
             onClick={() => setIsStudentFormOpen(true)}
             disabled={loggedInUser?.role !== "admin"}
           >

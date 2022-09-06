@@ -9,7 +9,7 @@ import Dropdown from "./Dropdown";
 
 // TailWindCSS variable
 const hoverHeaderLinks =
-  "px-3 py-2 rounded-lg hover:ring-1 hover:ring-blue-500 hover:text-blue-500 cursor-pointer";
+  "px-3 py-2 rounded-lg hover:ring-1 hover:ring-blue-700 hover:text-blue-700 cursor-pointer";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -31,12 +31,14 @@ const Header = () => {
     <header className="h-16 px-[4%] mx-auto flex justify-between text-gray-500 border-b-2">
       <Toaster />
       <div className="flex justify-between items-center">
-        <img
-          src={logo}
-          alt="logo"
-          className="h-12 rounded-lg cursor-pointer"
-          onClick={() => navigate("/")}
-        />
+        <a href="https://www.mongodb.com/mern-stack" target="_blanc">
+          <img
+            src={logo}
+            alt="logo"
+            className="h-12 rounded-lg cursor-pointer"
+          />{" "}
+        </a>
+
         <div className="w-96 ml-12 flex justify-between items-center text-sm font-medium text-gray-500">
           <p onClick={() => navigate("/")} className={`${hoverHeaderLinks}`}>
             Home

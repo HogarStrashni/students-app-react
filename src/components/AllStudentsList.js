@@ -25,19 +25,21 @@ const AllStudentsList = ({
 
   return (
     <main className="h-[calc(100vh-196px)]">
-      <table className="mx-auto text-sm text-left shadow-md">
-        <thead className="text-[11px] text-gray-700 uppercase bg-gray-200">
-          <tr className="text-gray-900">
-            <th className="w-24 py-2 px-8">No.</th>
-            <th className="w-36 py-2 px-6">First Name</th>
-            <th className="w-40 py-2 px-6">Last Name</th>
-            <th className="w-40 py-2 px-6">Index Number</th>
-            <th className="w-80 py-2 px-6">E-mail</th>
-            <th className="w-44 py-2 pl-6">Contact Phone</th>
-          </tr>
-        </thead>
-      </table>
-      <div className="w-[66rem] max-h-[calc(100vh-276px)] overflow-auto mx-auto shadow-md">
+      <div className="w-[66rem] mx-auto rounded-t-lg bg-blue-300 shadow-md">
+        <table className="mx-auto text-sm text-left">
+          <thead className="text-[11px] text-gray-700 uppercase">
+            <tr className="text-gray-900">
+              <th className="w-24 py-2 px-8">No.</th>
+              <th className="w-36 py-2 px-6">First Name</th>
+              <th className="w-40 py-2 px-6">Last Name</th>
+              <th className="w-40 py-2 px-6">Index Number</th>
+              <th className="w-80 py-2 px-6">E-mail</th>
+              <th className="w-44 py-2 pl-6">Contact Phone</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div className="w-[66rem] max-h-[calc(100vh-276px)] overflow-auto mx-auto shadow-md rounded-b-lg">
         <table className="mx-auto text-sm text-left text-gray-500">
           <tbody ref={referTbody}>
             {listStudents.map((item, index) => {
@@ -50,7 +52,7 @@ const AllStudentsList = ({
                       : navigate(`/login?path=student/${item.indexNumber}`)
                   }
                   key={item.indexNumber}
-                  className="odd:bg-white even:bg-gray-50 hover:bg-gray-200 cursor-pointer border-b text-gray-900"
+                  className="odd:bg-white even:bg-gray-50 hover:bg-blue-100 cursor-pointer text-gray-900"
                 >
                   <td className="w-24 px-8">
                     {(currentPage - 1) * limitNumber + index + 1}.

@@ -127,8 +127,8 @@ const LoginForm = () => {
                 />
               </>
             )}
-            <div className="flex justify-center mt-16">
-              <button className="py-2 px-8 text-sm font-medium text-gray-50 bg-blue-600 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg">
+            <div className="flex justify-center mt-16 py-3">
+              <button className="w-72 py-2 text-sm font-medium text-gray-50 bg-blue-600 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg">
                 {location.pathname === "/login" ? "Login" : "Register"}
               </button>
             </div>
