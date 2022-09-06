@@ -14,8 +14,11 @@ const Grades = ({
 }) => {
   const { loggedInUser } = useAuth();
 
+  // Conditional for escaping error on loading
+  const { gradeHistory } = student ? student : [];
+
   const [stateGrades, setStateGrades] = useState(
-    student.gradeHistory.map((item) => {
+    gradeHistory.map((item) => {
       return {
         subject: item.subject || "",
         grade: item.grade || "",
@@ -33,7 +36,7 @@ const Grades = ({
       .catch((err) => console.log(err.message));
   };
 
-  // handling Date...
+  // Handling Date...
   student.gradeHistory = student.gradeHistory.map((item) => {
     return {
       ...item,

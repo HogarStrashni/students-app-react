@@ -56,10 +56,9 @@ const Home = () => {
   }, [pageNumber, queryPart, limitNumber]);
 
   return (
-    <main>
-      {isLoading ? (
-        <LoadingStage />
-      ) : (
+    <>
+      {isLoading && <LoadingStage />}
+      <main>
         <div className="mx-auto my-3">
           <div className="w-[66rem] mx-auto border-slate-200 mt-4 mb-4 flex justify-between items-center">
             <SearchBar queryPart={queryPart} limitNumber={limitNumber} />
@@ -82,8 +81,8 @@ const Home = () => {
             limitNumber={limitNumber}
           />
         </div>
-      )}
-    </main>
+      </main>
+    </>
   );
 };
 

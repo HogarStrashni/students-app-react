@@ -9,9 +9,10 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  //setting ErrorStage
+  // Setting ErrorStage
   const [isError, setIsError] = useState(false);
 
+  // Conditional for escaping error on loading
   const { firstName, lastName, indexNumber, email, phone } = student
     ? student
     : "";

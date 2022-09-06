@@ -22,7 +22,7 @@ const Header = () => {
     notifyLoggedOut();
   };
 
-  //Toaster implementation
+  // Toaster implementation
   const notifyLoggedOut = () => toast.error("Successfully Logged Out");
 
   const { loggedInUser, setloggedInUser } = useAuth();

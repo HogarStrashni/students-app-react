@@ -26,13 +26,13 @@ const SearchBar = ({ queryPart, limitNumber }) => {
       <form className="relative" onSubmit={(event) => event.preventDefault()}>
         <input
           type="text"
-          className="w-96 p-2 pl-12 text-sm text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 shadow-sm rounded-lg"
+          className="w-96 p-2 pl-11 text-sm text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 z-5 shadow-sm rounded-lg"
           placeholder="Search..."
           value={searchValue}
           autoFocus={searchValue}
           onChange={(event) => changeHandler(event)}
         />
-        <FaSearch className="text-xl text-gray-500 absolute left-4 bottom-2" />
+        <FaSearch className="text-gray-500 absolute left-4 bottom-2.5" />
       </form>
     </div>
   );

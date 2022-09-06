@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../service/httpClient";
 
 const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
-  //returning on main page after delete comfirm
   const navigate = useNavigate();
 
   const deleteHandler = () => {

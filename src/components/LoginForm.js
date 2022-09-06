@@ -5,7 +5,7 @@ import { loginUser, registerUser } from "../service/auth";
 import toast, { Toaster } from "react-hot-toast";
 
 const LoginForm = () => {
-  //Toaster implementation
+  // Toaster implementation
   const notifyLoggedIn = () => toast.success("Successfully Logged In");
 
   const [email, setEmail] = useState("");
