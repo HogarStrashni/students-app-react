@@ -2,6 +2,8 @@ import React from "react";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../service/httpClient";
+import { Toaster } from "react-hot-toast";
+import { infoChanged } from "../service/toastLogic";
 
 const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
   const navigate = useNavigate();
@@ -9,7 +11,10 @@ const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
   const deleteHandler = () => {
     axiosInstance
       .delete(`/student/${studentId}`)
-      .then(() => setIsModalDeleteOpen(false))
+      .then(() => {
+        setIsModalDeleteOpen(false);
+        infoChanged("Successfully Deleted Student");
+      })
       .catch((err) => console.log(err.message));
     navigate("/");
   };
@@ -20,6 +25,7 @@ const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
 
   return (
     <>
+      <Toaster />
       <article
         className="w-[100%] h-[100%] top-0 bg-gray-200 opacity-70 absolute"
         onClick={closeModalDeleteHandler}

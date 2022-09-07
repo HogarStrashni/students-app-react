@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context";
 import { loginUser, registerUser } from "../service/auth";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import { infoChanged } from "../service/toastLogic";
 
 const LoginForm = () => {
-  // Toaster implementation
-  const notifyLoggedIn = () => toast.success("Successfully Logged In");
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -29,8 +27,8 @@ const LoginForm = () => {
         .then((data) => {
           setloggedInUser(data);
           urlPath ? navigate(`/${urlPath}`) : navigate("/");
-          notifyLoggedIn();
         })
+        .then(() => infoChanged("Successfully Logged In"))
         .catch((error) => {
           console.log(error.message);
           setEmail("");
@@ -42,8 +40,8 @@ const LoginForm = () => {
         .then((data) => {
           setloggedInUser(data);
           navigate("/");
-          notifyLoggedIn();
         })
+        .then(() => infoChanged("Successfully Logged In"))
         .catch((error) => {
           console.log(error.message);
           setEmail("");
@@ -61,8 +59,8 @@ const LoginForm = () => {
 
   return (
     <>
-      <Toaster />
       <article className="w-[100%] h-[calc(100vh-114px)] mx-auto bg-gray-50 flex items-center">
+        <Toaster />
         <div className="flex flex-col px-6 rounded-xl mx-auto bg-white shadow-lg">
           {!loggedInUser && urlPath && (
             <p className="pt-6 text-blue-600 text-sm text-center">

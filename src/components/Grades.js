@@ -5,6 +5,8 @@ import { useAuth } from "../context";
 import axiosInstance from "../service/httpClient";
 import { formatingIso, isoToLocalDate } from "../service/dateFormating";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
+import { Toaster } from "react-hot-toast";
+import { infoChanged } from "../service/toastLogic";
 
 const Grades = ({
   gradeHistory,
@@ -35,11 +37,13 @@ const Grades = ({
         gradeHistory: stateGrades,
       })
       .then(() => setIsEditGradeOpen(false))
+      .then(() => infoChanged("Grade History Successfully Changed"))
       .catch((err) => console.log(err.message));
   };
 
   return (
     <section className="w-[60rem] mx-auto mt-5 flex justify-between">
+      <Toaster />
       <div>
         <div className="bg-blue-200 rounded-t">
           <table>

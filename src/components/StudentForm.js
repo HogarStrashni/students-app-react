@@ -4,6 +4,8 @@ import ErrorStage from "./ErrorStage";
 import axiosInstance from "../service/httpClient";
 import { useAuth } from "../context";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
+import { Toaster } from "react-hot-toast";
+import { infoChanged } from "../service/toastLogic";
 
 const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
   const navigate = useNavigate();
@@ -42,6 +44,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
             phone: stateForm.phone,
           })
           .then(() => navigate("/"))
+          .then(() => infoChanged("Successfully Added New Student"))
           .catch((err) => {
             setIsError(true);
             console.log(err.message);
@@ -54,6 +57,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
             phone: stateForm.phone,
           })
           .then(() => setIsStudentFormOpen(false))
+          .then(() => infoChanged("Successfully Changed Student Info"))
           .catch((err) => console.log(err.message));
   };
 
@@ -88,6 +92,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
 
   return (
     <>
+      <Toaster />
       {isError && (
         <ErrorStage
           setIsError={setIsError}
@@ -116,7 +121,7 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
                     </label>
                     <input
                       type="text"
-                      className="w-80 py-1 pl-4 font-medium text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-300 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm disabled:bg-gray-200 shadow-sm rounded-lg"
+                      className="w-80 py-1 pl-4 text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-300 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm disabled:bg-gray-200 shadow-sm rounded-lg"
                       name={item}
                       id={item}
                       placeholder={`${formPlaceVal[index]}...`}
