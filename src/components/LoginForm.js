@@ -4,12 +4,22 @@ import { useAuth } from "../context";
 import { loginUser, registerUser } from "../service/auth";
 import { Toaster } from "react-hot-toast";
 import { infoChanged } from "../service/toastLogic";
+import { emailChecker, passwordChecker } from "../service/validation";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  //Validation input fields
+  const [validInput, setValidInput] = useState({
+    email: false,
+    pass: false,
+    passConfirm: false,
+  });
+
+  console.log(validInput);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -87,7 +97,14 @@ const LoginForm = () => {
               placeholder="example@example.com"
               required
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(event) => {
+                setEmail(event.target.value);
+                if (location.pathname === "/register")
+                  setValidInput({
+                    ...validInput,
+                    email: emailChecker(event.target.value),
+                  });
+              }}
             />
             <label
               htmlFor="password"
@@ -103,7 +120,15 @@ const LoginForm = () => {
               placeholder="******"
               required
               value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={(event) => {
+                setPassword(event.target.value);
+                if (location.pathname === "/register")
+                  setValidInput({
+                    ...validInput,
+                    pass: passwordChecker(event.target.value),
+                    passConfirm: passwordConfirm === event.target.value,
+                  });
+              }}
             />
             {location.pathname === "/register" && (
               <>
@@ -121,7 +146,14 @@ const LoginForm = () => {
                   placeholder="******"
                   required
                   value={passwordConfirm}
-                  onChange={(event) => setPasswordConfirm(event.target.value)}
+                  onChange={(event) => {
+                    setPasswordConfirm(event.target.value);
+                    if (location.pathname === "/register")
+                      setValidInput({
+                        ...validInput,
+                        passConfirm: event.target.value === password,
+                      });
+                  }}
                 />
               </>
             )}
