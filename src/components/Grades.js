@@ -9,24 +9,22 @@ import { Toaster } from "react-hot-toast";
 import { infoChanged } from "../service/toastLogic";
 
 const Grades = ({
-  gradeHistory,
+  student,
   isEditGradeOpen,
   setIsEditGradeOpen,
   studentId,
 }) => {
   const { loggedInUser } = useAuth();
-
+  const { gradeHistory } = student;
   const [stateGrades, setStateGrades] = useState([]);
 
   // Handling Date...
   let gradeHistoryFormatDate = [];
-
   if (gradeHistory) {
     gradeHistoryFormatDate = gradeHistory.map((item) => {
       return {
         ...item,
         dateExam: formatingIso(item.dateExam),
-        dateExamLocaly: isoToLocalDate(item.dateExam),
       };
     });
   }
@@ -34,6 +32,7 @@ const Grades = ({
   const studentGradeHandler = () => {
     axiosInstance
       .patch(`/student/${studentId}`, {
+        ...student,
         gradeHistory: stateGrades,
       })
       .then(() => setIsEditGradeOpen(false))
@@ -65,7 +64,7 @@ const Grades = ({
           />
         ) : (
           gradeHistoryFormatDate.map((item, index) => {
-            const { subject, grade, dateExam, dateExamLocaly } = item;
+            const { subject, grade, dateExam } = item;
             return (
               <div
                 key={index}
@@ -88,7 +87,7 @@ const Grades = ({
                       </td>
                       <td className="w-36 py-[5px] px-6 text-center font-medium">
                         {dateExam ? (
-                          dateExamLocaly
+                          isoToLocalDate(dateExam)
                         ) : (
                           <span className="text-xs font-normal italic lowercase text-gray-400">
                             no passed exam

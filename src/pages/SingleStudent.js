@@ -45,8 +45,6 @@ const SingleStudent = () => {
       });
   }, [isEditGradeOpen, isStudentFormOpen, studentId, navigate]);
 
-  const { gradeHistory } = student;
-
   return (
     <>
       {isLoading && <LoadingStage />}
@@ -73,7 +71,7 @@ const SingleStudent = () => {
                 student={student}
               />
               <Grades
-                gradeHistory={gradeHistory}
+                student={student}
                 isEditGradeOpen={isEditGradeOpen}
                 setIsEditGradeOpen={setIsEditGradeOpen}
                 studentId={studentId}

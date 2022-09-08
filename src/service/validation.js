@@ -1,6 +1,6 @@
 // Validate certain input fields
 export const emailChecker = (value) => {
-  const emailRegex = /^[^\s@.]+@[^\s@.]+\.[^\s@.]{3}$/;
+  const emailRegex = /^[^\s@]+@[^\s@.]+\.[^\s@.]{3}$/;
   return emailRegex.test(value);
 };
 

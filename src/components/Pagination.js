@@ -2,12 +2,6 @@ import React from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-// TailWindCSS variable
-const buttonPag =
-  "py-0.5 text-xs font-medium text-gray-700 bg-white border border-blue-100 focus:outline-none hover:bg-gray-200 rounded-lg";
-const buttonDisabled =
-  "w-8 mx-2 disabled:opacity-50 disabled:cursor-not-allowed";
-
 const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
   const navigate = useNavigate();
 
@@ -37,6 +31,12 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
       ? navigate(`/?q=${queryPart}&page=${val}&limit=${limitNumber}`)
       : navigate(`/?page=${val}&limit=${limitNumber}`);
   };
+
+  // Repeating variables
+  const buttonPag =
+    "py-0.5 text-xs font-medium text-gray-700 bg-white border border-blue-100 focus:outline-none hover:bg-gray-200 rounded-lg";
+  const buttonDisabled =
+    "w-8 mx-2 disabled:opacity-50 disabled:cursor-not-allowed";
 
   return (
     <div className="w-[66rem] mx-auto my-4 flex justify-between">

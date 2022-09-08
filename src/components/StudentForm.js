@@ -21,11 +21,11 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
     : "";
 
   const [stateForm, setStateForm] = useState({
-    firstName: firstName,
-    lastName: lastName,
-    indexNumber: indexNumber,
-    email: email,
-    phone: phone,
+    firstName: firstName || "",
+    lastName: lastName || "",
+    indexNumber: indexNumber || "",
+    email: email || "",
+    phone: phone || "",
   });
 
   const changeInputHandler = (event) => {
