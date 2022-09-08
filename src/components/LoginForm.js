@@ -4,22 +4,13 @@ import { useAuth } from "../context";
 import { loginUser, registerUser } from "../service/auth";
 import { Toaster } from "react-hot-toast";
 import { infoChanged } from "../service/toastLogic";
-import { emailChecker, passwordChecker } from "../service/validation";
+import LoginFormValidation from "./LoginFormValidation";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  //Validation input fields
-  const [validInput, setValidInput] = useState({
-    email: false,
-    pass: false,
-    passConfirm: false,
-  });
-
-  console.log(validInput);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -82,98 +73,15 @@ const LoginForm = () => {
               {errorMessage}
             </p>
           )}
-          <form className="flex flex-col my-6" onSubmit={loginRegisterHandler}>
-            <label
-              htmlFor="email"
-              className="mb-2 text-sm text-gray-500 capitalize"
-            >
-              Email:
-            </label>
-            <input
-              className="w-72 py-1 pl-4 text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm shadow-sm rounded-lg"
-              type="text"
-              name="email"
-              id="email"
-              placeholder="example@example.com"
-              required
-              value={email}
-              onChange={(event) => {
-                setEmail(event.target.value);
-                if (location.pathname === "/register")
-                  setValidInput({
-                    ...validInput,
-                    email: emailChecker(event.target.value),
-                  });
-              }}
-            />
-            <label
-              htmlFor="password"
-              className="mb-2 mt-6 text-sm text-gray-500 capitalize"
-            >
-              Password:
-            </label>
-            <input
-              className="w-72 py-1 pl-4 text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm shadow-sm rounded-lg"
-              type="password"
-              name="password"
-              id="password"
-              placeholder="******"
-              required
-              value={password}
-              onChange={(event) => {
-                setPassword(event.target.value);
-                if (location.pathname === "/register")
-                  setValidInput({
-                    ...validInput,
-                    pass: passwordChecker(event.target.value),
-                    passConfirm: passwordConfirm === event.target.value,
-                  });
-              }}
-            />
-            {location.pathname === "/register" && (
-              <>
-                <label
-                  htmlFor="passwordConfirm"
-                  className="mb-2 mt-6 text-sm text-gray-500 capitalize"
-                >
-                  Confirm Password:
-                </label>
-                <input
-                  className="w-72 py-1 pl-4 font-medium text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm shadow-sm rounded-lg"
-                  type="password"
-                  name="passwordConfirm"
-                  id="passwordConfirm"
-                  placeholder="******"
-                  required
-                  value={passwordConfirm}
-                  onChange={(event) => {
-                    setPasswordConfirm(event.target.value);
-                    if (location.pathname === "/register")
-                      setValidInput({
-                        ...validInput,
-                        passConfirm: event.target.value === password,
-                      });
-                  }}
-                />
-              </>
-            )}
-            <div className="flex justify-center mt-16 py-3">
-              <button className="w-72 py-2 text-sm font-medium text-gray-50 bg-blue-600 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg">
-                {location.pathname === "/login" ? "Login" : "Register"}
-              </button>
-            </div>
-            {location.pathname === "/login" && (
-              <p className="mt-6 text-sm text-center">
-                Don't have account?{" "}
-                <span
-                  className="text-blue-500 font-semibold hover:text-blue-700 cursor-pointer"
-                  onClick={() => navigate("/register")}
-                >
-                  Register
-                </span>
-              </p>
-            )}
-          </form>
+          <LoginFormValidation
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            passwordConfirm={passwordConfirm}
+            setPasswordConfirm={setPasswordConfirm}
+            loginRegisterHandler={loginRegisterHandler}
+          />
         </div>
       </article>
     </>

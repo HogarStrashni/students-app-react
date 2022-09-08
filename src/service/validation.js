@@ -13,3 +13,8 @@ export const indexNumberChecker = (value) => {
   const indexRegex = /^\d+-\d{4}$/;
   return indexRegex.test(value);
 };
+
+export const phoneNumberChecker = (value) => {
+  const phoneRegex = /^\+\d{3}\s\d{2}\s\d{3}\s\d{3,4}$/;
+  return phoneRegex.test(value);
+};
