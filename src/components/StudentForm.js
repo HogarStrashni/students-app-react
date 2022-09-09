@@ -102,14 +102,17 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
     navigate(`/student/${studentId}`);
   };
 
+  // Prevent error on http access
   useEffect(() => {
-    if (
-      location.pathname === "/student/new-student" &&
-      loggedInUser?.role !== "admin"
-    ) {
-      navigate("/");
+    if (location.pathname === "/student/new-student") {
+      if (!loggedInUser) {
+        navigate("/login?path=student/new-student");
+      }
+      if (loggedInUser && loggedInUser?.role !== "admin") {
+        navigate("/");
+      }
     }
-  }, [location.pathname, loggedInUser?.role, navigate]);
+  }, [location.pathname, loggedInUser, loggedInUser?.role, navigate]);
 
   return (
     <>

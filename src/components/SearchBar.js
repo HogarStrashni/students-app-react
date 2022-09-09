@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
@@ -7,19 +7,23 @@ const SearchBar = ({ queryPart, limitNumber }) => {
   const navigate = useNavigate();
 
   // Implementing useDebouncedCallback
-  const [searchValue, setSearchValue] = useState(queryPart);
-  const debounced = useDebouncedCallback((val) => {
+  const [searchValue, setSearchValue] = useState("");
+  const debounced = useDebouncedCallback(() => {
     navigate(
-      val.target.value
-        ? `/?q=${val.target.value}&page=1&limit=${limitNumber}`
+      searchValue
+        ? `/?q=${searchValue}&page=1&limit=${limitNumber}`
         : `/?page=1&limit=${limitNumber}`
     );
   }, 500);
 
   const changeHandler = (val) => {
-    debounced(val);
     setSearchValue(val.target.value);
+    debounced();
   };
+
+  useEffect(() => {
+    setSearchValue(queryPart);
+  }, [queryPart]);
 
   return (
     <div>
