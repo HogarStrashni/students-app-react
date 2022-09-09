@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { emailChecker, passwordChecker } from "../service/validation";
+import Spinner from "./Spinner";
 
 const LoginFormValidation = ({
   email,
@@ -10,6 +11,7 @@ const LoginFormValidation = ({
   passwordConfirm,
   setPasswordConfirm,
   loginRegisterHandler,
+  loadingSpinner,
 }) => {
   // Validation input fields
   const [validInput, setValidInput] = useState({
@@ -32,7 +34,10 @@ const LoginFormValidation = ({
 
   return (
     <form className="flex flex-col my-6" onSubmit={loginRegisterHandler}>
-      <label htmlFor="email" className="mb-2 text-sm text-gray-500 capitalize">
+      <label
+        htmlFor="email"
+        className="mb-2 mt-2 text-sm text-gray-500 capitalize"
+      >
         Email:
       </label>
       <input
@@ -56,15 +61,18 @@ const LoginFormValidation = ({
             });
         }}
       />
-      {emailValideVar && (
-        <p className="text-xs text-red-600 pt-1">
-          Type valid email addres!{" "}
-          <span className="font-medium italic">(example@example.com)</span>
-        </p>
-      )}
+      <p
+        className={`text-xs text-red-600 pt-1 ${
+          emailValideVar ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        Type valid email addres!{" "}
+        <span className="font-medium italic">(example@example.com)</span>
+      </p>
+
       <label
         htmlFor="password"
-        className="mb-2 mt-6 text-sm text-gray-500 capitalize"
+        className="mb-2 mt-2 text-sm text-gray-500 capitalize"
       >
         Password:
       </label>
@@ -90,17 +98,19 @@ const LoginFormValidation = ({
             });
         }}
       />
-      {passValideVar && (
-        <p className="text-xs text-red-600 pt-1">
-          Password should have a minimum of 4 characters
-        </p>
-      )}
+      <p
+        className={`text-xs text-red-600 pt-1 ${
+          passValideVar ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        Password should have a minimum of 4 characters
+      </p>
 
       {location.pathname === "/register" && (
         <>
           <label
             htmlFor="passwordConfirm"
-            className="mb-2 mt-6 text-sm text-gray-500 capitalize"
+            className="mb-2 mt-2 text-sm text-gray-500 capitalize"
           >
             Confirm Password:
           </label>
@@ -125,30 +135,36 @@ const LoginFormValidation = ({
                 });
             }}
           />
-          {confirmValideVar && (
-            <p className="text-xs text-red-600 pt-1">
-              Make sure your passwords match!
-            </p>
-          )}
+          <p
+            className={`text-xs text-red-600 pt-1 ${
+              confirmValideVar ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            Make sure your passwords match!
+          </p>
         </>
       )}
-      <div className="flex justify-center mt-16 py-3">
-        <button
-          className="w-72 py-2 text-sm font-medium text-gray-50 bg-blue-600 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg disabled:cursor-not-allowed disabled:hover:bg-gray-500 disabled:border-gray-500"
-          disabled={
-            location.pathname === "/register" &&
-            (!validInput.email ||
-              !validInput.pass ||
-              !validInput.passConfirm ||
-              !email ||
-              !password)
-          }
-        >
-          {location.pathname === "/login" ? "Login" : "Register"}
-        </button>
+      <div className="flex justify-center mt-12 py-3">
+        {!loadingSpinner ? (
+          <button
+            className="w-72 py-2 text-sm font-medium text-gray-50 bg-blue-600 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg disabled:cursor-not-allowed disabled:hover:bg-gray-500 disabled:border-gray-500"
+            disabled={
+              location.pathname === "/register" &&
+              (!validInput.email ||
+                !validInput.pass ||
+                !validInput.passConfirm ||
+                !email ||
+                !password)
+            }
+          >
+            {location.pathname === "/login" ? "Login" : "Register"}
+          </button>
+        ) : (
+          <Spinner />
+        )}
       </div>
       {location.pathname === "/login" && (
-        <p className="mt-6 text-sm text-center">
+        <p className="mt-2 text-sm text-center">
           Don't have account?{" "}
           <span
             className="text-blue-600 font-medium hover:text-blue-800 cursor-pointer"

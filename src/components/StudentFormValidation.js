@@ -36,18 +36,28 @@ const StudentFormValidation = ({
         return (
           <div
             key={index}
-            className="w-[30rem] mx-auto py-3 flex justify-center items-start"
+            className={`w-[30rem] mx-auto py-2 flex justify-center items-start ${
+              index === 0 || index === 1 ? "mb-5" : null
+            }`}
           >
             <label
               htmlFor={item}
-              className="w-32 mt-2 text-sm font-medium text-gray-500 capitalize"
+              className="w-32 mt-1.5 text-sm font-medium text-gray-500 capitalize"
             >
               {formPlaceVal[index]}:
             </label>
             <div>
               <input
                 type="text"
-                className={`w-80 py-1 pl-4 text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm disabled:bg-gray-200 shadow-sm rounded-lg`}
+                className={`w-80 py-1 pl-4 text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm disabled:bg-gray-200 shadow-sm rounded-lg ${
+                  (item === "indexNumber" &&
+                    !validInput.indexNum &&
+                    stateForm.indexNumber) ||
+                  (item === "email" && !validInput.email && stateForm.email) ||
+                  (item === "phone" && !validInput.phoneNum && stateForm.phone)
+                    ? "ring-red-500 focus:border-red-500"
+                    : "ring-blue-500 focus:border-blue-500"
+                }`}
                 name={item}
                 id={item}
                 placeholder={`${formPlaceVal[index]}...`}
@@ -59,24 +69,40 @@ const StudentFormValidation = ({
                   (item === "indexNumber")
                 }
               />
-              {item === "indexNumber" &&
-                !validInput.indexNum &&
-                stateForm.indexNumber && (
-                  <p className="text-xs text-red-600 pt-1">
-                    Type valid index number!{" "}
-                    <span className="font-medium italic">(##-####)</span>
-                  </p>
-                )}
-              {item === "email" && !validInput.email && stateForm.email && (
-                <p className="text-xs text-red-600 pt-1">
+              {item === "indexNumber" && (
+                <p
+                  className={`text-xs text-red-600 pt-1 ${
+                    !validInput.indexNum && stateForm.indexNumber
+                      ? "opacity-100"
+                      : "opacity-0"
+                  }`}
+                >
+                  Type valid index number!{" "}
+                  <span className="font-medium italic">(##-####)</span>
+                </p>
+              )}
+              {item === "email" && (
+                <p
+                  className={`text-xs text-red-600 pt-1 ${
+                    !validInput.email && stateForm.email
+                      ? "opacity-100"
+                      : "opacity-0"
+                  }`}
+                >
                   Type valid email addres!{" "}
                   <span className="font-medium italic">
                     (example@example.com)
                   </span>
                 </p>
               )}
-              {item === "phone" && !validInput.phoneNum && stateForm.phone && (
-                <p className="text-xs text-red-600 pt-1">
+              {item === "phone" && (
+                <p
+                  className={`text-xs text-red-600 pt-1 ${
+                    !validInput.phoneNum && stateForm.phone
+                      ? "opacity-100"
+                      : "opacity-0"
+                  }`}
+                >
                   Type valid contact phone!{" "}
                   <span className="font-medium italic">
                     (+### ## ### ###(#))

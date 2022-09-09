@@ -27,27 +27,15 @@ const Home = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    !queryPart
-      ? axiosInstance
-          .get(`/students?page=${pageNumber}&limit=${limitNumber}`)
-          .then((response) => {
-            setListStudents(response.data.resultStudents);
-            setCurrentPage(response.data.currentPage);
-            setTotalPages(response.data.totalPages);
-            setIsLoading(false);
-          })
-          .catch((err) => console.log(err.message))
-      : axiosInstance
-          .get(
-            `/students?q=${queryPart}&page=${pageNumber}&limit=${limitNumber}`
-          )
-          .then((response) => {
-            setListStudents(response.data.resultStudents);
-            setCurrentPage(response.data.currentPage);
-            setTotalPages(response.data.totalPages);
-            setIsLoading(false);
-          })
-          .catch((err) => console.log(err.message));
+    axiosInstance
+      .get(`/students?q=${queryPart}&page=${pageNumber}&limit=${limitNumber}`)
+      .then((response) => {
+        setListStudents(response.data.resultStudents);
+        setCurrentPage(response.data.currentPage);
+        setTotalPages(response.data.totalPages);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err.message));
   }, [pageNumber, queryPart, limitNumber]);
 
   return (

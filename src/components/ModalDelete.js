@@ -15,8 +15,8 @@ const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
         setIsModalDeleteOpen(false);
         infoChanged("Successfully Deleted Student");
       })
+      .then(() => navigate("/"))
       .catch((err) => console.log(err.message));
-    navigate("/");
   };
 
   const closeModalDeleteHandler = () => {

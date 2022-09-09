@@ -12,6 +12,9 @@ const LoginForm = () => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Loading spinner
+  const [loadingSpinner, setLoadingSpinner] = useState(false);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -21,15 +24,19 @@ const LoginForm = () => {
   const urlPath = searchParams.get("path") ?? "";
 
   const loginRegisterHandler = (event) => {
-    setErrorMessage("");
     event.preventDefault();
+    setErrorMessage("");
+    setLoadingSpinner(true);
     if (location.pathname === "/login") {
       loginUser({ email, password })
         .then((data) => {
           setloggedInUser(data);
           urlPath ? navigate(`/${urlPath}`) : navigate("/");
         })
-        .then(() => infoChanged("Successfully Logged In"))
+        .then(() => {
+          infoChanged("Successfully Logged In");
+          setLoadingSpinner(false);
+        })
         .catch((error) => {
           console.log(error.message);
           setEmail("");
@@ -42,7 +49,10 @@ const LoginForm = () => {
           setloggedInUser(data);
           navigate("/");
         })
-        .then(() => infoChanged("Successfully Logged In"))
+        .then(() => {
+          infoChanged("Successfully Logged In");
+          setLoadingSpinner(false);
+        })
         .catch((error) => {
           console.log(error.message);
           setEmail("");
@@ -59,32 +69,31 @@ const LoginForm = () => {
   }, [navigate]);
 
   return (
-    <>
-      <article className="w-[100%] h-[calc(100vh-114px)] mx-auto bg-gray-50 flex items-center">
-        <Toaster />
-        <div className="flex flex-col px-6 rounded-xl mx-auto bg-white shadow-lg">
-          {!loggedInUser && urlPath && (
-            <p className="pt-6 text-blue-600 text-sm text-center">
-              Log In to Complete Action!
-            </p>
-          )}
-          {errorMessage && (
-            <p className="pt-6 text-red-500 text-center text-sm">
-              {errorMessage}
-            </p>
-          )}
-          <LoginFormValidation
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            passwordConfirm={passwordConfirm}
-            setPasswordConfirm={setPasswordConfirm}
-            loginRegisterHandler={loginRegisterHandler}
-          />
-        </div>
-      </article>
-    </>
+    <article className="w-[100%] h-[calc(100vh-114px)] mx-auto bg-gray-50 flex items-center">
+      <Toaster />
+      <div className="flex flex-col px-6 rounded-xl mx-auto bg-white shadow-lg">
+        {!loggedInUser && urlPath && (
+          <p className="pt-6 text-blue-600 text-sm text-center">
+            Log In to Complete Action!
+          </p>
+        )}
+        {errorMessage && (
+          <p className="pt-6 text-red-500 text-center text-sm">
+            {errorMessage}
+          </p>
+        )}
+        <LoginFormValidation
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          passwordConfirm={passwordConfirm}
+          setPasswordConfirm={setPasswordConfirm}
+          loginRegisterHandler={loginRegisterHandler}
+          loadingSpinner={loadingSpinner}
+        />
+      </div>
+    </article>
   );
 };
 
