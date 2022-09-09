@@ -55,8 +55,6 @@ const Home = () => {
     }
   }, [pageNumber, queryPart, limitNumber]);
 
-  console.log(listStudents);
-
   return (
     <>
       {isLoading && <LoadingStage />}

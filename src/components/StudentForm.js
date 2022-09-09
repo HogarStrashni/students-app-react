@@ -6,6 +6,11 @@ import { useAuth } from "../context";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { Toaster } from "react-hot-toast";
 import { infoChanged } from "../service/toastLogic";
+import {
+  indexNumberChecker,
+  emailChecker,
+  phoneNumberChecker,
+} from "../service/validation";
 
 const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
   const navigate = useNavigate();
@@ -13,6 +18,13 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
 
   // Setting ErrorStage
   const [isError, setIsError] = useState(false);
+
+  // Validation input fields
+  const [validInput, setValidInput] = useState({
+    indexNum: false,
+    email: false,
+    phoneNum: false,
+  });
 
   const { loggedInUser } = useAuth();
 
@@ -30,6 +42,23 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
 
   const changeInputHandler = (event) => {
     setStateForm({ ...stateForm, [event.target.name]: event.target.value });
+
+    // Validation input fields
+    event.target.name === "indexNumber" &&
+      setValidInput({
+        ...validInput,
+        indexNum: indexNumberChecker(event.target.value),
+      });
+    event.target.name === "email" &&
+      setValidInput({
+        ...validInput,
+        email: emailChecker(event.target.value),
+      });
+    event.target.name === "phone" &&
+      setValidInput({
+        ...validInput,
+        phoneNum: phoneNumberChecker(event.target.value),
+      });
   };
 
   const studentFormHandler = (event) => {
@@ -111,28 +140,60 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
                 return (
                   <div
                     key={index}
-                    className="w-[30rem] mx-auto py-3 flex justify-center items-center"
+                    className="w-[30rem] mx-auto py-3 flex justify-center items-start"
                   >
                     <label
                       htmlFor={item}
-                      className="w-32 text-sm font-medium text-gray-500 capitalize"
+                      className="w-32 mt-2 text-sm font-medium text-gray-500 capitalize"
                     >
                       {formPlaceVal[index]}:
                     </label>
-                    <input
-                      type="text"
-                      className="w-80 py-1 pl-4 text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-300 focus:border-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm disabled:bg-gray-200 shadow-sm rounded-lg"
-                      name={item}
-                      id={item}
-                      placeholder={`${formPlaceVal[index]}...`}
-                      value={stateForm[item]}
-                      onChange={changeInputHandler}
-                      required
-                      disabled={
-                        (location.pathname !== "/student/new-student") &
-                        (item === "indexNumber")
-                      }
-                    />
+                    <div>
+                      <input
+                        type="text"
+                        className={`w-80 py-1 pl-4 text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm disabled:bg-gray-200 shadow-sm rounded-lg`}
+                        name={item}
+                        id={item}
+                        placeholder={`${formPlaceVal[index]}...`}
+                        value={stateForm[item]}
+                        onChange={changeInputHandler}
+                        required
+                        disabled={
+                          (location.pathname !== "/student/new-student") &
+                          (item === "indexNumber")
+                        }
+                      />
+                      {item === "indexNumber" &&
+                        !validInput.indexNum &&
+                        stateForm.indexNumber && (
+                          <p className="text-xs text-red-600 pt-1">
+                            Type valid index number!{" "}
+                            <span className="font-medium italic">
+                              (##-####)
+                            </span>
+                          </p>
+                        )}
+                      {item === "email" &&
+                        !validInput.email &&
+                        stateForm.email && (
+                          <p className="text-xs text-red-600 pt-1">
+                            Type valid email addres!{" "}
+                            <span className="font-medium italic">
+                              (example@example.com)
+                            </span>
+                          </p>
+                        )}
+                      {item === "phone" &&
+                        !validInput.phoneNum &&
+                        stateForm.phone && (
+                          <p className="text-xs text-red-600 pt-1">
+                            Type valid contact phone!{" "}
+                            <span className="font-medium italic">
+                              (+### ## ### ###(#))
+                            </span>
+                          </p>
+                        )}
+                    </div>
                   </div>
                 );
               })}
@@ -151,7 +212,12 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
                 </button>
                 <button
                   type="submit"
-                  className="flex items-center h-8 px-3 text-sm font-medium text-white ring-1 bg-blue-500 ring-blue-500 hover:bg-blue-800 rounded-lg"
+                  className="flex items-center h-8 px-3 text-sm font-medium text-white ring-1 bg-blue-500 ring-blue-500 hover:bg-blue-800 rounded-lg disabled:cursor-not-allowed disabled:hover:bg-gray-500 disabled:border-gray-500 disabled:hover:ring-gray-500"
+                  disabled={
+                    !validInput.indexNum ||
+                    !validInput.email ||
+                    !validInput.phoneNum
+                  }
                 >
                   <GiConfirmed />
                   <span className="pl-1">
