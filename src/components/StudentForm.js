@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ErrorStage from "./ErrorStage";
 import axiosInstance from "../service/httpClient";
 import { useAuth } from "../context";
-import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { Toaster } from "react-hot-toast";
 import { infoChanged } from "../service/toastLogic";
 import {
@@ -11,6 +10,7 @@ import {
   emailChecker,
   phoneNumberChecker,
 } from "../service/validation";
+import StudentFormValidation from "./StudentFormValidation";
 
 const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
   const navigate = useNavigate();
@@ -20,11 +20,19 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
   const [isError, setIsError] = useState(false);
 
   // Validation input fields
-  const [validInput, setValidInput] = useState({
-    indexNum: false,
-    email: false,
-    phoneNum: false,
-  });
+  const [validInput, setValidInput] = useState(
+    location.pathname === "/student/new-student"
+      ? {
+          indexNum: false,
+          email: false,
+          phoneNum: false,
+        }
+      : {
+          indexNum: true,
+          email: true,
+          phoneNum: true,
+        }
+  );
 
   const { loggedInUser } = useAuth();
 
@@ -42,7 +50,6 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
 
   const changeInputHandler = (event) => {
     setStateForm({ ...stateForm, [event.target.name]: event.target.value });
-
     // Validation input fields
     event.target.name === "indexNumber" &&
       setValidInput({
@@ -104,21 +111,6 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
     }
   }, [location.pathname, loggedInUser?.role, navigate]);
 
-  const formTagValue = [
-    "firstName",
-    "lastName",
-    "indexNumber",
-    "email",
-    "phone",
-  ];
-  const formPlaceVal = [
-    "First Name",
-    "Last Name",
-    "Index Number",
-    "E-mail",
-    "Contact Phone",
-  ];
-
   return (
     <>
       <Toaster />
@@ -132,102 +124,13 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
       <main className="h-[calc(100vh-114px)] mx-auto bg-gray-50">
         <div className="h-[100%] mx-auto my-auto flex justify-between items-center">
           {loggedInUser?.role === "admin" && (
-            <form
-              onSubmit={studentFormHandler}
-              className="px-4 pt-6 pb-9 mx-auto my-auto bg-white rounded-lg shadow-sm"
-            >
-              {formTagValue.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="w-[30rem] mx-auto py-3 flex justify-center items-start"
-                  >
-                    <label
-                      htmlFor={item}
-                      className="w-32 mt-2 text-sm font-medium text-gray-500 capitalize"
-                    >
-                      {formPlaceVal[index]}:
-                    </label>
-                    <div>
-                      <input
-                        type="text"
-                        className={`w-80 py-1 pl-4 text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 ring-blue-500 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm disabled:bg-gray-200 shadow-sm rounded-lg`}
-                        name={item}
-                        id={item}
-                        placeholder={`${formPlaceVal[index]}...`}
-                        value={stateForm[item]}
-                        onChange={changeInputHandler}
-                        required
-                        disabled={
-                          (location.pathname !== "/student/new-student") &
-                          (item === "indexNumber")
-                        }
-                      />
-                      {item === "indexNumber" &&
-                        !validInput.indexNum &&
-                        stateForm.indexNumber && (
-                          <p className="text-xs text-red-600 pt-1">
-                            Type valid index number!{" "}
-                            <span className="font-medium italic">
-                              (##-####)
-                            </span>
-                          </p>
-                        )}
-                      {item === "email" &&
-                        !validInput.email &&
-                        stateForm.email && (
-                          <p className="text-xs text-red-600 pt-1">
-                            Type valid email addres!{" "}
-                            <span className="font-medium italic">
-                              (example@example.com)
-                            </span>
-                          </p>
-                        )}
-                      {item === "phone" &&
-                        !validInput.phoneNum &&
-                        stateForm.phone && (
-                          <p className="text-xs text-red-600 pt-1">
-                            Type valid contact phone!{" "}
-                            <span className="font-medium italic">
-                              (+### ## ### ###(#))
-                            </span>
-                          </p>
-                        )}
-                    </div>
-                  </div>
-                );
-              })}
-              <div className="flex justify-center mt-16">
-                <button
-                  className="mr-3 flex items-center h-8 px-11 text-sm font-medium text-gray-500 ring-1 ring-gray-400 hover:bg-gray-100 rounded-lg"
-                  type="button"
-                  onClick={
-                    location.pathname === "/student/new-student"
-                      ? () => navigate("/")
-                      : closeFormHandler
-                  }
-                >
-                  <GiCancel />
-                  <span className="pl-1">Cancel</span>
-                </button>
-                <button
-                  type="submit"
-                  className="flex items-center h-8 px-3 text-sm font-medium text-white ring-1 bg-blue-500 ring-blue-500 hover:bg-blue-800 rounded-lg disabled:cursor-not-allowed disabled:hover:bg-gray-500 disabled:border-gray-500 disabled:hover:ring-gray-500"
-                  disabled={
-                    !validInput.indexNum ||
-                    !validInput.email ||
-                    !validInput.phoneNum
-                  }
-                >
-                  <GiConfirmed />
-                  <span className="pl-1">
-                    {location.pathname === "/student/new-student"
-                      ? "Add New Student"
-                      : "Confirm Changes"}
-                  </span>
-                </button>
-              </div>
-            </form>
+            <StudentFormValidation
+              studentFormHandler={studentFormHandler}
+              closeFormHandler={closeFormHandler}
+              changeInputHandler={changeInputHandler}
+              stateForm={stateForm}
+              validInput={validInput}
+            />
           )}
         </div>
       </main>

@@ -26,33 +26,28 @@ const Home = () => {
   let limitNumber = searchParams.get("limit") ?? 20;
 
   useEffect(() => {
-    if (!queryPart) {
-      setIsLoading(true);
-      axiosInstance
-        .get(`/students?page=${pageNumber}&limit=${limitNumber}`)
-        .then((response) => {
-          setListStudents(response.data.resultStudents);
-          setCurrentPage(response.data.currentPage);
-          setTotalPages(response.data.totalPages);
-          setIsLoading(false);
-        })
-        .catch((err) => console.log(err.message));
-    }
-  }, [pageNumber, queryPart, limitNumber]);
-
-  useEffect(() => {
-    if (queryPart) {
-      setIsLoading(true);
-      axiosInstance
-        .get(`/students?q=${queryPart}&page=${pageNumber}&limit=${limitNumber}`)
-        .then((response) => {
-          setListStudents(response.data.resultStudents);
-          setCurrentPage(response.data.currentPage);
-          setTotalPages(response.data.totalPages);
-          setIsLoading(false);
-        })
-        .catch((err) => console.log(err.message));
-    }
+    setIsLoading(true);
+    !queryPart
+      ? axiosInstance
+          .get(`/students?page=${pageNumber}&limit=${limitNumber}`)
+          .then((response) => {
+            setListStudents(response.data.resultStudents);
+            setCurrentPage(response.data.currentPage);
+            setTotalPages(response.data.totalPages);
+            setIsLoading(false);
+          })
+          .catch((err) => console.log(err.message))
+      : axiosInstance
+          .get(
+            `/students?q=${queryPart}&page=${pageNumber}&limit=${limitNumber}`
+          )
+          .then((response) => {
+            setListStudents(response.data.resultStudents);
+            setCurrentPage(response.data.currentPage);
+            setTotalPages(response.data.totalPages);
+            setIsLoading(false);
+          })
+          .catch((err) => console.log(err.message));
   }, [pageNumber, queryPart, limitNumber]);
 
   return (
