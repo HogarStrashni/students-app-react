@@ -14,6 +14,8 @@ In the process of making this project, I tried to cover as many things as possib
 
 - Browser Router
 
+- Deep Linking
+
 - Conditional Rendering
 
 - Handling Events
@@ -34,4 +36,4 @@ In the process of making this project, I tried to cover as many things as possib
 
 - Styling and CSS
 
-        tailwindCSS, react-icons, react-hot-toast
+        tailwindCSS, react-icons, react-hot-toast, menu-dropdown(headlessUI)
