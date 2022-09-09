@@ -1,6 +1,7 @@
 import React from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { pagination } from "../service/tailwindCSS";
 
 const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
   const navigate = useNavigate();
@@ -32,18 +33,12 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
       : navigate(`/?page=${val}&limit=${limitNumber}`);
   };
 
-  // Repeating variables
-  const buttonPag =
-    "py-0.5 text-xs font-medium text-gray-700 bg-white border border-blue-100 focus:outline-none hover:bg-gray-200 rounded-lg";
-  const buttonDisabled =
-    "w-8 mx-2 disabled:opacity-50 disabled:cursor-not-allowed";
-
   return (
     <div className="w-[66rem] mx-auto my-4 flex justify-between">
       <div className="w-36" />
       <div>
         <button
-          className={`${buttonPag} ${buttonDisabled}`}
+          className={`${pagination.button} ${pagination.buttonDisabled}`}
           onClick={() => paginationHandler(currentPage - 1)}
           disabled={currentPage <= 1}
         >
@@ -53,7 +48,7 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
           return (
             <button
               key={index}
-              className={`w-6 mx-0.5 ${item !== "..." && buttonPag} ${
+              className={`w-6 mx-0.5 ${item !== "..." && pagination.button} ${
                 currentPage === item ? "ring-2 ring-blue-500 bg-gray-50" : null
               } ${item === "..." && ""}`}
               onClick={() => (item !== "..." ? paginationHandler(item) : null)}
@@ -64,7 +59,7 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
           );
         })}
         <button
-          className={`${buttonPag} ${buttonDisabled}`}
+          className={`${pagination.button} ${pagination.buttonDisabled}`}
           onClick={() => paginationHandler(currentPage + 1)}
           disabled={currentPage === totalPages}
         >

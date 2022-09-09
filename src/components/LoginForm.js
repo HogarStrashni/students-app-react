@@ -42,6 +42,7 @@ const LoginForm = () => {
           setEmail("");
           setPassword("");
           setErrorMessage(error.response.data.message);
+          setLoadingSpinner(false);
         });
     } else {
       registerUser({ email, password, passwordConfirm })
@@ -59,6 +60,7 @@ const LoginForm = () => {
           setPassword("");
           setPasswordConfirm("");
           setErrorMessage(error.response.data.message);
+          setLoadingSpinner(false);
         });
     }
   };

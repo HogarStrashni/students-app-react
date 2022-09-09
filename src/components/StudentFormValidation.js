@@ -1,6 +1,7 @@
 import React from "react";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { useLocation, useNavigate } from "react-router-dom";
+import { classButton, classForm } from "../service/tailwindCSS";
 
 const StudentFormValidation = ({
   studentFormHandler,
@@ -71,11 +72,9 @@ const StudentFormValidation = ({
               />
               {item === "indexNumber" && (
                 <p
-                  className={`text-xs text-red-600 pt-1 ${
+                  className={`${classForm.messageError(
                     !validInput.indexNum && stateForm.indexNumber
-                      ? "opacity-100"
-                      : "opacity-0"
-                  }`}
+                  )}`}
                 >
                   Type valid index number!{" "}
                   <span className="font-medium italic">(##-####)</span>
@@ -83,11 +82,9 @@ const StudentFormValidation = ({
               )}
               {item === "email" && (
                 <p
-                  className={`text-xs text-red-600 pt-1 ${
+                  className={`${classForm.messageError(
                     !validInput.email && stateForm.email
-                      ? "opacity-100"
-                      : "opacity-0"
-                  }`}
+                  )}`}
                 >
                   Type valid email addres!{" "}
                   <span className="font-medium italic">
@@ -97,11 +94,9 @@ const StudentFormValidation = ({
               )}
               {item === "phone" && (
                 <p
-                  className={`text-xs text-red-600 pt-1 ${
+                  className={`${classForm.messageError(
                     !validInput.phoneNum && stateForm.phone
-                      ? "opacity-100"
-                      : "opacity-0"
-                  }`}
+                  )}`}
                 >
                   Type valid contact phone!{" "}
                   <span className="font-medium italic">
@@ -115,7 +110,7 @@ const StudentFormValidation = ({
       })}
       <div className="flex justify-center mt-16">
         <button
-          className="mr-3 flex items-center h-8 px-11 text-sm font-medium text-gray-500 ring-1 ring-gray-400 hover:bg-gray-100 rounded-lg"
+          className={`mr-3 px-11 ${classButton.secondaryGray}`}
           type="button"
           onClick={
             location.pathname === "/student/new-student"
@@ -128,7 +123,7 @@ const StudentFormValidation = ({
         </button>
         <button
           type="submit"
-          className="flex items-center h-8 px-3 text-sm font-medium text-white ring-1 bg-blue-500 ring-blue-500 hover:bg-blue-800 rounded-lg disabled:cursor-not-allowed disabled:hover:bg-gray-500 disabled:border-gray-500 disabled:hover:ring-gray-500"
+          className={`px-3 ${classButton.secondaryBlue} ${classButton.secondaryDisabled}`}
           disabled={
             !validInput.indexNum || !validInput.email || !validInput.phoneNum
           }

@@ -7,6 +7,7 @@ import { formatingIso, isoToLocalDate } from "../service/dateFormating";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { Toaster } from "react-hot-toast";
 import { infoChanged } from "../service/toastLogic";
+import { classButton } from "../service/tailwindCSS";
 
 const Grades = ({
   student,
@@ -105,8 +106,7 @@ const Grades = ({
       {!isEditGradeOpen ? (
         <div>
           <button
-            className="flex items-center h-8 px-4 text-sm font-medium text-blue-700 hover:text-white ring-1 ring-blue-700 hover:bg-blue-700 rounded-lg
-            disabled:opacity-30 disabled:cursor-not-allowed"
+            className={`px-4 ${classButton.primary}`}
             onClick={() => {
               setStateGrades(gradeHistoryFormatDate);
               setIsEditGradeOpen(true);
@@ -120,14 +120,14 @@ const Grades = ({
       ) : (
         <div className="flex">
           <button
-            className="mr-3 flex items-center h-8 px-[13px] text-sm font-medium text-gray-500 ring-1 ring-gray-400 hover:bg-gray-100 rounded-lg"
+            className={`mr-3 px-[13px] ${classButton.secondaryGray}`}
             onClick={() => setIsEditGradeOpen(false)}
           >
             <GiCancel />
             <span className="pl-1">Cancel</span>
           </button>
           <button
-            className="flex items-center h-8 px-2 text-sm font-medium text-white ring-1 bg-blue-500 ring-blue-500 hover:bg-blue-800 rounded-lg"
+            className={`px-2 ${classButton.secondaryBlue}`}
             onClick={studentGradeHandler}
           >
             <GiConfirmed />

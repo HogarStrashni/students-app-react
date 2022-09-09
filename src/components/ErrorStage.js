@@ -1,6 +1,7 @@
 import React from "react";
 import { FaHome, FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { classButton } from "../service/tailwindCSS";
 
 const ErrorStage = ({ setIsError, stateForm, setStateForm }) => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const ErrorStage = ({ setIsError, stateForm, setStateForm }) => {
           </h1>
           <div className="flex">
             <button
-              className="mr-7 flex items-center h-8 px-5 text-sm font-medium text-blue-700 hover:text-white ring-1 ring-blue-700 hover:bg-blue-700 rounded-lg"
+              className={`mr-7 px-5 ${classButton.secondaryBlue}`}
               onClick={() => {
                 setIsError(false);
                 navigate("/");
@@ -24,7 +25,7 @@ const ErrorStage = ({ setIsError, stateForm, setStateForm }) => {
               <span className="pl-1">Back To Home</span>
             </button>
             <button
-              className="flex items-center h-8 px-3 text-sm font-medium text-blue-700 hover:text-white ring-1 ring-blue-700 hover:bg-blue-700 rounded-lg"
+              className={`px-3 ${classButton.secondaryBlue}`}
               onClick={() => {
                 setStateForm({ ...stateForm, indexNumber: "" });
                 setIsError(false);

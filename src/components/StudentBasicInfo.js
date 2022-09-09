@@ -1,6 +1,7 @@
 import React from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useAuth } from "../context";
+import { classButton, dataList } from "../service/tailwindCSS";
 
 const StudentBasicInfo = ({
   setIsModalDeleteOpen,
@@ -44,40 +45,30 @@ const StudentBasicInfo = ({
         <dl className="pr-12">
           {studentObjectValues.map((item, index) => {
             return (
-              <div key={index} className="flex border-b border-gray-100">
-                <dt className="w-36 pl-6 pt-1 text-sm font-medium text-gray-500 capitalize">
+              <div key={index} className={`${dataList.dl}`}>
+                <dt className={`${dataList.dt}`}>
                   {studentObjectKeys[index]}:
                 </dt>
-                <dd className="pl-3 pr-6 pt-0.5 font-medium text-gray-900">
-                  {item}
-                </dd>
+                <dd className={`${dataList.dd}`}>{item}</dd>
               </div>
             );
           })}
         </dl>
         <dl>
-          <div className="flex border-b border-gray-100">
-            <dt className="w-36 pl-6 pt-1 text-sm font-medium text-gray-500 capitalize">
-              Passed Exams:
-            </dt>
-            <dd className="pl-3 pr-6 pt-0.5 font-medium text-gray-900">
-              {numberPassedExam}
-            </dd>
+          <div className={`${dataList.dl}`}>
+            <dt className={`${dataList.dt}`}>Passed Exams:</dt>
+            <dd className={`${dataList.dd}`}>{numberPassedExam}</dd>
           </div>
-          <div className="flex border-b border-gray-100">
-            <dt className="w-36 pl-6 pt-1 text-sm font-medium text-gray-500 capitalize">
-              Grade Average:
-            </dt>
-            <dd className="pl-3 pr-6 pt-0.5 font-medium text-gray-900">
-              {valueGPA}
-            </dd>
+          <div className={`${dataList.dl}`}>
+            <dt className={`${dataList.dt}`}>Grade Average:</dt>
+            <dd className={`${dataList.dd}`}>{valueGPA}</dd>
           </div>
         </dl>
       </div>
       {!isEditGradeOpen && (
         <div className="h-6 mt-2 flex">
           <button
-            className="mr-3 flex items-center h-8 px-2.5 text-sm font-medium text-blue-700 hover:text-white ring-1 ring-blue-700 hover:bg-blue-700 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
+            className={`mr-3 px-2.5 ${classButton.primary}`}
             onClick={() => setIsModalDeleteOpen(true)}
             disabled={loggedInUser?.role !== "admin"}
           >
@@ -85,7 +76,7 @@ const StudentBasicInfo = ({
             <span className="pl-1">Delete</span>
           </button>
           <button
-            className="flex items-center h-8 px-4 text-sm font-medium text-blue-700 hover:text-white ring-1 ring-blue-700 hover:bg-blue-700 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed"
+            className={`px-4 ${classButton.primary}`}
             onClick={() => setIsStudentFormOpen(true)}
             disabled={loggedInUser?.role !== "admin"}
           >

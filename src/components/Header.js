@@ -7,6 +7,7 @@ import { logoutUser } from "../service/auth";
 import Dropdown from "./Dropdown";
 import { Toaster } from "react-hot-toast";
 import { infoChanged } from "../service/toastLogic";
+import { hoverLink } from "../service/tailwindCSS";
 
 const Header = () => {
   const { loggedInUser, setloggedInUser } = useAuth();
@@ -21,10 +22,6 @@ const Header = () => {
     infoChanged("Successfully Logged Out");
   };
 
-  // Repeating variables
-  const hoverHeaderLinks =
-    "px-3 py-2 rounded-lg hover:ring-1 hover:ring-blue-700 hover:text-blue-700 cursor-pointer";
-
   return (
     <header className="h-16 px-[4%] mx-auto flex justify-between text-gray-500 border-b-2">
       <Toaster />
@@ -38,25 +35,25 @@ const Header = () => {
         </a>
 
         <div className="w-96 ml-12 flex justify-between items-center text-sm font-medium text-gray-500">
-          <p onClick={() => navigate("/")} className={`${hoverHeaderLinks}`}>
+          <p onClick={() => navigate("/")} className={`${hoverLink.header}`}>
             Home
           </p>
           <a
             href="https://www.unibl.org/"
             target="_blanc"
-            className={`${hoverHeaderLinks}`}
+            className={`${hoverLink.header}`}
           >
             University
           </a>
           <p
             onClick={() => navigate("/documentation")}
-            className={`${hoverHeaderLinks}`}
+            className={`${hoverLink.header}`}
           >
             Documentation
           </p>
           <p
             onClick={() => navigate("/about")}
-            className={`${hoverHeaderLinks}`}
+            className={`${hoverLink.header}`}
           >
             About Us
           </p>
@@ -68,7 +65,7 @@ const Header = () => {
         ) &&
         !loggedInUser && (
           <button
-            className="flex items-center px-5 my-3 text-sm font-medium text-gray-50 bg-blue-500 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg shadow-sm"
+            className="px-5 my-3 shadow-sm flex items-center text-sm font-medium text-gray-50 bg-blue-500 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg"
             onClick={() => navigate("/login")}
           >
             <FaSignInAlt className="mr-1 text-inherit" />

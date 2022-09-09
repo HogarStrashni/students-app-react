@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { emailChecker, passwordChecker } from "../service/validation";
 import Spinner from "./Spinner";
+import { classForm } from "../service/tailwindCSS";
 
 const LoginFormValidation = ({
   email,
@@ -24,28 +25,19 @@ const LoginFormValidation = ({
   const navigate = useNavigate();
 
   // Repeating variables
-  const inputStyle =
-    "w-72 py-1 pl-4 text-gray-900 bg-white border border-gray-300 outline-none focus:ring-1 hover:bg-gray-50 placeholder:font-normal placeholder:text-sm shadow-sm rounded-lg";
-  const emailValideVar =
+  const emailValid =
     location.pathname === "/register" && email && !validInput.email;
-  const passValideVar =
+  const passValid =
     location.pathname === "/register" && password && !validInput.pass;
-  const confirmValideVar = passwordConfirm && !validInput.passConfirm;
+  const confirmValid = passwordConfirm && !validInput.passConfirm;
 
   return (
     <form className="flex flex-col my-6" onSubmit={loginRegisterHandler}>
-      <label
-        htmlFor="email"
-        className="mb-2 mt-2 text-sm text-gray-500 capitalize"
-      >
+      <label htmlFor="email" className={`${classForm.label}`}>
         Email:
       </label>
       <input
-        className={`${inputStyle} ${
-          emailValideVar
-            ? "ring-red-500 focus:border-red-500"
-            : "ring-blue-500 focus:border-blue-500"
-        }`}
+        className={`${classForm.input(emailValid)}`}
         type="text"
         name="email"
         id="email"
@@ -61,27 +53,16 @@ const LoginFormValidation = ({
             });
         }}
       />
-      <p
-        className={`text-xs text-red-600 pt-1 ${
-          emailValideVar ? "opacity-100" : "opacity-0"
-        }`}
-      >
+      <p className={`${classForm.messageError(emailValid)}`}>
         Type valid email addres!{" "}
         <span className="font-medium italic">(example@example.com)</span>
       </p>
 
-      <label
-        htmlFor="password"
-        className="mb-2 mt-2 text-sm text-gray-500 capitalize"
-      >
+      <label htmlFor="password" className={`${classForm.label}`}>
         Password:
       </label>
       <input
-        className={`${inputStyle} ${
-          passValideVar
-            ? "ring-red-500 focus:border-red-500"
-            : "ring-blue-500 focus:border-blue-500"
-        }`}
+        className={`${classForm.input(passValid)}`}
         type="password"
         name="password"
         id="password"
@@ -98,28 +79,17 @@ const LoginFormValidation = ({
             });
         }}
       />
-      <p
-        className={`text-xs text-red-600 pt-1 ${
-          passValideVar ? "opacity-100" : "opacity-0"
-        }`}
-      >
+      <p className={`${classForm.messageError(passValid)}`}>
         Password should have a minimum of 4 characters
       </p>
 
       {location.pathname === "/register" && (
         <>
-          <label
-            htmlFor="passwordConfirm"
-            className="mb-2 mt-2 text-sm text-gray-500 capitalize"
-          >
+          <label htmlFor="passwordConfirm" className={`${classForm.label}`}>
             Confirm Password:
           </label>
           <input
-            className={`${inputStyle} ${
-              confirmValideVar
-                ? "ring-red-500 focus:border-red-500"
-                : "ring-blue-500 focus:border-blue-500"
-            }`}
+            className={`${classForm.input(confirmValid)}`}
             type="password"
             name="passwordConfirm"
             id="passwordConfirm"
@@ -135,11 +105,7 @@ const LoginFormValidation = ({
                 });
             }}
           />
-          <p
-            className={`text-xs text-red-600 pt-1 ${
-              confirmValideVar ? "opacity-100" : "opacity-0"
-            }`}
-          >
+          <p className={`${classForm.messageError(confirmValid)}`}>
             Make sure your passwords match!
           </p>
         </>
@@ -147,7 +113,7 @@ const LoginFormValidation = ({
       <div className="flex justify-center mt-12 py-3">
         {!loadingSpinner ? (
           <button
-            className="w-72 py-2 text-sm font-medium text-gray-50 bg-blue-600 hover:text-white border border-blue-500 hover:bg-blue-800 rounded-lg disabled:cursor-not-allowed disabled:hover:bg-gray-500 disabled:border-gray-500"
+            className={`${classForm.button}`}
             disabled={
               location.pathname === "/register" &&
               (!validInput.email ||
