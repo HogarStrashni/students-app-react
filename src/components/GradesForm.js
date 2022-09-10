@@ -1,7 +1,7 @@
 import React from "react";
 import { classForm } from "../service/tailwindCSS";
 
-const GradesForm = ({ stateGrades, setStateGrades }) => {
+const GradesForm = ({ stateGrades, setStateGrades, setErrorGradeValue }) => {
   const helpFunctionFind = (value) => {
     return stateGrades.find((item) => item.subject === value);
   };
@@ -13,6 +13,9 @@ const GradesForm = ({ stateGrades, setStateGrades }) => {
           ? { ...item, grade: event.target.value }
           : item;
       })
+    );
+    setErrorGradeValue(
+      event.target.value && (event.target.value < 6 || event.target.value > 10)
     );
   };
 
@@ -41,7 +44,15 @@ const GradesForm = ({ stateGrades, setStateGrades }) => {
                     </td>
                     <td className="w-36 text-center">
                       <input
-                        className={`w-32 py-[2px] ${classForm.inputGrades} placeholder:text-xs placeholder:italic placeholder:font-normal`}
+                        className={`w-32 py-[2px] ${
+                          classForm.inputGrades
+                        } placeholder:text-xs placeholder:italic placeholder:font-normal ${
+                          helpFunctionFind(subject).grade &&
+                          (helpFunctionFind(subject).grade < 6 ||
+                            helpFunctionFind(subject).grade > 10)
+                            ? "bg-gray-400"
+                            : null
+                        }`}
                         type="text"
                         placeholder="no passed exam"
                         name={subject}

@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <header className="h-16 px-[4%] flex justify-between text-gray-500 border-b-2">
       <Toaster />
-      <div className="h-14 pl-4 pr-6 my-auto flex justify-between items-center rounded-xl shadow-sm">
+      <div className="h-14 pl-4 pr-6 my-auto flex justify-between items-center rounded-xl">
         <a
           href="https://www.mongodb.com/mern-stack"
           target="_blanc"
@@ -45,27 +45,30 @@ const Header = () => {
             </h3>
           </div>
         </a>
-      </div>
-      <div className="w-96 ml-8 flex justify-between items-center text-sm font-medium text-gray-500">
-        <p onClick={() => navigate("/")} className={`${hoverLink.header}`}>
-          Home
-        </p>
-        <a
-          href="https://www.unibl.org/"
-          target="_blanc"
-          className={`${hoverLink.header}`}
-        >
-          University
-        </a>
-        <p
-          onClick={() => navigate("/documentation")}
-          className={`${hoverLink.header}`}
-        >
-          Documentation
-        </p>
-        <p onClick={() => navigate("/about")} className={`${hoverLink.header}`}>
-          About Us
-        </p>
+        <div className="w-96 ml-16 flex justify-between items-center text-sm font-medium text-gray-500">
+          <p onClick={() => navigate("/")} className={`${hoverLink.header}`}>
+            Home
+          </p>
+          <a
+            href="https://www.unibl.org/"
+            target="_blanc"
+            className={`${hoverLink.header}`}
+          >
+            University
+          </a>
+          <p
+            onClick={() => navigate("/documentation")}
+            className={`${hoverLink.header}`}
+          >
+            Documentation
+          </p>
+          <p
+            onClick={() => navigate("/about")}
+            className={`${hoverLink.header}`}
+          >
+            About Us
+          </p>
+        </div>
       </div>
       {!loggedInUser ? (
         !(

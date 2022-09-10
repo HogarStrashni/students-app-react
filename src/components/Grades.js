@@ -7,7 +7,7 @@ import { formatingIso, isoToLocalDate } from "../service/dateFormating";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { Toaster } from "react-hot-toast";
 import { infoChanged } from "../service/toastLogic";
-import { classButton } from "../service/tailwindCSS";
+import { classButton, classForm } from "../service/tailwindCSS";
 
 const Grades = ({
   student,
@@ -18,6 +18,7 @@ const Grades = ({
   const { loggedInUser } = useAuth();
   const { gradeHistory } = student;
   const [stateGrades, setStateGrades] = useState([]);
+  const [errorGradeValue, setErrorGradeValue] = useState(false);
 
   // Handling Date...
   let gradeHistoryFormatDate = [];
@@ -62,6 +63,8 @@ const Grades = ({
             setStateGrades={setStateGrades}
             studentId={studentId}
             setIsEditGradeOpen={setIsEditGradeOpen}
+            errorGradeValue={errorGradeValue}
+            setErrorGradeValue={setErrorGradeValue}
           />
         ) : (
           gradeHistoryFormatDate.map((item, index) => {
@@ -118,21 +121,31 @@ const Grades = ({
           </button>
         </div>
       ) : (
-        <div className="flex">
-          <button
-            className={`mr-3 px-[13px] ${classButton.secondaryGray}`}
-            onClick={() => setIsEditGradeOpen(false)}
-          >
-            <GiCancel />
-            <span className="pl-1">Cancel</span>
-          </button>
-          <button
-            className={`px-2 ${classButton.secondaryBlue}`}
-            onClick={studentGradeHandler}
-          >
-            <GiConfirmed />
-            <span className="pl-1">Confirm</span>
-          </button>
+        <div>
+          <div className="flex">
+            <button
+              className={`mr-3 px-[13px] ${classButton.secondaryGray}`}
+              onClick={() => {
+                setIsEditGradeOpen(false);
+                setErrorGradeValue(false);
+              }}
+            >
+              <GiCancel />
+              <span className="pl-1">Cancel</span>
+            </button>
+            <button
+              className={`px-2 ${classButton.secondaryBlue} ${classButton.secondaryDisabled}`}
+              onClick={studentGradeHandler}
+              disabled={errorGradeValue}
+            >
+              <GiConfirmed />
+              <span className="pl-1">Confirm</span>
+            </button>
+          </div>
+          <div className={`mt-4 ${classForm.messageError(errorGradeValue)}`}>
+            <p>Grades are not valid!</p>
+            <p>Valid values are between 6 and 10.</p>
+          </div>
         </div>
       )}
     </section>
