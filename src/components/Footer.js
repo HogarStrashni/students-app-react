@@ -30,7 +30,7 @@ const Footer = () => {
       </div>
       <div className="w-36 h-12 text-xl flex justify-between items-center">
         <a
-          href="https://www.linkedin.com/in/%C4%91or%C4%91e-mati%C4%87-b634b6249/"
+          href="https://www.linkedin.com/in/djordje-matic/"
           target="_blanc"
           className="hover:text-blue-700"
         >
