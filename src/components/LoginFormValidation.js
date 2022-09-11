@@ -25,10 +25,8 @@ const LoginFormValidation = ({
   const navigate = useNavigate();
 
   // Repeating variables
-  const emailValid =
-    location.pathname === "/register" && email && !validInput.email;
-  const passValid =
-    location.pathname === "/register" && password && !validInput.pass;
+  const emailValid = email && !validInput.email;
+  const passValid = password && !validInput.pass;
   const confirmValid = passwordConfirm && !validInput.passConfirm;
 
   return (
@@ -46,11 +44,10 @@ const LoginFormValidation = ({
         value={email}
         onChange={(event) => {
           setEmail(event.target.value);
-          location.pathname === "/register" &&
-            setValidInput({
-              ...validInput,
-              email: emailChecker(event.target.value),
-            });
+          setValidInput({
+            ...validInput,
+            email: emailChecker(event.target.value),
+          });
         }}
       />
       <p className={`${classForm.messageError(emailValid)}`}>
@@ -71,12 +68,11 @@ const LoginFormValidation = ({
         value={password}
         onChange={(event) => {
           setPassword(event.target.value);
-          location.pathname === "/register" &&
-            setValidInput({
-              ...validInput,
-              pass: passwordChecker(event.target.value),
-              passConfirm: passwordConfirm === event.target.value,
-            });
+          setValidInput({
+            ...validInput,
+            pass: passwordChecker(event.target.value),
+            passConfirm: passwordConfirm === event.target.value,
+          });
         }}
       />
       <p className={`${classForm.messageError(passValid)}`}>
@@ -115,12 +111,11 @@ const LoginFormValidation = ({
           <button
             className={`${classForm.button}`}
             disabled={
-              location.pathname === "/register" &&
-              (!validInput.email ||
-                !validInput.pass ||
-                !validInput.passConfirm ||
-                !email ||
-                !password)
+              !validInput.email ||
+              !validInput.pass ||
+              (location.pathname === "/register" && !validInput.passConfirm) ||
+              !email ||
+              !password
             }
           >
             {location.pathname === "/login" ? "Login" : "Register"}
