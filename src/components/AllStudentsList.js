@@ -9,6 +9,8 @@ const AllStudentsList = ({
   totalPages,
   queryPart,
   limitNumber,
+  allStudentsNum,
+  searchedStudentsNum,
 }) => {
   const navigate = useNavigate();
 
@@ -82,6 +84,8 @@ const AllStudentsList = ({
         totalPages={totalPages}
         queryPart={queryPart}
         limitNumber={limitNumber}
+        allStudentsNum={allStudentsNum}
+        searchedStudentsNum={searchedStudentsNum}
       />
     </main>
   );

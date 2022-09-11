@@ -3,7 +3,14 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { pagination } from "../service/tailwindCSS";
 
-const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
+const Pagination = ({
+  currentPage,
+  totalPages,
+  queryPart,
+  limitNumber,
+  allStudentsNum,
+  searchedStudentsNum,
+}) => {
   const navigate = useNavigate();
 
   let allPages = [];
@@ -35,7 +42,17 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
 
   return (
     <div className="w-[66rem] mx-auto my-4 flex justify-between">
-      <div className="w-36" />
+      <div className="w-72 text-xs flex items-center">
+        <p>
+          {" "}
+          All Students: <span className="font-medium">{allStudentsNum}</span>
+        </p>
+        <p className={`${queryPart ? "opacity-100" : "opacity-0"}`}>
+          <span className="mx-0.5">/</span>
+          Search results:{" "}
+          <span className="font-medium">{searchedStudentsNum}</span>
+        </p>
+      </div>
       <div>
         <button
           className={`${pagination.button} ${pagination.buttonDisabled}`}
@@ -66,7 +83,7 @@ const Pagination = ({ currentPage, totalPages, queryPart, limitNumber }) => {
           <FaChevronRight className="text-center inline pb-1" />
         </button>
       </div>
-      <div className="w-36 flex justify-end items-center">
+      <div className="w-72 flex justify-end items-center">
         <label htmlFor="limit" className="mr-1 ml-4 text-xs text-gray-700">
           Per page:{" "}
         </label>

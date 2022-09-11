@@ -19,6 +19,10 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  // Implementing numerical data of all Students
+  const [allStudentsNum, setAllStudentsNum] = useState(0);
+  const [searchedStudentsNum, setSearchedStudentsNum] = useState(0);
+
   // Getting all searchParams
   const [searchParams] = useSearchParams();
   const queryPart = searchParams.get("q") ?? "";
@@ -33,6 +37,8 @@ const Home = () => {
         setListStudents(response.data.resultStudents);
         setCurrentPage(response.data.currentPage);
         setTotalPages(response.data.totalPages);
+        setAllStudentsNum(response.data.sumaryNumber);
+        setSearchedStudentsNum(response.data.sumarySearch);
         setIsLoading(false);
       })
       .catch((err) => console.log(err.message));
@@ -62,6 +68,8 @@ const Home = () => {
             totalPages={totalPages}
             queryPart={queryPart}
             limitNumber={limitNumber}
+            allStudentsNum={allStudentsNum}
+            searchedStudentsNum={searchedStudentsNum}
           />
         </div>
       </main>

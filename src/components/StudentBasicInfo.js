@@ -10,8 +10,15 @@ const StudentBasicInfo = ({
   student,
 }) => {
   const { loggedInUser } = useAuth();
-  const { firstName, lastName, indexNumber, email, phone, gradeHistory } =
-    student;
+  const {
+    firstName,
+    lastName,
+    indexNumber,
+    email,
+    phone,
+    gradeHistory,
+    averageGrade,
+  } = student;
 
   // Helper for maping info
   const studentObjectKeys = [
@@ -23,7 +30,7 @@ const StudentBasicInfo = ({
   ];
   const studentObjectValues = [firstName, lastName, indexNumber, email, phone];
 
-  // Implementing GPA
+  // Implementing number of passed exams
   let allGradesList = [];
   if (gradeHistory) {
     allGradesList = gradeHistory
@@ -31,13 +38,6 @@ const StudentBasicInfo = ({
       .filter((item) => item);
   }
   const numberPassedExam = allGradesList.length;
-  const valueGPA =
-    numberPassedExam > 0
-      ? (
-          allGradesList.reduce((acc, item) => (acc += item), 0) /
-          numberPassedExam
-        ).toFixed(2)
-      : "0.00";
 
   return (
     <section className="w-[60rem] mx-auto my-3 flex justify-between">
@@ -61,7 +61,7 @@ const StudentBasicInfo = ({
           </div>
           <div className={`${dataList.dl}`}>
             <dt className={`${dataList.dt}`}>Grade Average:</dt>
-            <dd className={`${dataList.dd}`}>{valueGPA}</dd>
+            <dd className={`${dataList.dd}`}>{averageGrade?.toFixed(2)}</dd>
           </div>
         </dl>
       </div>
