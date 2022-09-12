@@ -42,7 +42,7 @@ const Pagination = ({
 
   return (
     <div className="w-[66rem] mx-auto my-4 flex justify-between">
-      <div className="w-72 text-xs flex items-center">
+      <div className="w-72 text-xs text-gray-700 flex items-center">
         <p>
           {" "}
           All Students: <span className="font-medium">{allStudentsNum}</span>
