@@ -67,7 +67,7 @@ const AllStudentsList = ({
                     className="w-44 py-2 pl-6"
                     style={{
                       width: isScrollbarVisible
-                        ? "calc(11rem - 17px)"
+                        ? "calc(11rem - 0.5rem)"
                         : "11rem",
                     }}
                   >
