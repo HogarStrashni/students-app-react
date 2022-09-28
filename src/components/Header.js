@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <header className="h-16 px-[4%] flex justify-between text-gray-500 border-b-2">
       <Toaster />
-      <div className="h-14 pl-4 pr-6 my-auto flex justify-between items-center rounded-xl">
+      <div className="h-14 pl-4 min-w-[46rem] pr-6 my-auto flex justify-between items-center rounded-xl">
         <a
           href="https://www.mongodb.com/mern-stack"
           target="_blanc"
