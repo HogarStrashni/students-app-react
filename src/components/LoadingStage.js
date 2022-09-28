@@ -4,7 +4,7 @@ const LoadingStage = () => {
   return (
     <>
       <main className="h-[calc(100vh-114px)] w-[100%] opacity-50 absolute bg-gray-50 z-10" />
-      <div className="top-[calc(50%-1.5rem)] left-[calc(50%-1.5rem)] z-50 absolute">
+      <div className="top-[calc(50vh-1.5rem)] left-[calc(50vw-1.5rem)] z-50 absolute">
         <div role="status">
           <svg
             className="inline mr-2 w-12 h-12 text-gray-200 animate-spin fill-blue-600"
