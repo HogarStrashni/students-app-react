@@ -1,5 +1,5 @@
 import React from "react";
-import { classForm } from "../service/tailwindCSS";
+import { classForm } from "../assets/tailwindCSS";
 
 const GradesForm = ({ stateGrades, setStateGrades, setErrorGradeValue }) => {
   const helpFunctionFind = (value) => {

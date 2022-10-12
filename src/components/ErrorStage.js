@@ -1,7 +1,7 @@
 import React from "react";
 import { FaHome, FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { classButton } from "../service/tailwindCSS";
+import { classButton } from "../assets/tailwindCSS";
 
 const ErrorStage = ({ setIsError, stateForm, setStateForm }) => {
   const navigate = useNavigate();

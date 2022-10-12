@@ -3,11 +3,10 @@ import GradesForm from "./GradesForm";
 import { FaEdit } from "react-icons/fa";
 import { useAuth } from "../context";
 import axiosInstance from "../service/httpClient";
-import { formatingIso, isoToLocalDate } from "../service/dateFormating";
+import { formatingIso, isoToLocalDate } from "../utils/dateFormating";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
-import { Toaster } from "react-hot-toast";
-import { infoChanged } from "../service/toastLogic";
-import { classButton, classForm } from "../service/tailwindCSS";
+import { infoChanged } from "../utils/toastLogic";
+import { classButton, classForm } from "../assets/tailwindCSS";
 
 const Grades = ({
   student,
@@ -44,7 +43,6 @@ const Grades = ({
 
   return (
     <section className="w-[60rem] mx-auto mt-5 flex justify-between">
-      <Toaster />
       <div>
         <div className="bg-blue-200 rounded-t">
           <table>

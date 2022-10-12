@@ -1,7 +1,7 @@
 import React from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { pagination } from "../service/tailwindCSS";
+import { pagination } from "../assets/tailwindCSS";
 
 const Pagination = ({
   currentPage,

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context";
-import { loginUser, registerUser } from "../service/auth";
-import { Toaster } from "react-hot-toast";
-import { infoChanged } from "../service/toastLogic";
+import { loginUser, registerUser } from "../utils/auth";
+import { infoChanged } from "../utils/toastLogic";
 import LoginFormValidation from "./LoginFormValidation";
 
 const LoginForm = () => {
@@ -72,7 +71,6 @@ const LoginForm = () => {
 
   return (
     <article className="w-[100%] h-[calc(100vh-114px)] mx-auto bg-gray-50 flex items-center">
-      <Toaster />
       <div className="flex flex-col px-6 rounded-xl mx-auto bg-white shadow-lg">
         {!loggedInUser && urlPath && (
           <p className="pt-6 text-blue-600 text-sm text-center">

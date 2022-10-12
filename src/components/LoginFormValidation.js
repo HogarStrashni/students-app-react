@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { emailChecker, passwordChecker } from "../service/validation";
+import { emailChecker, passwordChecker } from "../utils/validation";
 import Spinner from "./Spinner";
-import { classForm } from "../service/tailwindCSS";
+import { classForm } from "../assets/tailwindCSS";
 
 const LoginFormValidation = ({
   email,

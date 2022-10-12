@@ -1,7 +1,7 @@
 import React from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useAuth } from "../context";
-import { classButton, dataList } from "../service/tailwindCSS";
+import { classButton, dataList } from "../assets/tailwindCSS";
 
 const StudentBasicInfo = ({
   setIsModalDeleteOpen,

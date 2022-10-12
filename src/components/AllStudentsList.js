@@ -50,10 +50,10 @@ const AllStudentsList = ({
                 <tr
                   onClick={() =>
                     loggedInUser
-                      ? navigate(`/student/${item.indexNumber}`)
-                      : navigate(`/login?path=student/${item.indexNumber}`)
+                      ? navigate(`/student/${indexNumber}`)
+                      : navigate(`/login?path=student/${indexNumber}`)
                   }
-                  key={item.indexNumber}
+                  key={indexNumber}
                   className="odd:bg-white even:bg-gray-50 hover:bg-blue-100 cursor-pointer text-gray-900"
                 >
                   <td className="w-24 px-8">

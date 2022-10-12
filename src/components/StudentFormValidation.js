@@ -1,7 +1,7 @@
 import React from "react";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { useLocation, useNavigate } from "react-router-dom";
-import { classButton, classForm } from "../service/tailwindCSS";
+import { classButton, classForm } from "../assets/tailwindCSS";
 
 const StudentFormValidation = ({
   studentFormHandler,

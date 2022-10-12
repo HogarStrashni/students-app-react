@@ -2,9 +2,8 @@ import React from "react";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../service/httpClient";
-import { Toaster } from "react-hot-toast";
-import { infoChanged } from "../service/toastLogic";
-import { classButton } from "../service/tailwindCSS";
+import { infoChanged } from "../utils/toastLogic";
+import { classButton } from "../assets/tailwindCSS";
 
 const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
   const navigate = useNavigate();
@@ -26,7 +25,6 @@ const ModalDelete = ({ setIsModalDeleteOpen, studentId }) => {
 
   return (
     <>
-      <Toaster />
       <article
         className="w-[100%] h-[100%] top-0 bg-gray-200 opacity-70 absolute"
         onClick={closeModalDeleteHandler}

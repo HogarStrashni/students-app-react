@@ -4,8 +4,8 @@ import Grades from "../components/Grades";
 import ModalDelete from "../components/ModalDelete";
 import StudentForm from "../components/StudentForm";
 import LoadingStage from "../components/LoadingStage";
-import axiosInstance from "../service/httpClient";
 import StudentBasicInfo from "../components/StudentBasicInfo";
+import axiosInstance from "../service/httpClient";
 import { useAuth } from "../context";
 
 const SingleStudent = () => {

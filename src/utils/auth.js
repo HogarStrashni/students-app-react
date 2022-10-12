@@ -1,4 +1,4 @@
-import axiosInstance from "./httpClient";
+import axiosInstance from "../service/httpClient";
 
 let token;
 

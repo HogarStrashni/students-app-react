@@ -3,13 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ErrorStage from "./ErrorStage";
 import axiosInstance from "../service/httpClient";
 import { useAuth } from "../context";
-import { Toaster } from "react-hot-toast";
-import { infoChanged } from "../service/toastLogic";
+import { infoChanged } from "../utils/toastLogic";
 import {
   indexNumberChecker,
   emailChecker,
   phoneNumberChecker,
-} from "../service/validation";
+} from "../utils/validation";
 import StudentFormValidation from "./StudentFormValidation";
 
 const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
@@ -116,7 +115,6 @@ const StudentForm = ({ student, setIsStudentFormOpen, studentId }) => {
 
   return (
     <>
-      <Toaster />
       {isError && (
         <ErrorStage
           setIsError={setIsError}

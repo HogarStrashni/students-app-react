@@ -1,13 +1,12 @@
 import React from "react";
-import logo from "../service/logo.jpg";
+import logo from "../assets/logo.jpg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaSignInAlt } from "react-icons/fa";
 import { useAuth } from "../context";
-import { logoutUser } from "../service/auth";
+import { logoutUser } from "../utils/auth";
 import Dropdown from "./Dropdown";
-import { Toaster } from "react-hot-toast";
-import { infoChanged } from "../service/toastLogic";
-import { hoverLink } from "../service/tailwindCSS";
+import { infoChanged } from "../utils/toastLogic";
+import { hoverLink } from "../assets/tailwindCSS";
 
 const Header = () => {
   const { loggedInUser, setloggedInUser } = useAuth();
@@ -24,7 +23,6 @@ const Header = () => {
 
   return (
     <header className="h-16 px-[4%] flex justify-between text-gray-500 border-b-2">
-      <Toaster />
       <div className="h-14 pl-4 min-w-[46rem] pr-6 my-auto flex justify-between items-center rounded-xl">
         <a
           href="https://www.mongodb.com/mern-stack"
