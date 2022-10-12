@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { useAuth } from "../context";
+import { useAuth } from "../context/authContext";
 import { loginUser, registerUser } from "../utils/auth";
 import { infoChanged } from "../utils/toastLogic";
 import LoginFormValidation from "./LoginFormValidation";

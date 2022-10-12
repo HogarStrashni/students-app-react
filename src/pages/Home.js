@@ -5,7 +5,7 @@ import SearchBar from "../components/SearchBar";
 import AllStudentsList from "../components/AllStudentsList";
 import LoadingStage from "../components/LoadingStage";
 import axiosInstance from "../service/httpClient";
-import { useAuth } from "../context";
+import { useAuth } from "../context/authContext";
 
 const Home = () => {
   const navigate = useNavigate();

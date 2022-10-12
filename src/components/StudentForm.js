@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ErrorStage from "./ErrorStage";
 import axiosInstance from "../service/httpClient";
-import { useAuth } from "../context";
+import { useAuth } from "../context/authContext";
 import { infoChanged } from "../utils/toastLogic";
 import {
   indexNumberChecker,

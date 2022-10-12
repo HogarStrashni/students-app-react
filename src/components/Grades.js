@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import GradesForm from "./GradesForm";
 import { FaEdit } from "react-icons/fa";
-import { useAuth } from "../context";
+import { useAuth } from "../context/authContext";
 import axiosInstance from "../service/httpClient";
 import { formatingIso, isoToLocalDate } from "../utils/dateFormating";
 import { GiCancel, GiConfirmed } from "react-icons/gi";

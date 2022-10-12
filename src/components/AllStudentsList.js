@@ -1,6 +1,6 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context";
+import { useAuth } from "../context/authContext";
 import Pagination from "./Pagination";
 
 const AllStudentsList = ({

@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../assets/logo.jpg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaSignInAlt } from "react-icons/fa";
-import { useAuth } from "../context";
+import { useAuth } from "../context/authContext";
 import { logoutUser } from "../utils/auth";
 import Dropdown from "./Dropdown";
 import { infoChanged } from "../utils/toastLogic";

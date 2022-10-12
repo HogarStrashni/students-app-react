@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, createContext } from "react";
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const [loggedInUser, setloggedInUser] = useState(null);
 
   return (
@@ -13,8 +13,6 @@ const AuthProvider = ({ children }) => {
 };
 
 // Create custom hook
-const useAuth = () => {
+export const useAuth = () => {
   return useContext(AuthContext);
 };
-
-export { AuthProvider, useAuth };

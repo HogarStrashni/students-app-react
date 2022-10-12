@@ -6,7 +6,7 @@ import StudentForm from "../components/StudentForm";
 import LoadingStage from "../components/LoadingStage";
 import StudentBasicInfo from "../components/StudentBasicInfo";
 import axiosInstance from "../service/httpClient";
-import { useAuth } from "../context";
+import { useAuth } from "../context/authContext";
 
 const SingleStudent = () => {
   const navigate = useNavigate();

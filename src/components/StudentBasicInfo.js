@@ -1,6 +1,6 @@
 import React from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { useAuth } from "../context";
+import { useAuth } from "../context/authContext";
 import { classButton, dataList } from "../assets/tailwindCSS";
 
 const StudentBasicInfo = ({
